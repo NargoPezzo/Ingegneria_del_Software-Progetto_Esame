@@ -14,7 +14,7 @@ class VistaHome(QWidget):
 
         grid_layout.addWidget(self.get_generic_button("Prodotti", self.go_lista_servizi), 0, 0)
         grid_layout.addWidget(self.get_generic_button("Lista Clienti", self.go_lista_clienti), 0, 1)
-        grid_layout.addWidget(self.get_generic_button("Carrello", self.go_lista_dipendenti), 1, 0)
+        grid_layout.addWidget(self.get_generic_button("Carrello", self.go_lista_dipendenti), 0, 2)
 
         self.setLayout(grid_layout)
         self.resize(400, 300)
