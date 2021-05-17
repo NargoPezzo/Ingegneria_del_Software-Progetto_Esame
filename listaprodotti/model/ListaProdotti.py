@@ -18,7 +18,7 @@ class ListaProdotti():
             if prodotto.id == id:
                 return True
             return False
-        self.lista_prodotti.remove(list(filter(is_selected_prodotto(), self.lista_prodotti))[0])
+        self.lista_prodotti.remove(list(filter(is_selected_prodotto, self.lista_prodotti))[0])
 
     def get_prodotto_by_index(self, index):
         return self.lista_prodotti[index]
