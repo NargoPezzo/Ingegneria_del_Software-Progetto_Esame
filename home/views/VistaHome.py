@@ -18,7 +18,7 @@ class VistaHome(QWidget):
 
         self.setLayout(grid_layout)
         self.resize(400, 300)
-        self.setWindowTitle("Gestore Stabilimento PRO")
+        self.setWindowTitle("Negozio di Elettronica")
 
     '''
     Questa funzione restituisce un bottone generico dato il titolo
