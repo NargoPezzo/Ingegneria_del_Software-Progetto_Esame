@@ -1,10 +1,11 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
 
+
 from cliente.controller.ControlloreCliente import ControlloreCliente
 
 
 class VistaCliente(QWidget):
-    def __init_(self, cliente, elimina_cliente, elimina_callback, parent=None):
+    def __init__(self, cliente, elimina_cliente, elimina_callback, parent=None):
         super(VistaCliente, self).__init__(parent)
         self.controller = ControlloreCliente(cliente)
         self.elimina_cliente = elimina_cliente
@@ -14,7 +15,7 @@ class VistaCliente(QWidget):
 
         label_nome = QLabel(self.controller.get_nome_cliente() + " " + self.controller.get_cognome_cliente())
         font_nome = label_nome.font()
-        font_nome.setPointsSize(30)
+        font_nome.setPointSize(30)
         label_nome.setFont(font_nome)
         v_layout.addWidget(label_nome)
 
@@ -32,7 +33,7 @@ class VistaCliente(QWidget):
         btn_elimina.clicked.connect(self.elimina_cliente_click)
         v_layout.addWidget(btn_elimina)
 
-        self.selfLayout(v_layout)
+        self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_nome_cliente() + " " + self.controller.get_cognome_cliente())
 
     def get_label_info(self, testo, valore):

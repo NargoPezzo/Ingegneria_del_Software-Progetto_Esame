@@ -3,7 +3,7 @@ class Cliente:
         super(Cliente, self).__init__()
         self.id = id
         self.nome = nome
-        self.congome = cognome
+        self.cognome = cognome
         self.cf = cf
         self.indirizzo = indirizzo
         self.email = email
