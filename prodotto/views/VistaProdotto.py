@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePoli
 
 
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
-
+from carrello.controller.ControlloreCarrello import ControlloreCarrello
 
 class VistaProdotto(QWidget):
     def __init__(self, prodotto, elimina_prodotto, elimina_callback, parent=None):
@@ -28,9 +28,13 @@ class VistaProdotto(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-        btn_elimina = QPushButton("Elimina")
+        btn_elimina = QPushButton("RIMUOVI DAL MAGAZZINO")
         btn_elimina.clicked.connect(self.elimina_prodotto_click)
         v_layout.addWidget(btn_elimina)
+
+        btn_carrello = QPushButton("Aggiungi al Carrello")
+        #btn_carrello.clicked.connect(self.aggiungi_carrello)
+        v_layout.addWidget(btn_carrello)
 
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_marca_prodotto() + " " + self.controller.get_nome_prodotto())

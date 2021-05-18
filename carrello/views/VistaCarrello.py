@@ -1,17 +1,16 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
 
-from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
+from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from listaprodotti.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
-from carrello.controller.ControlloreCarrello import ControlloreCarrello
 
 
-class VistaListaProdotti(QWidget):
+class VistaCarrello(QWidget):
     def __init__(self, parent=None):
-        super(VistaListaProdotti, self).__init__(parent)
+        super(VistaCarrello, self).__init__(parent)
 
-        self.controller = ControlloreListaProdotti()
+        self.controller = ControlloreCarrello()
 
         h_layout = QHBoxLayout()
         self.list_view = QListView()
@@ -23,7 +22,7 @@ class VistaListaProdotti(QWidget):
         open_button.clicked.connect(self.show_selected_info)
         buttons_layout.addWidget(open_button)
 
-        new_button = QPushButton("Nuovo")
+        new_button = QPushButton("Checkout")
         new_button.clicked.connect(self.show_new_prodotto)
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
@@ -31,7 +30,7 @@ class VistaListaProdotti(QWidget):
 
         self.setLayout(h_layout)
         self.resize(600,300)
-        self.setWindowTitle("Lista Prodotti")
+        self.setWindowTitle("Carrello")
 
     def show_selected_info(self):
         selected = self.list_view.selectedIndexes()[0].row()
