@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, \
+    QComboBox
 
 from prodotto.model.Prodotto import Prodotto
 
@@ -10,11 +11,12 @@ class VistaInserisciProdotto(QWidget):
         self.callback = callback
         self.info = {}
 
+        categoria = QComboBox()
+
         self.v_layout = QVBoxLayout()
 
         self.get_form_entry("Marca")
         self.get_form_entry("Nome")
-        self.get_form_entry("Categoria")
         self.get_form_entry("Prezzo")
         self.get_form_entry("Quantità")
 
