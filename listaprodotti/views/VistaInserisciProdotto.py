@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, \
     QComboBox
 
@@ -11,9 +12,40 @@ class VistaInserisciProdotto(QWidget):
         self.callback = callback
         self.info = {}
 
-        categoria = QComboBox()
+
 
         self.v_layout = QVBoxLayout()
+        self.v_layout.addWidget(QLabel("Categoria"))
+        self.categoria = QComboBox()
+        self.categoria_model = QStandardItemModel(self.categoria)
+
+        item = QStandardItem()
+        item.setText("Telefonia")
+        item.setEditable(False)
+        self.categoria_model.appendRow(item)
+
+        item = QStandardItem()
+        item.setText("Informatica")
+        item.setEditable(False)
+        self.categoria_model.appendRow(item)
+
+        item = QStandardItem()
+        item.setText("Piccoli Elettrodomestici")
+        item.setEditable(False)
+        self.categoria_model.appendRow(item)
+
+        item = QStandardItem()
+        item.setText("Elettrodomestici")
+        item.setEditable(False)
+        self.categoria_model.appendRow(item)
+
+        item = QStandardItem()
+        item.setText("TV e Hi-Fi")
+        item.setEditable(False)
+        self.categoria_model.appendRow(item)
+
+        self.categoria.setModel(self.categoria_model)
+        self.v_layout.addWidget(self.categoria)
 
         self.get_form_entry("Marca")
         self.get_form_entry("Nome")
@@ -25,6 +57,7 @@ class VistaInserisciProdotto(QWidget):
         btn_ok = QPushButton("OK")
         btn_ok.clicked.connect(self.add_prodotto)
         self.v_layout.addWidget(btn_ok)
+        self.v_layout.addWidget(self.categoria)
 
         self.setLayout(self.v_layout)
         self.setWindowTitle("Nuovo Prodotto")
