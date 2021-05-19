@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton
+import sys
+
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QApplication
 
 from home.views.VistaHome import VistaHome
 
@@ -7,7 +9,7 @@ class VistaLogin(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Login Form')
-        self.resize(500, 120)
+        self.resize(400, 120)
 
         layout = QGridLayout()
 
@@ -29,13 +31,20 @@ class VistaLogin(QWidget):
         layout.setRowMinimumHeight(2, 75)
 
         self.setLayout(layout)
+        self.dialog = VistaHome()
 
     def check_password(self):
         msg = QMessageBox()
 
-        if self.lineEdit_username.text() == 'Username' and self.lineEdit_password.text() == '000':
-            msg.setText('SoooS')
+
+
+        if self.lineEdit_username.text() == 'a' and self.lineEdit_password.text() == '000':
+            msg.setText('Benvenuto')
             msg.exec_()
+            self.dialog.show()
+
+
         else:
             msg.setText('Incorrect Password')
             msg.exec_()
+
