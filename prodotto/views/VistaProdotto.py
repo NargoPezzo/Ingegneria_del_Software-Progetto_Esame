@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
-
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QGridLayout, \
+    QHBoxLayout
 
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
@@ -13,12 +13,14 @@ class VistaProdotto(QWidget):
         #self.aggiungi_carrello = aggiungi_carrello
 
         v_layout = QVBoxLayout()
+        h_layout = QHBoxLayout()
+
 
         label_nome = QLabel(self.controller.get_marca_prodotto() + " " + self.controller.get_nome_prodotto())
         font_nome = label_nome.font()
         font_nome.setPointSize(30)
         label_nome.setFont(font_nome)
-        v_layout.addWidget(label_nome)
+        v_layout.addWidget(label_nome, )
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -28,13 +30,16 @@ class VistaProdotto(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-        btn_elimina = QPushButton("RIMUOVI DAL MAGAZZINO")
+        btn_elimina = QPushButton(" RIMUOVI DAL MAGAZZINO ")
         btn_elimina.clicked.connect(self.elimina_prodotto_click)
-        v_layout.addWidget(btn_elimina)
+        btn_elimina.setStyleSheet("background-color: red")
+        h_layout.addWidget(btn_elimina)
 
         btn_carrello = QPushButton("Aggiungi al Carrello")
         #btn_carrello.clicked.connect(self.aggiungi_carrello)
-        v_layout.addWidget(btn_carrello)
+        h_layout.addWidget(btn_carrello)
+
+        v_layout.addLayout(h_layout)
 
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_marca_prodotto() + " " + self.controller.get_nome_prodotto())

@@ -1,4 +1,3 @@
-import sys
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QApplication
 
@@ -13,7 +12,7 @@ class VistaLogin(QWidget):
 
         layout = QGridLayout()
 
-        label_name = QLabel('<font size="4"> Username </font>')
+        label_name = QLabel('<font size="4"> Dipendente </font>')
         self.lineEdit_username = QLineEdit()
         self.lineEdit_username.setPlaceholderText('Inserire nome Dipendente')
         layout.addWidget(label_name, 0, 0)
@@ -42,10 +41,10 @@ class VistaLogin(QWidget):
             msg.setText('Benvenuto')
             msg.exec_()
             self.dialog.show()
-
+            self.close() #ciao
 
 
         else:
-            msg.setText('Incorrect Password')
+            msg.setText('ERRORE: Ricontrollare le credenziali')
             msg.exec_()
 
