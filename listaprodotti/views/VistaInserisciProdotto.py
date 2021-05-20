@@ -16,36 +16,36 @@ class VistaInserisciProdotto(QWidget):
 
         self.v_layout = QVBoxLayout()
         self.v_layout.addWidget(QLabel("Categoria"))
-        self.categoria = QComboBox()
-        self.categoria_model = QStandardItemModel(self.categoria)
+        self.combo_categoria = QComboBox()
+        self.combo_categoria_model = QStandardItemModel(self.combo_categoria)
 
         item = QStandardItem()
         item.setText("Telefonia")
         item.setEditable(False)
-        self.categoria_model.appendRow(item)
+        self.combo_categoria_model.appendRow(item)
 
         item = QStandardItem()
         item.setText("Informatica")
         item.setEditable(False)
-        self.categoria_model.appendRow(item)
+        self.combo_categoria_model.appendRow(item)
 
         item = QStandardItem()
         item.setText("Piccoli Elettrodomestici")
         item.setEditable(False)
-        self.categoria_model.appendRow(item)
+        self.combo_categoria_model.appendRow(item)
 
         item = QStandardItem()
         item.setText("Elettrodomestici")
         item.setEditable(False)
-        self.categoria_model.appendRow(item)
+        self.combo_categoria_model.appendRow(item)
 
         item = QStandardItem()
         item.setText("TV e Hi-Fi")
         item.setEditable(False)
-        self.categoria_model.appendRow(item)
+        self.combo_categoria_model.appendRow(item)
 
-        self.categoria.setModel(self.categoria_model)
-        self.v_layout.addWidget(self.categoria)
+        self.combo_categoria.setModel(self.combo_categoria_model)
+        self.v_layout.addWidget(self.combo_categoria)
 
         self.get_form_entry("Marca")
         self.get_form_entry("Nome")
@@ -57,7 +57,7 @@ class VistaInserisciProdotto(QWidget):
         btn_ok = QPushButton("OK")
         btn_ok.clicked.connect(self.add_prodotto)
         self.v_layout.addWidget(btn_ok)
-        self.v_layout.addWidget(self.categoria)
+        self.v_layout.addWidget(self.combo_categoria)
 
         self.setLayout(self.v_layout)
         self.setWindowTitle("Nuovo Prodotto")
@@ -71,7 +71,7 @@ class VistaInserisciProdotto(QWidget):
     def add_prodotto(self):
         marca = self.info["Marca"].text()
         nome = self.info["Nome"].text()
-        categoria = self.info["Categoria"].text()
+        categoria = self.combo_categoria.currentText()
         prezzo = self.info["Prezzo"].text()
         quantita = self.info["Quantità"].text()
 
