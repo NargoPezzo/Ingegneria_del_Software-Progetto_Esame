@@ -37,7 +37,7 @@ class VistaLogin(QWidget):
 
 
 
-        if self.lineEdit_username.text() == 'a' and self.lineEdit_password.text() == '000':
+        if self.lineEdit_username.text() == '' and self.lineEdit_password.text() == '':
             msg.setText('Benvenuto')
             msg.exec_()
             self.dialog.show()
