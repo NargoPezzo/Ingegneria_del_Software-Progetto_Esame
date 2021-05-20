@@ -21,6 +21,7 @@ class VistaCliente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
+        v_layout.addWidget(self.get_label_info("Codice ID", self.controller.get_id_cliente()))
         v_layout.addWidget(self.get_label_info("Codice Fiscale", self.controller.get_cf_cliente()))
         v_layout.addWidget(self.get_label_info("Indirizzo", self.controller.get_indirizzo_cliente()))
         v_layout.addWidget(self.get_label_info("Email", self.controller.get_email_cliente()))

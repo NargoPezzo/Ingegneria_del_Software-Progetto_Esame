@@ -25,3 +25,6 @@ class ControlloreDipendente:
 
     def get_eta_dipendente(self):
         return self.model.eta
+
+    def get_password_dipendente(self):
+        return self.model.password

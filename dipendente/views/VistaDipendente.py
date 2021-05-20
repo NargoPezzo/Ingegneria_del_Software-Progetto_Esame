@@ -19,11 +19,13 @@ class VistaDipendente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
+        v_layout.addWidget(self.get_label_info("ID", self.controller.get_id_dipendente()))
         v_layout.addWidget(self.get_label_info("Codice Fiscale", self.controller.get_cf_dipendente()))
         v_layout.addWidget(self.get_label_info("Indirizzo", self.controller.get_indirizzo_dipendente()))
         v_layout.addWidget(self.get_label_info("Email", self.controller.get_email_dipendente()))
         v_layout.addWidget(self.get_label_info("Telefono", self.controller.get_telefono_dipendente()))
         v_layout.addWidget(self.get_label_info("Età", self.controller.get_eta_dipendente()))
+        v_layout.addWidget(self.get_label_info("Password", self.controller.get_password_dipendente()))
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 

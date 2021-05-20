@@ -19,6 +19,7 @@ class VistaInserisciDipendente(QWidget):
         self.get_form_entry("Email")
         self.get_form_entry("Telefono")
         self.get_form_entry("Età")
+        self.get_form_entry("Password")
 
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -43,9 +44,10 @@ class VistaInserisciDipendente(QWidget):
         email = self.info["Email"].text()
         telefono = self.info["Telefono"].text()
         eta = self.info["Età"].text()
-        if nome == "" or cognome == "" or cf == "" or indirizzo == "" or email == "" or telefono == "" or eta == "":
+        password = self.info["Password"].text()
+        if nome == "" or cognome == "" or cf == "" or indirizzo == "" or email == "" or telefono == "" or eta == "" or password == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         else:
-            self.controller.aggiungi_dipendente(Dipendente((nome+cognome).lower(), nome, cognome, cf, indirizzo, email, telefono, eta))
+            self.controller.aggiungi_dipendente(Dipendente((nome+cognome).lower(), nome, cognome, cf, indirizzo, email, telefono, eta,password))
             self.callback()
             self.close()

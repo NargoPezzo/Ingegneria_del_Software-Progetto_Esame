@@ -35,6 +35,9 @@ class VistaInserisciCliente(QWidget):
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
+
+
+
     def add_cliente(self):
         nome = self.info["Nome"].text()
         cognome = self.info["Cognome"].text()
