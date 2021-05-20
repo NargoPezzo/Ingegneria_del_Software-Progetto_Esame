@@ -36,8 +36,6 @@ class VistaLogin(QWidget):
         msg = QMessageBox()
 
 
-
-
         if self.lineEdit_username.text() == '' and self.lineEdit_password.text() == '':
             msg.setText('Benvenuto')
             msg.exec_()
@@ -48,4 +46,3 @@ class VistaLogin(QWidget):
         else:
             msg.setText('ERRORE: Ricontrollare le credenziali')
             msg.exec_()
-

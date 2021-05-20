@@ -64,6 +64,9 @@ class VistaInserisciProdotto(QWidget):
 
         if marca == "" or nome == "" or categoria == "" or prezzo == "" or quantita == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+
+        for i in range(0):
+            return
         else:
             self.controller.aggiungi_prodotto(Prodotto((marca+nome).lower(), marca, nome, categoria, prezzo, quantita))
             self.callback()
