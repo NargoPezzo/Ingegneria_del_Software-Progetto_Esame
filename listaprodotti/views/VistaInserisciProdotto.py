@@ -19,30 +19,11 @@ class VistaInserisciProdotto(QWidget):
         self.combo_categoria = QComboBox()
         self.combo_categoria_model = QStandardItemModel(self.combo_categoria)
 
-        item = QStandardItem()
-        item.setText("Telefonia")
-        item.setEditable(False)
-        self.combo_categoria_model.appendRow(item)
-
-        item = QStandardItem()
-        item.setText("Informatica")
-        item.setEditable(False)
-        self.combo_categoria_model.appendRow(item)
-
-        item = QStandardItem()
-        item.setText("Piccoli Elettrodomestici")
-        item.setEditable(False)
-        self.combo_categoria_model.appendRow(item)
-
-        item = QStandardItem()
-        item.setText("Elettrodomestici")
-        item.setEditable(False)
-        self.combo_categoria_model.appendRow(item)
-
-        item = QStandardItem()
-        item.setText("TV e Hi-Fi")
-        item.setEditable(False)
-        self.combo_categoria_model.appendRow(item)
+        self.add_combobox_item("Telefonia")
+        self.add_combobox_item("Informatica")
+        self.add_combobox_item("Piccoli Elettrodomestici")
+        self.add_combobox_item("Elettrodomestici")
+        self.add_combobox_item("TV e Hi-Fi")
 
         self.combo_categoria.setModel(self.combo_categoria_model)
         self.v_layout.addWidget(self.combo_categoria)
@@ -67,6 +48,12 @@ class VistaInserisciProdotto(QWidget):
         current_text_edit = QLineEdit(self)
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
+
+    def add_combobox_item(self, tipo):
+        item = QStandardItem()
+        item.setText(tipo)
+        item.setEditable(False)
+        self.combo_categoria_model.appendRow(item)
 
     def add_prodotto(self):
         marca = self.info["Marca"].text()
