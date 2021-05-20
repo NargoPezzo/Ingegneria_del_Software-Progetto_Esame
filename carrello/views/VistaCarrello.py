@@ -2,7 +2,6 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
 
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
-from listaprodotti.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
 
 
@@ -23,7 +22,7 @@ class VistaCarrello(QWidget):
         buttons_layout.addWidget(open_button)
 
         new_button = QPushButton("Checkout")
-        new_button.clicked.connect(self.show_new_prodotto)
+        new_button.clicked.connect(self.show_checkout)
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
         h_layout.addLayout(buttons_layout)
@@ -38,9 +37,8 @@ class VistaCarrello(QWidget):
         self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui)
         self.vista_prodotto.show()
 
-    def show_new_prodotto(self):
-        self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)
-        self.vista_inserisci_prodotto.show()
+    def show_checkout(self):
+        return
 
     def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)
