@@ -10,6 +10,8 @@ class ListaProdotti():
             with open('listaprodotti/data/lista_prodotti_salvata.pickle', 'rb') as f:
                 self.lista_prodotti = pickle.load(f)
 
+
+
     def aggiungi_prodotto(self, prodotto):
         self.lista_prodotti.append(prodotto)
 
