@@ -1,7 +1,11 @@
+import pickle
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QApplication
 
+from dipendente.model.Dipendente import Dipendente
 from home.views.VistaHome import VistaHome
+from listadipendenti.controller.ControlloreListaDipendenti import ControlloreListaDipendenti
+from listadipendenti.model.ListaDipendenti import ListaDipendenti
 
 
 class VistaLogin(QWidget):
@@ -32,15 +36,25 @@ class VistaLogin(QWidget):
         self.setLayout(layout)
         self.dialog = VistaHome()
 
+        pickle_file = open('listadipendenti/data/lista_dipendenti_salvata.pickle', 'rb')
+        self.objects = []
+        while True:
+            try:
+                self.objects.append(pickle.load(pickle_file))
+            except EOFError:
+                break
+        pickle_file.close()
+
     def check_password(self):
         msg = QMessageBox()
+        prova = ListaDipendenti()
 
-
-        if self.lineEdit_username.text() == '' and self.lineEdit_password.text() == '':
+        if prova.verifica_id_dipendente(self.lineEdit_username.text(), self.lineEdit_password.text()):
+      #  if self.lineEdit_username.text() == 'alexpugnaloni' and self.lineEdit_password.text() == 'Ciccio20' or self.lineEdit_username.text() == 'elia vaccarini' and self.lineEdit_password.text() == '1234':
             msg.setText('Benvenuto')
             msg.exec_()
             self.dialog.show()
-            self.close() #ciao
+            self.close()  # ciao
 
 
         else:
