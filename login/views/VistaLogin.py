@@ -70,4 +70,8 @@ class VistaLogin(QWidget):
             msg.exec_()
 
     def keyPressEvent(self, qKeyEvent):
-        self.check_password()
+
+        if qKeyEvent.key() == QtCore.Qt.Key_Return:
+            self.check_password()
+        else:
+            super().keyPressEvent(qKeyEvent)
