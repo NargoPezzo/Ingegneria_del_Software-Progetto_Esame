@@ -1,3 +1,4 @@
+import os
 import pickle
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QApplication
@@ -34,29 +35,39 @@ class VistaLogin(QWidget):
         layout.setRowMinimumHeight(2, 75)
 
         self.setLayout(layout)
-        self.dialog = VistaHome()
 
-        pickle_file = open('listadipendenti/data/lista_dipendenti_salvata.pickle', 'rb')
-        self.objects = []
-        while True:
-            try:
-                self.objects.append(pickle.load(pickle_file))
-            except EOFError:
-                break
-        pickle_file.close()
+
+        if os.path.isfile('listadipendenti/data/lista_prodotti_salvata.pickle'):
+            pickle_file = open('listadipendenti/data/lista_dipendenti_salvata.pickle', 'rb')
+            self.objects = []
+            while True:
+                try:
+                    self.objects.append(pickle.load(pickle_file))
+                except EOFError:
+                    break
+                pickle_file.close()
 
     def check_password(self):
         msg = QMessageBox()
-        prova = ListaDipendenti()
+        lista = ListaDipendenti()
 
-        if prova.verifica_id_dipendente(self.lineEdit_username.text(), self.lineEdit_password.text()):
-      #  if self.lineEdit_username.text() == 'alexpugnaloni' and self.lineEdit_password.text() == 'Ciccio20' or self.lineEdit_username.text() == 'elia vaccarini' and self.lineEdit_password.text() == '1234':
-            msg.setText('Benvenuto')
+
+        if lista.verifica_id_dipendente(self.lineEdit_username.text(), self.lineEdit_password.text()):
+            self.dialog = VistaHome()
+            msg.setText('Accesso alla pagina dei dipendenti')
             msg.exec_()
             self.dialog.show()
-            self.close()  # ciao
+            self.close()
 
+        elif self.lineEdit_username.text() == 'admin' and self.lineEdit_password.text() == 'admin':
+            self.dialog = VistaHomeDirettore()
+            msg.setText('Accesso alla pagina del direttore')
+            msg.exec_()
+            self.dialog.show()
+            self.close()
 
         else:
             msg.setText('ERRORE: Ricontrollare le credenziali')
             msg.exec_()
+
+

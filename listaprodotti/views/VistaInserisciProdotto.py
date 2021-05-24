@@ -2,6 +2,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, \
     QComboBox
 
+
 from prodotto.model.Prodotto import Prodotto
 
 
@@ -11,8 +12,6 @@ class VistaInserisciProdotto(QWidget):
         self.controller = controller
         self.callback = callback
         self.info = {}
-
-
 
         self.v_layout = QVBoxLayout()
         self.v_layout.addWidget(QLabel("Categoria"))
@@ -56,6 +55,7 @@ class VistaInserisciProdotto(QWidget):
         self.combo_categoria_model.appendRow(item)
 
     def add_prodotto(self):
+
         marca = self.info["Marca"].text()
         nome = self.info["Nome"].text()
         categoria = self.combo_categoria.currentText()
@@ -65,8 +65,7 @@ class VistaInserisciProdotto(QWidget):
         if marca == "" or nome == "" or categoria == "" or prezzo == "" or quantita == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
 
-        for i in range(0):
-            return
+
         else:
             self.controller.aggiungi_prodotto(Prodotto((marca+nome).lower(), marca, nome, categoria, prezzo, quantita))
             self.callback()

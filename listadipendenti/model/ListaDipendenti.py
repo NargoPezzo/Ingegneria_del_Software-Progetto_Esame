@@ -31,14 +31,8 @@ class ListaDipendenti():
             pickle.dump(self.lista_dipendenti, handle, pickle.HIGHEST_PROTOCOL)
 
     def verifica_id_dipendente(self, id,password):
+
         for dipendente in self.lista_dipendenti:
             if dipendente.id == id and dipendente.password == password:
                 return True
         return False
-
-   # def verifica_password_dipendente(self, password):
-    #    for dipendente in self.lista_dipendenti:
-    #        if dipendente.password == password:
-   #             return True
-    #        else:
-    #            return False
