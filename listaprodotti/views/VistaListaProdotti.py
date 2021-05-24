@@ -1,6 +1,7 @@
+from PyQt5.QtCore import QSortFilterProxyModel, Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLineEdit, QSpacerItem, \
-    QSizePolicy
+    QTableView, QHeaderView
 
 from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
 from listaprodotti.views.VistaInserisciProdotto import VistaInserisciProdotto
@@ -16,13 +17,23 @@ class VistaListaProdotti(QWidget):
 
         v_layout = QVBoxLayout()
 
-        search_field = QLineEdit()
-        search_field.setStyleSheet('font-size: 15px; height: 30px;')
-        #search_field.textChanged.connect(filter_proxy_model.setFilterRegExp)
-        v_layout.addWidget(search_field)
-
         self.list_view = QListView()
         self.update_ui()
+
+        filter_proxy_model = QSortFilterProxyModel()
+        filter_proxy_model.setSourceModel(self.listview_model)
+        filter_proxy_model.setFilterCaseSensitivity(Qt.CaseInsensitive)
+        filter_proxy_model.setFilterKeyColumn(0)
+
+        search_field = QLineEdit()
+        search_field.setStyleSheet('font-size: 15px; height: 30px;')
+        search_field.textChanged.connect(filter_proxy_model.setFilterRegExp)
+        v_layout.addWidget(search_field)
+
+
+        self.list_view.setModel(filter_proxy_model)
+
+
         v_layout.addWidget(self.list_view)
         main_layout.addLayout(v_layout)
 
