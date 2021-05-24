@@ -2,18 +2,21 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
 from carrello.views.VistaCarrello import VistaCarrello
 from listaclienti.views.VistaListaClienti import VistaListaClienti
+from listadipendenti.views.VistaListaDipendenti import VistaListaDipendenti
 from listaprodotti.views.VistaListaProdotti import VistaListaProdotti
 
 
-class VistaHome(QWidget):
+class VistaHomeDirettore(QWidget):
 
     def __init__(self, parent=None):
-        super(VistaHome, self).__init__(parent)
+        super(VistaHomeDirettore, self).__init__(parent)
         grid_layout = QGridLayout()
 
         grid_layout.addWidget(self.get_generic_button("Lista Prodotti", self.go_lista_prodotti), 0, 0)
         grid_layout.addWidget(self.get_generic_button("Lista Clienti", self.go_lista_clienti), 0, 1)
-        grid_layout.addWidget(self.get_generic_button("Carrello", self.go_carrello), 1, 0)
+        grid_layout.addWidget(self.get_generic_button("Lista Dipendenti", self.go_lista_dipendenti), 1, 0)
+        grid_layout.addWidget(self.get_generic_button("Carrello", self.go_carrello), 1, 1)
+        grid_layout.addWidget(self.get_generic_button("Statistiche sulle vendite", self.go_statistiche), 2, 0)
 
         self.setLayout(grid_layout)
         self.resize(400, 300)
@@ -40,4 +43,11 @@ class VistaHome(QWidget):
         self.vistacarrello = VistaCarrello()
         self.vistacarrello.show()
 
+
+    def go_lista_dipendenti(self):
+        self.vista_lista_dipendenti = VistaListaDipendenti()
+        self.vista_lista_dipendenti.show()
+
+    def go_statistiche(self):
+        return
 

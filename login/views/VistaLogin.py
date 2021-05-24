@@ -3,9 +3,9 @@ import pickle
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QApplication
 
-from dipendente.model.Dipendente import Dipendente
+
 from home.views.VistaHome import VistaHome
-from listadipendenti.controller.ControlloreListaDipendenti import ControlloreListaDipendenti
+from home.views.VistaHomeDirettore import VistaHomeDirettore
 from listadipendenti.model.ListaDipendenti import ListaDipendenti
 
 
@@ -50,7 +50,6 @@ class VistaLogin(QWidget):
     def check_password(self):
         msg = QMessageBox()
         lista = ListaDipendenti()
-
 
         if lista.verifica_id_dipendente(self.lineEdit_username.text(), self.lineEdit_password.text()):
             self.dialog = VistaHome()
