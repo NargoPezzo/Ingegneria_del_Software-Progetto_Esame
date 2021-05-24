@@ -1,6 +1,6 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
-
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLineEdit, QSpacerItem, \
+    QSizePolicy
 
 from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
 from listaprodotti.views.VistaInserisciProdotto import VistaInserisciProdotto
@@ -12,14 +12,25 @@ class VistaListaProdotti(QWidget):
 
         self.controller = ControlloreListaProdotti()
 
-        h_layout = QHBoxLayout()
+        main_layout = QHBoxLayout()
+
+        v_layout = QVBoxLayout()
+
+        search_field = QLineEdit()
+        search_field.setStyleSheet('font-size: 15px; height: 30px;')
+        #search_field.textChanged.connect(filter_proxy_model.setFilterRegExp)
+        v_layout.addWidget(search_field)
 
         self.list_view = QListView()
         self.update_ui()
-        h_layout.addWidget(self.list_view)
+        v_layout.addWidget(self.list_view)
+        main_layout.addLayout(v_layout)
 
 
         buttons_layout = QVBoxLayout()
+
+        buttons_layout.addItem(QSpacerItem(40, 40))
+
         open_button = QPushButton("Apri")
         open_button.clicked.connect(self.show_selected_info)
         buttons_layout.addWidget(open_button)
@@ -28,9 +39,9 @@ class VistaListaProdotti(QWidget):
         new_button.clicked.connect(self.show_new_prodotto)
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
-        h_layout.addLayout(buttons_layout)
+        main_layout.addLayout(buttons_layout)
 
-        self.setLayout(h_layout)
+        self.setLayout(main_layout)
         self.resize(600,300)
         self.setWindowTitle("Lista Prodotti")
 
