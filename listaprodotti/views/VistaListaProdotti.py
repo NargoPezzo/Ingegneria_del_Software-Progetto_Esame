@@ -1,11 +1,10 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
 
+
 from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
 from listaprodotti.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
-from carrello.controller.ControlloreCarrello import ControlloreCarrello
-
 
 class VistaListaProdotti(QWidget):
     def __init__(self, parent=None):
@@ -14,9 +13,11 @@ class VistaListaProdotti(QWidget):
         self.controller = ControlloreListaProdotti()
 
         h_layout = QHBoxLayout()
+
         self.list_view = QListView()
         self.update_ui()
         h_layout.addWidget(self.list_view)
+
 
         buttons_layout = QVBoxLayout()
         open_button = QPushButton("Apri")

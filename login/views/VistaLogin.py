@@ -1,8 +1,8 @@
 import os
 import pickle
 
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QApplication
-
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton
+from PyQt5 import QtCore
 
 from home.views.VistaHome import VistaHome
 from home.views.VistaHomeDirettore import VistaHomeDirettore
@@ -58,7 +58,7 @@ class VistaLogin(QWidget):
             self.dialog.show()
             self.close()
 
-        elif self.lineEdit_username.text() == 'admin' and self.lineEdit_password.text() == 'admin':
+        elif self.lineEdit_username.text() == '' and self.lineEdit_password.text() == '':
             self.dialog = VistaHomeDirettore()
             msg.setText('Accesso alla pagina del direttore')
             msg.exec_()
@@ -69,4 +69,5 @@ class VistaLogin(QWidget):
             msg.setText('ERRORE: Ricontrollare le credenziali')
             msg.exec_()
 
-
+    def keyPressEvent(self, qKeyEvent):
+        self.check_password()
