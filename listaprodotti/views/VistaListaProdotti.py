@@ -56,7 +56,7 @@ class VistaListaProdotti(QWidget):
     def show_selected_info(self):
         selected = self.list_view.selectedIndexes()[0].row()
         prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-        self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.controller.aggiungi_al_carello_by_id, self.update_ui)
+        self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui)
         self.vista_prodotto.show()
 
     def show_new_prodotto(self):

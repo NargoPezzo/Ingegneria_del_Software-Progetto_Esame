@@ -21,8 +21,5 @@ class ControlloreListaProdotti():
     def save_data(self):
         self.model.save_data()
 
-    def aggiungi_al_carello_by_id(self,id):
-        self.model.aggiungi_al_carrello_by_id(id)
-
     def save_data_carrello(self):
         self.model.save_data_carello()

@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QGridLayout, \
-    QHBoxLayout
+    QHBoxLayout, QMessageBox
 
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
@@ -8,13 +8,13 @@ from prodotto.views.VistaModificaProdotto import VistaModificaProdotto
 
 
 class VistaProdotto(QWidget):
-    def __init__(self, prodotto, elimina_prodotto, elimina_callback,aggiungi_carrello, parent=None):
+    def __init__(self, prodotto, elimina_prodotto, elimina_callback, parent=None):
         super(VistaProdotto, self).__init__(parent)
         self.controller = ControlloreProdotto(prodotto)
         self.elimina_prodotto = elimina_prodotto
         self.elimina_callback = elimina_callback
         self.prodotto = prodotto
-        self.aggiungi_carrello = aggiungi_carrello
+       # self.aggiungi_carrello = aggiungi_carrello
 
         v_layout = QVBoxLayout()
         h_layout = QHBoxLayout()
@@ -59,9 +59,14 @@ class VistaProdotto(QWidget):
         return current_label
 
     def elimina_prodotto_click(self):
-        self.elimina_prodotto(self.controller.get_id_prodotto())
-        self.elimina_callback()
-        self.close()
+        reply = QMessageBox.question(self, "Conferma", "Sei sicuro di voler eliminare il prodotto dal magazzino?", QMessageBox.Yes, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            self.elimina_prodotto(self.controller.get_id_prodotto())
+            self.elimina_callback()
+            self.close()
+        else:
+            return
 
     def show_modifica_prodotto(self):
         self.vista_modifica_prodotto = VistaModificaProdotto(self.prodotto)

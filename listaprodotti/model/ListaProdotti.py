@@ -37,13 +37,6 @@ class ListaProdotti():
         with open('listaprodotti/data/lista_prodotti_salvata.pickle', 'wb') as handle:
             pickle.dump(self.lista_prodotti, handle, pickle.HIGHEST_PROTOCOL)
 
-    def aggiungi_al_carrello_by_id(self,id):
-        def is_selected_prodotto(prodotto):
-            if prodotto.id == id:
-                return True
-            return False
-        self.lista_carrello.append(list(filter(is_selected_prodotto, self.lista_prodotti))[0])
-        print(self.lista_carrello)
 
     def save_data_carello(self):
         with open('carrello/data/carrello_salvato.picle','wb') as handle:
