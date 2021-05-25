@@ -12,6 +12,7 @@ class VistaProdotto(QWidget):
         self.controller = ControlloreProdotto(prodotto)
         self.elimina_prodotto = elimina_prodotto
         self.elimina_callback = elimina_callback
+        self.prodotto = prodotto
         #self.modifica = modifica
         #self.aggiungi_carrello = aggiungi_carrello
 
@@ -63,5 +64,5 @@ class VistaProdotto(QWidget):
         self.close()
 
     def show_modifica_prodotto(self):
-        self.vista_modifica_prodotto = VistaModificaProdotto(self.controller)
+        self.vista_modifica_prodotto = VistaModificaProdotto(self.prodotto)
         self.vista_modifica_prodotto.show()
