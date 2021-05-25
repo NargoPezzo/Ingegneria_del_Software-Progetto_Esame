@@ -7,14 +7,14 @@ from prodotto.views.VistaModificaProdotto import VistaModificaProdotto
 
 
 class VistaProdotto(QWidget):
-    def __init__(self, prodotto, elimina_prodotto, elimina_callback, parent=None):
+    def __init__(self, prodotto, elimina_prodotto, elimina_callback,aggiungi_carrello, parent=None):
         super(VistaProdotto, self).__init__(parent)
         self.controller = ControlloreProdotto(prodotto)
         self.elimina_prodotto = elimina_prodotto
         self.elimina_callback = elimina_callback
         self.prodotto = prodotto
         #self.modifica = modifica
-        #self.aggiungi_carrello = aggiungi_carrello
+        self.aggiungi_carrello = aggiungi_carrello
 
         v_layout = QVBoxLayout()
         h_layout = QHBoxLayout()
@@ -39,7 +39,7 @@ class VistaProdotto(QWidget):
         h_layout.addWidget(btn_elimina)
 
         btn_carrello = QPushButton("Aggiungi al Carrello")
-        #btn_carrello.clicked.connect(self.aggiungi_carrello)
+        btn_carrello.clicked.connect(self.aggiungi_al_carrello)
         h_layout.addWidget(btn_carrello)
 
         btn_modify = QPushButton("Modifica Quantità e Prezzo")
@@ -66,3 +66,7 @@ class VistaProdotto(QWidget):
     def show_modifica_prodotto(self):
         self.vista_modifica_prodotto = VistaModificaProdotto(self.prodotto)
         self.vista_modifica_prodotto.show()
+
+    def aggiungi_al_carrello(self):
+        self.controller.get_id_prodotto()
+        self.close()
