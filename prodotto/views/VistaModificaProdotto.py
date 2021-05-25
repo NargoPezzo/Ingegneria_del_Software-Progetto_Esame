@@ -1,12 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 
-from prodotto.controller.ControlloreProdotto import ControlloreProdotto
-
-
 class VistaModificaProdotto(QWidget):
     def __init__(self, prodotto, parent=None):
         super(VistaModificaProdotto, self).__init__(parent)
-        self.controller = ControlloreProdotto(prodotto)
+        self.prodotto = prodotto
         self.info = {}
 
         self.v_layout = QVBoxLayout()
@@ -27,17 +24,17 @@ class VistaModificaProdotto(QWidget):
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
+
     def modifica_prodotto(self):
 
-        prezzo = self.info["Nuovo Prezzo"].text()
-        quantita = self.info["Nuova Quantità"].text()
+        nuovoprezzo = self.info["Nuovo Prezzo"].text()
+        nuovaquantita = self.info["Nuova Quantità"].text()
 
-        if prezzo == "" or quantita == "":
+        if nuovoprezzo == "" or nuovaquantita == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
 
         else:
-            self.controller.set_prezzo_prodotto(prezzo)
-            self.controller.set_quantita_prodotto(quantita)
-
+            self.prodotto.prezzo = nuovoprezzo
+            self.prodotto.quantita = nuovaquantita
             #self.callback()
             self.close()

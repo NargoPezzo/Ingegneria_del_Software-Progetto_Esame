@@ -19,10 +19,3 @@ class ControlloreProdotto:
 
     def get_quantita_disp(self):
         return self.model.quantita
-
-    #----------------------------------------------------------------
-    def set_prezzo_prodotto(self, prezzo):
-        self.model.prezzo = prezzo
-
-    def set_quantita_prodotto(self, quantita):
-            self.model.quantita = quantita
