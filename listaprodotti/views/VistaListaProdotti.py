@@ -1,11 +1,11 @@
 from PyQt5.QtCore import QSortFilterProxyModel, Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLineEdit, QSpacerItem, \
-    QTableView, QHeaderView
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLineEdit, QSpacerItem
 
 from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
 from listaprodotti.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
+
 
 class VistaListaProdotti(QWidget):
     def __init__(self, parent=None):
@@ -30,13 +30,10 @@ class VistaListaProdotti(QWidget):
         search_field.textChanged.connect(filter_proxy_model.setFilterRegExp)
         v_layout.addWidget(search_field)
 
-
         self.list_view.setModel(filter_proxy_model)
-
 
         v_layout.addWidget(self.list_view)
         main_layout.addLayout(v_layout)
-
 
         buttons_layout = QVBoxLayout()
 

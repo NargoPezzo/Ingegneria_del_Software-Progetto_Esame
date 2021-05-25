@@ -37,7 +37,7 @@ class VistaInserisciProdotto(QWidget):
         btn_ok = QPushButton("OK")
         btn_ok.clicked.connect(self.add_prodotto)
         self.v_layout.addWidget(btn_ok)
-        self.v_layout.addWidget(self.combo_categoria)
+        #self.v_layout.addWidget(self.combo_categoria)
 
         self.setLayout(self.v_layout)
         self.setWindowTitle("Nuovo Prodotto")
