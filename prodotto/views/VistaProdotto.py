@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePoli
 
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
+from prodotto.views.VistaAggiungiQuantita import VistaAggiungiQuantita
 from prodotto.views.VistaModificaProdotto import VistaModificaProdotto
 
 
@@ -13,7 +14,6 @@ class VistaProdotto(QWidget):
         self.elimina_prodotto = elimina_prodotto
         self.elimina_callback = elimina_callback
         self.prodotto = prodotto
-        #self.modifica = modifica
         self.aggiungi_carrello = aggiungi_carrello
 
         v_layout = QVBoxLayout()
@@ -68,5 +68,6 @@ class VistaProdotto(QWidget):
         self.vista_modifica_prodotto.show()
 
     def aggiungi_al_carrello(self):
-        self.controller.get_id_prodotto()
+        self.vista_aggiungi_quantita = VistaAggiungiQuantita(self.prodotto)
+        self.vista_aggiungi_quantita.show()
         self.close()

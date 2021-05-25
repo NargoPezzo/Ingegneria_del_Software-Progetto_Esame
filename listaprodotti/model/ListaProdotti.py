@@ -11,8 +11,8 @@ class ListaProdotti():
                 self.lista_prodotti = pickle.load(f)
 
         self.lista_carrello = []
-        if os.path.isfile('carrello/data/carrello_salvato.picle'):
-            with open('carrello/data/carrello_salvato.picle', 'rb') as f:
+        if os.path.isfile('carrello/data/carrello_salvato.pickle'):
+            with open('carrello/data/carrello_salvato.pickle', 'rb') as f:
                 self.lista_carrello = pickle.load(f)
 
 
@@ -42,9 +42,9 @@ class ListaProdotti():
             if prodotto.id == id:
                 return True
             return False
-        self.lista_carrello.append(list(filter(is_selected_prodotto,self.lista_prodotti))[0])
+        self.lista_carrello.append(list(filter(is_selected_prodotto, self.lista_prodotti))[0])
         print(self.lista_carrello)
 
     def save_data_carello(self):
         with open('carrello/data/carrello_salvato.picle','wb') as handle:
-            pickle.dump(self.lista_carrello,handle,pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.lista_carrello, handle, pickle.HIGHEST_PROTOCOL)
