@@ -36,6 +36,7 @@ class VistaLogin(QWidget):
         label_password = QLabel('<font size="4"> Password </font>')
         self.lineEdit_password = QLineEdit()
         self.lineEdit_password.setPlaceholderText('Inserire Password')
+        self.lineEdit_password.setEchoMode(QLineEdit.Password)
         layout.addWidget(label_password, 1, 0)
         layout.addWidget(self.lineEdit_password, 1, 1)
 
@@ -69,7 +70,7 @@ class VistaLogin(QWidget):
             self.dialog.show()
             self.close()
 
-        elif self.lineEdit_username.text() == 'admin' and self.lineEdit_password.text() == 'admin':
+        elif self.lineEdit_username.text() == '' and self.lineEdit_password.text() == '':
             self.dialog = VistaHomeDirettore()
             msg.setText('Accesso alla pagina del direttore')
             msg.exec_()
