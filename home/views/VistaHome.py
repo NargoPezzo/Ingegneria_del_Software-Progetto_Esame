@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 from carrello.views.VistaCarrello import VistaCarrello
 from listaclienti.views.VistaListaClienti import VistaListaClienti
 from listaprodotti.views.VistaListaProdotti import VistaListaProdotti
+from PyQt5 import QtGui
 
 
 class VistaHome(QWidget):
@@ -18,6 +19,7 @@ class VistaHome(QWidget):
         self.setLayout(grid_layout)
         self.resize(400, 300)
         self.setWindowTitle("Negozio di Elettronica")
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
     '''
     Questa funzione restituisce un bottone generico dato il titolo

@@ -4,12 +4,13 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 from cliente.views.VistaCliente import VistaCliente
 from listaclienti.controller.ControlloreListaClienti import ControlloreListaClienti
 from listaclienti.views.VistaInserisciCliente import VistaInserisciCliente
+from PyQt5 import QtGui
 
 
 class VistaListaClienti(QWidget):
     def __init__(self, parent=None):
         super(VistaListaClienti, self).__init__(parent)
-
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         self.controller = ControlloreListaClienti()
 
         h_layout = QHBoxLayout()

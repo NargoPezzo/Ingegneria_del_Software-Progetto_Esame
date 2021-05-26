@@ -1,10 +1,11 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QPushButton
-
+from PyQt5 import QtGui
 
 class VistaAggiungiQuantita(QWidget):
     def __init__(self, prodotto, parent=None):
         super(VistaAggiungiQuantita, self).__init__(parent)
         self.prodotto = prodotto
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
         self.setWindowTitle("Aggiungi Prodotto al Carrello")
         self.resize(250, 100)

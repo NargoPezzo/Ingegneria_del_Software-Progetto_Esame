@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 
 from cliente.model.Cliente import Cliente
+from PyQt5 import QtGui
 
 
 class VistaInserisciCliente(QWidget):
@@ -9,7 +10,7 @@ class VistaInserisciCliente(QWidget):
         self.controller = controller
         self.callback = callback
         self.info = {}
-
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         self.v_layout = QVBoxLayout()
 
         self.get_form_entry("Nome")

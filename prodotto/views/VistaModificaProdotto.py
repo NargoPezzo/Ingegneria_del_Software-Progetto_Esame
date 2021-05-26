@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
+from PyQt5 import QtGui
+
 
 class VistaModificaProdotto(QWidget):
     def __init__(self, prodotto, update, parent=None):
@@ -6,7 +8,9 @@ class VistaModificaProdotto(QWidget):
         self.prodotto = prodotto
         self.info = {}
         self.update = update
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         self.v_layout = QVBoxLayout()
+
 
         self.get_form_entry("Nuovo Prezzo")
         self.get_form_entry("Nuova Quantità")

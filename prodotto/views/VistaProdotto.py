@@ -5,7 +5,7 @@ from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from prodotto.views.VistaAggiungiQuantita import VistaAggiungiQuantita
 from prodotto.views.VistaModificaProdotto import VistaModificaProdotto
-
+from PyQt5 import QtGui
 
 class VistaProdotto(QWidget):
     def __init__(self, prodotto, elimina_prodotto, elimina_callback, parent=None):
@@ -20,6 +20,7 @@ class VistaProdotto(QWidget):
         h_layout = QHBoxLayout()
 
         label_nome = QLabel(self.controller.get_marca_prodotto() + " " + self.controller.get_nome_prodotto())
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         font_nome = label_nome.font()
         font_nome.setPointSize(30)
         label_nome.setFont(font_nome)

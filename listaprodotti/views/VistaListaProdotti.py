@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
 from listaprodotti.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
+from PyQt5 import QtGui
 
 
 class VistaListaProdotti(QWidget):
@@ -12,7 +13,7 @@ class VistaListaProdotti(QWidget):
         super(VistaListaProdotti, self).__init__(parent)
 
         self.controller = ControlloreListaProdotti()
-
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         main_layout = QHBoxLayout()
 
         v_layout = QVBoxLayout()

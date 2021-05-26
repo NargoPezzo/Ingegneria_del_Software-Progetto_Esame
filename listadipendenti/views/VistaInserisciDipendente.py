@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 
 from dipendente.model.Dipendente import Dipendente
+from PyQt5 import QtGui
 
 
 class VistaInserisciDipendente(QWidget):
@@ -9,6 +10,7 @@ class VistaInserisciDipendente(QWidget):
         self.controller = controller
         self.callback = callback
         self.info = {}
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
         self.v_layout = QVBoxLayout()
 

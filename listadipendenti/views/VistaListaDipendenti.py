@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 from dipendente.views.VistaDipendente import VistaDipendente
 from listadipendenti.controller.ControlloreListaDipendenti import ControlloreListaDipendenti
 from listadipendenti.views.VistaInserisciDipendente import VistaInserisciDipendente
+from PyQt5 import QtGui
 
 
 class VistaListaDipendenti(QWidget):
@@ -11,6 +12,7 @@ class VistaListaDipendenti(QWidget):
         super(VistaListaDipendenti, self).__init__(parent)
 
         self.controller = ControlloreListaDipendenti()
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
         h_layout = QHBoxLayout()
         self.list_view = QListView()
