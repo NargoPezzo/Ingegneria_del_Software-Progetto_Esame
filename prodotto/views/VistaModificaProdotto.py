@@ -1,11 +1,11 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 
 class VistaModificaProdotto(QWidget):
-    def __init__(self, prodotto, parent=None):
+    def __init__(self, prodotto, update, parent=None):
         super(VistaModificaProdotto, self).__init__(parent)
         self.prodotto = prodotto
         self.info = {}
-
+        self.update = update
         self.v_layout = QVBoxLayout()
 
         self.get_form_entry("Nuovo Prezzo")
@@ -36,5 +36,5 @@ class VistaModificaProdotto(QWidget):
         else:
             self.prodotto.prezzo = nuovoprezzo
             self.prodotto.quantita = nuovaquantita
-            #self.callback()
+            self.update()
             self.close()

@@ -26,10 +26,13 @@ class VistaProdotto(QWidget):
         v_layout.addWidget(label_nome, )
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
-
-        v_layout.addWidget(self.get_label_info("Prezzo", self.controller.get_prezzo_prodotto()))
         v_layout.addWidget(self.get_label_info("Categoria", self.controller.get_categoria_prodotto()))
-        v_layout.addWidget(self.get_label_info("Quantità", self.controller.get_quantita_disp()))
+
+        self.label_prezzo = self.get_label_info("Prezzo", self.controller.get_prezzo_prodotto() + " €")
+        self.label_quantita = self.get_label_info("Quantità", self.controller.get_quantita_disp())
+
+        v_layout.addWidget(self.label_prezzo)
+        v_layout.addWidget(self.label_quantita)
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -69,10 +72,14 @@ class VistaProdotto(QWidget):
             return
 
     def show_modifica_prodotto(self):
-        self.vista_modifica_prodotto = VistaModificaProdotto(self.prodotto)
+        self.vista_modifica_prodotto = VistaModificaProdotto(self.prodotto, self.update_prodotto)
         self.vista_modifica_prodotto.show()
 
     def aggiungi_al_carrello(self):
         self.vista_aggiungi_quantita = VistaAggiungiQuantita(self.prodotto)
         self.vista_aggiungi_quantita.show()
         self.close()
+
+    def update_prodotto(self):
+        self.label_prezzo.setText("Prezzo: {}".format(self.controller.get_prezzo_prodotto() + " €"))
+        self.label_quantita.setText("Quantità: {}".format(self.controller.get_quantita_disp()))
