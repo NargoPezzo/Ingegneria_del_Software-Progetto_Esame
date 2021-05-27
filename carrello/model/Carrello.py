@@ -1,17 +1,22 @@
 import os
 import pickle
 
+from prodotto.controller.ControlloreProdotto import ControlloreProdotto
+
 
 class Carrello():
     def __init__(self):
         super(Carrello, self).__init__()
+
         self.carrello = []
+
         if os.path.isfile('carrello/data/carrello_salvato.pickle'):
             with open('carrello/data/carrello_salvato.pickle', 'rb') as f:
                 self.carrello= pickle.load(f)
 
-    def aggiungi_al_carrello(self, prodotto):
+    def aggiungi_al_carrello(self,prodotto, quantita):
         self.carrello.append(prodotto)
+
 
     def rimuovi_prodotto_by_id(self, id):
         def is_selected_prodotto(prodotto):

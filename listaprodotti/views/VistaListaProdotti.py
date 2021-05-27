@@ -2,6 +2,7 @@ from PyQt5.QtCore import QSortFilterProxyModel, Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLineEdit, QSpacerItem
 
+from carrello.model.Carrello import Carrello
 from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
 from listaprodotti.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
@@ -12,6 +13,7 @@ class VistaListaProdotti(QWidget):
     def __init__(self, parent=None):
         super(VistaListaProdotti, self).__init__(parent)
 
+        self.carrello = Carrello()
         self.controller = ControlloreListaProdotti()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         main_layout = QHBoxLayout()
@@ -57,7 +59,7 @@ class VistaListaProdotti(QWidget):
     def show_selected_info(self):
         selected = self.list_view.selectedIndexes()[0].row()
         prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-        self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui)
+        self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
         self.vista_prodotto.show()
 
     def show_new_prodotto(self):

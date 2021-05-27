@@ -6,14 +6,9 @@ class ListaProdotti():
     def __init__(self):
         super(ListaProdotti, self).__init__()
         self.lista_prodotti = []
-        if os.path.isfile('listaprodotti/data/lista_prodotti_salvata.pickle'):
-            with open('listaprodotti/data/lista_prodotti_salvata.pickle', 'rb') as f:
+        if os.path.isfile('listaprodotti/data/lista_prodotti_salvata2.pickle'):
+            with open('listaprodotti/data/lista_prodotti_salvata2.pickle', 'rb') as f:
                 self.lista_prodotti = pickle.load(f)
-
-        self.lista_carrello = []
-        if os.path.isfile('carrello/data/carrello_salvato.pickle'):
-            with open('carrello/data/carrello_salvato.pickle', 'rb') as f:
-                self.lista_carrello = pickle.load(f)
 
 
 
@@ -33,11 +28,9 @@ class ListaProdotti():
     def get_lista_prodotti(self):
         return self.lista_prodotti
 
+
     def save_data(self):
-        with open('listaprodotti/data/lista_prodotti_salvata.pickle', 'wb') as handle:
+        with open('listaprodotti/data/lista_prodotti_salvata2.pickle', 'wb') as handle:
             pickle.dump(self.lista_prodotti, handle, pickle.HIGHEST_PROTOCOL)
 
 
-    def save_data_carello(self):
-        with open('carrello/data/carrello_salvato.picle','wb') as handle:
-            pickle.dump(self.lista_carrello, handle, pickle.HIGHEST_PROTOCOL)

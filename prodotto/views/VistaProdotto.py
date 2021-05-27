@@ -8,12 +8,13 @@ from prodotto.views.VistaModificaProdotto import VistaModificaProdotto
 from PyQt5 import QtGui
 
 class VistaProdotto(QWidget):
-    def __init__(self, prodotto, elimina_prodotto, elimina_callback, parent=None):
+    def __init__(self, prodotto, elimina_prodotto, elimina_callback, carrello, parent=None):
         super(VistaProdotto, self).__init__(parent)
         self.controller = ControlloreProdotto(prodotto)
         self.elimina_prodotto = elimina_prodotto
         self.elimina_callback = elimina_callback
         self.prodotto = prodotto
+        self.carrello = carrello
        # self.aggiungi_carrello = aggiungi_carrello
 
         v_layout = QVBoxLayout()
@@ -46,6 +47,7 @@ class VistaProdotto(QWidget):
         btn_carrello.clicked.connect(self.aggiungi_al_carrello)
         h_layout.addWidget(btn_carrello)
 
+
         btn_modify = QPushButton("Modifica Quantità e Prezzo")
         btn_modify.clicked.connect(self.show_modifica_prodotto)
         h_layout.addWidget(btn_modify)
@@ -76,11 +78,15 @@ class VistaProdotto(QWidget):
         self.vista_modifica_prodotto = VistaModificaProdotto(self.prodotto, self.update_prodotto)
         self.vista_modifica_prodotto.show()
 
+
     def aggiungi_al_carrello(self):
-        self.vista_aggiungi_quantita = VistaAggiungiQuantita(self.prodotto)
+        self.vista_aggiungi_quantita = VistaAggiungiQuantita(self.prodotto, self.carrello)
         self.vista_aggiungi_quantita.show()
         self.close()
+
 
     def update_prodotto(self):
         self.label_prezzo.setText("Prezzo: {}".format(self.controller.get_prezzo_prodotto() + " €"))
         self.label_quantita.setText("Quantità: {}".format(self.controller.get_quantita_disp()))
+
+

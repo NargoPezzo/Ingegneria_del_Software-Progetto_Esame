@@ -61,6 +61,7 @@ class VistaInserisciProdotto(QWidget):
         marca = self.info["Marca"].text()
         nome = self.info["Nome"].text()
         categoria = self.combo_categoria.currentText()
+
         prezzo = self.info["Prezzo"].text()
         quantita = self.info["Quantità"].text()
 
