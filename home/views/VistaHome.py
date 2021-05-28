@@ -24,7 +24,7 @@ class VistaHome(QWidget):
         grid_layout.addWidget(self.get_generic_button("Carrello", self.go_carrello), 1, 2)
 
         self.setLayout(grid_layout)
-        self.setFixedSize(700, 200)
+        self.setFixedSize(400, 200)
         self.setWindowTitle("Negozio di Elettronica")
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
