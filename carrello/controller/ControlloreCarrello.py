@@ -6,9 +6,9 @@ class ControlloreCarrello():
         super(ControlloreCarrello, self).__init__()
         self.model = Carrello()
 
-    def aggiungi_al_carrello(self, prodotto):
+    '''   def aggiungi_al_carrello(self, prodotto):     NON SERVE
         self.model.aggiungi_prodotto(prodotto)
-
+    '''
     def get_lista_dei_prodotti(self):
         return self.model.get_lista_prodotti()
 

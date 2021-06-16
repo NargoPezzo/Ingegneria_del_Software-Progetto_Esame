@@ -16,9 +16,10 @@ class Carrello():
 
     def aggiungi_al_carrello(self,prodotto, quantita):
         self.carrello.append(prodotto)
-    '''    if prodotto.id  in self.carrello is True:
-                prodotto.quantita = "belllaaaa"
-                self.carrello.append(prodotto)
+    '''    if prodotto.id  in self.carrello:
+            pass
+        else:
+            self.carrello.append(prodotto)
     '''
     '''    for prodotto.id in self.carrello:
             if prodotto.id in self.carrello is True:                             TENTATIVI VARI
@@ -28,7 +29,7 @@ class Carrello():
             self.carrello[prodotto.id] = self.carrello[prodotto.id]+quantita
         else:
              self.carrello[prodotto.id] = quantita
-    '''
+          '''
     def rimuovi_prodotto_by_id(self, id):
         def is_selected_prodotto(prodotto):
             if prodotto.id == id:
