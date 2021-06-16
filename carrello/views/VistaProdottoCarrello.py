@@ -7,9 +7,9 @@ from prodotto.views.VistaAggiungiQuantita import VistaAggiungiQuantita
 from prodotto.views.VistaModificaProdotto import VistaModificaProdotto
 from PyQt5 import QtGui
 
-class VistaCarrello(QWidget):
+class VistaProdottoCarrello(QWidget):
     def __init__(self, prodotto, elimina_prodotto, elimina_callback, carrello, parent=None):
-        super(VistaCarrello, self).__init__(parent)
+        super(VistaProdottoCarrello, self).__init__(parent)
         self.controller = ControlloreProdotto(prodotto)
         self.elimina_prodotto = elimina_prodotto
         self.elimina_callback = elimina_callback

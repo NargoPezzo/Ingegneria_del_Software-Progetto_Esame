@@ -20,3 +20,4 @@ class ControlloreCarrello():
 
     def save_data(self):
         self.model.save_data()
+

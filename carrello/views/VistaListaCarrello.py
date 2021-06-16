@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.model.Carrello import Carrello
-from carrello.views.VistaCarrello import VistaCarrello
+from carrello.views.VistaProdottoCarrello import VistaProdottoCarrello
 from prodotto.views.VistaProdotto import VistaProdotto
 
 
@@ -37,7 +37,7 @@ class VistaListaCarrello(QWidget):
     def show_selected_info(self):
         selected = self.list_view.selectedIndexes()[0].row()
         prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-        self.vista_prodotto = VistaCarrello(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello) ###VA CAMBIATA
+        self.vista_prodotto = VistaProdottoCarrello(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello) ###VA CAMBIATA
         self.vista_prodotto.show()
 
     def show_checkout(self):
