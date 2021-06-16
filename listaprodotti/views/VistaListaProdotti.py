@@ -80,3 +80,5 @@ class VistaListaProdotti(QWidget):
 
     def closeEvent(self, event):
         self.controller.save_data()
+
+  #   def update_elemento(self):  DA FARE

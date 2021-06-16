@@ -47,6 +47,7 @@ class VistaInserisciProdotto(QWidget):
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
+      #  current_text_edit.inputMask()  DA VEDERE
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 

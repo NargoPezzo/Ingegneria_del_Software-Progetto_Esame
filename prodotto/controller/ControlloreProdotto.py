@@ -18,4 +18,7 @@ class ControlloreProdotto:
         return self.model.categoria
 
     def get_quantita_disp(self):
-        return self.model.quantita
+        return self.model.quantita_magazzino
+
+    def get_quantita_carrello(self):
+        return self.model.quantita_carrello

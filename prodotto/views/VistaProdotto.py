@@ -89,4 +89,7 @@ class VistaProdotto(QWidget):
         self.label_prezzo.setText("Prezzo: {}".format(self.controller.get_prezzo_prodotto() + " €"))
         self.label_quantita.setText("Quantità: {}".format(self.controller.get_quantita_disp()))
 
+ #   def update_elemento_lista(self): da fare
+
+
 

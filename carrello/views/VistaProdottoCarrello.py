@@ -31,7 +31,7 @@ class VistaProdottoCarrello(QWidget):
         v_layout.addWidget(self.get_label_info("Categoria", self.controller.get_categoria_prodotto()))
 
         self.label_prezzo = self.get_label_info("Prezzo", self.controller.get_prezzo_prodotto() + " €")
-        self.label_quantita = self.get_label_info("Quantità", self.controller.get_quantita_disp())
+        self.label_quantita = self.get_label_info("Quantità", self.controller.get_quantita_carrello())
 
         v_layout.addWidget(self.label_prezzo)
         v_layout.addWidget(self.label_quantita)

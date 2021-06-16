@@ -39,6 +39,6 @@ class VistaModificaProdotto(QWidget):
 
         else:
             self.prodotto.prezzo = nuovoprezzo
-            self.prodotto.quantita = nuovaquantita
+            self.prodotto.quantita_magazzino = nuovaquantita
             self.update()
             self.close()
