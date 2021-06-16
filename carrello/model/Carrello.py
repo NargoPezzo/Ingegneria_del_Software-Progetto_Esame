@@ -8,7 +8,7 @@ class Carrello():
     def __init__(self):
         super(Carrello, self).__init__()
 
-        self.carrello = []
+        self.carrello = {'key':'value'}
 
         if os.path.isfile('carrello/data/carrello_salvato.pickle'):
             with open('carrello/data/carrello_salvato.pickle', 'rb') as f:
@@ -16,8 +16,19 @@ class Carrello():
 
     def aggiungi_al_carrello(self,prodotto, quantita):
         self.carrello.append(prodotto)
-
-
+    '''    if prodotto.id  in self.carrello is True:
+                prodotto.quantita = "belllaaaa"
+                self.carrello.append(prodotto)
+    '''
+    '''    for prodotto.id in self.carrello:
+            if prodotto.id in self.carrello is True:                             TENTATIVI VARI
+                prodotto.quantita +=1
+    '''
+    '''    if prodotto.id in self.carrello:
+            self.carrello[prodotto.id] = self.carrello[prodotto.id]+quantita
+        else:
+             self.carrello[prodotto.id] = quantita
+    '''
     def rimuovi_prodotto_by_id(self, id):
         def is_selected_prodotto(prodotto):
             if prodotto.id == id:
@@ -34,3 +45,4 @@ class Carrello():
     def save_data(self):
         with open('carrello/data/carrello_salvato.pickle', 'wb') as handle:
             pickle.dump(self.carrello, handle, pickle.HIGHEST_PROTOCOL)
+

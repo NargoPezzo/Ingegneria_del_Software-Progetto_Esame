@@ -1,56 +1,91 @@
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QGridLayout, \
+    QHBoxLayout, QMessageBox
 
+from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
-from prodotto.views.VistaProdotto import VistaProdotto
-
+from prodotto.views.VistaAggiungiQuantita import VistaAggiungiQuantita
+from prodotto.views.VistaModificaProdotto import VistaModificaProdotto
+from PyQt5 import QtGui
 
 class VistaCarrello(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, prodotto, elimina_prodotto, elimina_callback, carrello, parent=None):
         super(VistaCarrello, self).__init__(parent)
+        self.controller = ControlloreProdotto(prodotto)
+        self.elimina_prodotto = elimina_prodotto
+        self.elimina_callback = elimina_callback
+        self.prodotto = prodotto
+        self.carrello = carrello
+       # self.aggiungi_carrello = aggiungi_carrello
 
-        self.controller = ControlloreCarrello()
-
+        v_layout = QVBoxLayout()
         h_layout = QHBoxLayout()
-        self.list_view = QListView()
-        self.update_ui()
-        h_layout.addWidget(self.list_view)
 
-        buttons_layout = QVBoxLayout()
-        open_button = QPushButton("Apri")
-        open_button.clicked.connect(self.show_selected_info)
-        buttons_layout.addWidget(open_button)
+        label_nome = QLabel(self.controller.get_marca_prodotto() + " " + self.controller.get_nome_prodotto())
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
+        font_nome = label_nome.font()
+        font_nome.setPointSize(30)
+        label_nome.setFont(font_nome)
+        v_layout.addWidget(label_nome, )
 
-        new_button = QPushButton("Checkout")
-        new_button.clicked.connect(self.show_checkout)
-        buttons_layout.addWidget(new_button)
-        buttons_layout.addStretch()
-        h_layout.addLayout(buttons_layout)
+        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        v_layout.addWidget(self.get_label_info("Categoria", self.controller.get_categoria_prodotto()))
 
-        self.setLayout(h_layout)
-        self.resize(600,300)
-        self.setWindowTitle("Carrello")
+        self.label_prezzo = self.get_label_info("Prezzo", self.controller.get_prezzo_prodotto() + " €")
+        self.label_quantita = self.get_label_info("Quantità", self.controller.get_quantita_disp())
 
-    def show_selected_info(self):
-        selected = self.list_view.selectedIndexes()[0].row()
-        prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-        self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui)
-        self.vista_prodotto.show()
+        v_layout.addWidget(self.label_prezzo)
+        v_layout.addWidget(self.label_quantita)
 
-    def show_checkout(self):
-        return
+        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-    def update_ui(self):
-        self.listview_model = QStandardItemModel(self.list_view)
-        for prodotto in self.controller.get_lista_dei_prodotti():
-            item = QStandardItem()
-            item.setText(prodotto.marca + " " + prodotto.nome)
-            item.setEditable(False)
-            font = item.font()
-            font.setPointSize(18)
-            item.setFont(font)
-            self.listview_model.appendRow(item)
-        self.list_view.setModel(self.listview_model)
+        btn_elimina = QPushButton(" RIMUOVI DAL CARRELLO ")
+        btn_elimina.clicked.connect(self.elimina_prodotto_click)
+        btn_elimina.setStyleSheet("background-color: red")
+        h_layout.addWidget(btn_elimina)
 
-    def closeEvent(self, event):
-        self.controller.save_data()
+        '''    btn_carrello = QPushButton("Aggiungi al Carrello")
+        btn_carrello.clicked.connect(self.aggiungi_al_carrello)
+        h_layout.addWidget(btn_carrello)
+
+
+        btn_modify = QPushButton("Modifica Quantità e Prezzo")
+        btn_modify.clicked.connect(self.show_modifica_prodotto)
+        h_layout.addWidget(btn_modify)
+  '''
+        v_layout.addLayout(h_layout)
+
+        self.setLayout(v_layout)
+        self.setWindowTitle(self.controller.get_marca_prodotto() + " " + self.controller.get_nome_prodotto())
+
+    def get_label_info(self, testo, valore):
+        current_label = QLabel("{}: {}".format(testo, valore))
+        current_font = current_label.font()
+        current_font.setPointSize(17)
+        current_label.setFont(current_font)
+        return current_label
+
+    def elimina_prodotto_click(self):
+        reply = QMessageBox.question(self, "Conferma", "Sei sicuro di voler eliminare il prodotto dal carrello?", QMessageBox.Yes, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            self.elimina_prodotto(self.controller.get_id_prodotto())
+            self.elimina_callback()
+            self.close()
+        else:
+            return
+
+    def show_modifica_prodotto(self):
+        self.vista_modifica_prodotto = VistaModificaProdotto(self.prodotto, self.update_prodotto)
+        self.vista_modifica_prodotto.show()
+
+
+    '''   def aggiungi_al_carrello(self):
+        self.vista_aggiungi_quantita = VistaAggiungiQuantita(self.prodotto, self.carrello)   NON DOVREBBE SERVIRE
+        self.vista_aggiungi_quantita.show()
+        self.close()
+  '''
+
+    def update_prodotto(self):
+        self.label_prezzo.setText("Prezzo: {}".format(self.controller.get_prezzo_prodotto() + " €"))
+        self.label_quantita.setText("Quantità: {}".format(self.controller.get_quantita_disp()))
+
