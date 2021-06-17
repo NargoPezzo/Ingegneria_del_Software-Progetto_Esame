@@ -14,11 +14,17 @@ class VistaListaCarrello(QWidget):
         self.controller = ControlloreCarrello()
         self.carrello = Carrello()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
+        self.prezzo_finale = 0
+        self.totale_prodotti = 0
+
+    #    v_layout = QVBoxLayout()
 
         h_layout = QHBoxLayout()
         self.list_view = QListView()
         self.update_ui()
         h_layout.addWidget(self.list_view)
+
+    #    v_layout.addWidget(self.get_label_info("Totale", self.totale_prodotti))
 
         buttons_layout = QVBoxLayout()
         open_button = QPushButton("Apri")
@@ -48,14 +54,23 @@ class VistaListaCarrello(QWidget):
         self.listview_model = QStandardItemModel(self.list_view)
         for prodotto in self.controller.get_lista_dei_prodotti():
             item = QStandardItem()
-            prezzo_finale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
-            item.setText(prodotto.marca + " " + prodotto.nome + " " + "{:>20}".format(str(prezzo_finale)) + " €")   #PER PREZZO <------
-            item.setEditable(False)
+            self.prezzo_finale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
+            item.setText(prodotto.marca + " " + prodotto.nome + " " + "{:>20}".format(str(self.prezzo_finale)) + " €")   #PER PREZZO <------
+            item.setEditable(False)                                                                                     # METTERE I PREZZI INCOLONNATI A DESTRA
             font = item.font()
             font.setPointSize(18)
             item.setFont(font)
             self.listview_model.appendRow(item)
+            self.totale_prodotti += self.prezzo_finale    # QUI IL TOTALE DELLA SOMMA DI TUTTI I PRODOTTI NEL CARRELLO DA MANDARE A SCHERMO
+         #   print(self.totale_prodotti)
         self.list_view.setModel(self.listview_model)
 
     def closeEvent(self, event):
         self.controller.save_data()
+
+
+
+
+
+
+
