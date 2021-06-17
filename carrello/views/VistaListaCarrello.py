@@ -1,6 +1,6 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
-
+from PyQt5 import QtGui
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.model.Carrello import Carrello
 from carrello.views.VistaProdottoCarrello import VistaProdottoCarrello
@@ -13,6 +13,7 @@ class VistaListaCarrello(QWidget):
 
         self.controller = ControlloreCarrello()
         self.carrello = Carrello()
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
         h_layout = QHBoxLayout()
         self.list_view = QListView()
@@ -37,7 +38,7 @@ class VistaListaCarrello(QWidget):
     def show_selected_info(self):
         selected = self.list_view.selectedIndexes()[0].row()
         prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-        self.vista_prodotto = VistaProdottoCarrello(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello) ###VA CAMBIATA
+        self.vista_prodotto = VistaProdottoCarrello(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
         self.vista_prodotto.show()
 
     def show_checkout(self):
@@ -47,7 +48,8 @@ class VistaListaCarrello(QWidget):
         self.listview_model = QStandardItemModel(self.list_view)
         for prodotto in self.controller.get_lista_dei_prodotti():
             item = QStandardItem()
-            item.setText(prodotto.marca + " " + prodotto.nome)
+            prezzo_finale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
+            item.setText(prodotto.marca + " " + prodotto.nome + " " + "{:>20}".format(str(prezzo_finale)) + " €")   #PER PREZZO <------
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)
