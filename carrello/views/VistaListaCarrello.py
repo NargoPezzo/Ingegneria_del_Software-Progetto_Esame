@@ -5,6 +5,7 @@ from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.model.Carrello import Carrello
 from carrello.views.VistaProdottoCarrello import VistaProdottoCarrello
 from prodotto.views.VistaProdotto import VistaProdotto
+from statistiche.view.VistaStatistiche import VistaStatistiche
 
 
 class VistaListaCarrello(QWidget):
@@ -32,7 +33,7 @@ class VistaListaCarrello(QWidget):
         buttons_layout.addWidget(open_button)
 
         new_button = QPushButton("Checkout")
-        new_button.clicked.connect(self.show_checkout)
+        new_button.clicked.connect(self.aggiungi_alle_statistiche)
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
         h_layout.addLayout(buttons_layout)
@@ -47,8 +48,10 @@ class VistaListaCarrello(QWidget):
         self.vista_prodotto = VistaProdottoCarrello(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
         self.vista_prodotto.show()
 
-    def show_checkout(self):
-        return
+    def aggiungi_alle_statistiche(self):
+        prodotti_carrello = self.controller.get_lista_dei_prodotti()
+        self.vista_statistiche = VistaStatistiche(prodotti_carrello)
+        self.vista_statistiche.show()                                  #DA QUI DEVO CREARE IL METODO CHE MI PRENDE I PRODOTTI DEL CARRELLO E LI MANDA NEL CHECKOUT
 
     def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)
