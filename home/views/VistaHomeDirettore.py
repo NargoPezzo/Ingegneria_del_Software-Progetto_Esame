@@ -9,6 +9,8 @@ from listaprodotti.views.VistaListaProdotti import VistaListaProdotti
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
 
+from statistiche.view.VistaStatistiche import VistaStatistiche
+
 
 class VistaHomeDirettore(QWidget):
 
@@ -75,5 +77,6 @@ class VistaHomeDirettore(QWidget):
         self.vista_lista_dipendenti.show()
 
     def go_statistiche(self):
-        return
+        self.vista_statistiche = VistaStatistiche()
+        self.vista_statistiche.show()
 

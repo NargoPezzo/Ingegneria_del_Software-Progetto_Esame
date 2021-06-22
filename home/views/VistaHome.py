@@ -1,11 +1,14 @@
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
 
+from carrello.views.VistaListaCarrello import VistaListaCarrello
 from carrello.views.VistaProdottoCarrello import VistaProdottoCarrello
 from listaclienti.views.VistaListaClienti import VistaListaClienti
 from listaprodotti.views.VistaListaProdotti import VistaListaProdotti
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
+
+from statistiche.view.VistaStatistiche import VistaStatistiche
 
 
 class VistaHome(QWidget):
@@ -57,7 +60,12 @@ class VistaHome(QWidget):
         self.vista_lista_clienti.show()
 
     def go_carrello(self):
-        self.vistacarrello = VistaCarrello()
+        self.vistacarrello = VistaListaCarrello()
         self.vistacarrello.show()
+
+    def go_statistiche(self):
+        self.vista_statistiche = VistaStatistiche()
+        self.vista_statistiche.show()
+
 
 
