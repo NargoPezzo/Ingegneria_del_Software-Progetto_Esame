@@ -46,3 +46,4 @@ class VistaStatistiche(QWidget):
             self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
     '''
+    # provaaaaaa
