@@ -9,7 +9,7 @@ from statistiche.view.VistaStatistiche import VistaStatistiche
 
 
 class VistaListaCarrello(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self,  parent=None):
         super(VistaListaCarrello, self).__init__(parent)
 
         self.controller = ControlloreCarrello()
@@ -37,6 +37,7 @@ class VistaListaCarrello(QWidget):
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
         h_layout.addLayout(buttons_layout)
+        h_layout.addWidget(new_button)
 
         self.setLayout(h_layout)
         self.resize(600,300)
@@ -49,9 +50,9 @@ class VistaListaCarrello(QWidget):
         self.vista_prodotto.show()
 
     def aggiungi_alle_statistiche(self):
-        prodotti_carrello = self.controller.get_lista_dei_prodotti()
-        self.vista_statistiche = VistaStatistiche(prodotti_carrello)
-        self.vista_statistiche.show()                                  #DA QUI DEVO CREARE IL METODO CHE MI PRENDE I PRODOTTI DEL CARRELLO E LI MANDA NEL CHECKOUT
+        self.vista_statistiche = VistaStatistiche()
+        self.vista_statistiche.show()
+        self.close()
 
     def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)

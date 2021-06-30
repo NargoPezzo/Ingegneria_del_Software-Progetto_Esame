@@ -1,4 +1,4 @@
-from PyQt5.QtGui import QStandardItemModel
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
 from PyQt5 import QtGui
 
@@ -6,10 +6,10 @@ from statistiche.controller.ControlloreStatistiche import ControlloreStatistiche
 
 
 class VistaStatistiche(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self,  parent=None):
         super(VistaStatistiche, self).__init__(parent)
-    #    self.prodotto = prodotto
-    #    self.controller = ControlloreStatistiche()
+
+        self.controller = ControlloreStatistiche()
 
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         self.controller = ControlloreStatistiche()
@@ -33,17 +33,18 @@ class VistaStatistiche(QWidget):
         self.setLayout(h_layout)
         self.resize(600, 300)
         self.setWindowTitle("Statistiche")
-
-    '''def update_ui(self):
+    '''
+    def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)
-        for cliente in self.controller.get_lista_dei_clienti():
+        for prodotto_statistiche in self.controller.get_lista_dei_prodotti():
             item = QStandardItem()
-            item.setText(cliente.nome + " " + cliente.cognome)
+            item.setText(prodotto_statistiche + " " + cliente.cognome)
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)
             item.setFont(font)
             self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
-    '''
+
     # provaaaaaa
+    '''
