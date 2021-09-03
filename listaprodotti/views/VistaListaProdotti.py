@@ -83,7 +83,6 @@ class VistaListaProdotti(QWidget):
         self.controller.save_data()
 
     def toSourceIndex(self, index):
-
         return self.filter_proxy_model.mapToSource(index).row()
 
 
