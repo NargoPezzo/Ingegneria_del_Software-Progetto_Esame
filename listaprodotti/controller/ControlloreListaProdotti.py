@@ -22,4 +22,4 @@ class ControlloreListaProdotti():
         self.model.save_data()
 
     def save_data_carrello(self):
-        self.model.save_data_carello()
+        self.model.save_data_carrello()

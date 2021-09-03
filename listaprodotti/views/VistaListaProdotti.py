@@ -23,17 +23,17 @@ class VistaListaProdotti(QWidget):
         self.list_view = QListView()
         self.update_ui()
 
-        filter_proxy_model = QSortFilterProxyModel()
-        filter_proxy_model.setSourceModel(self.listview_model)
-        filter_proxy_model.setFilterCaseSensitivity(Qt.CaseInsensitive)
-        filter_proxy_model.setFilterKeyColumn(0)
+        self.filter_proxy_model = QSortFilterProxyModel()
+        self.filter_proxy_model.setSourceModel(self.listview_model)
+        self.filter_proxy_model.setFilterCaseSensitivity(Qt.CaseInsensitive)
+        self.filter_proxy_model.setFilterKeyColumn(0)
 
         search_field = QLineEdit()
         search_field.setStyleSheet('font-size: 15px; height: 30px;')
-        search_field.textChanged.connect(filter_proxy_model.setFilterRegExp)
+        search_field.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
         v_layout.addWidget(search_field)
 
-        self.list_view.setModel(filter_proxy_model)
+        self.list_view.setModel(self.filter_proxy_model)
 
         v_layout.addWidget(self.list_view)
         main_layout.addLayout(v_layout)
@@ -57,8 +57,9 @@ class VistaListaProdotti(QWidget):
         self.setWindowTitle("Lista Prodotti")
 
     def show_selected_info(self):
-        selected = self.list_view.selectedIndexes()[0].row()
-        prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
+        selected = self.list_view.selectedIndexes()[0]
+        sourceindex = self.toSourceIndex(selected)
+        prodotto_selezionato = self.controller.get_prodotto_by_index(sourceindex)
         self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
         self.vista_prodotto.show()
 
@@ -81,4 +82,8 @@ class VistaListaProdotti(QWidget):
     def closeEvent(self, event):
         self.controller.save_data()
 
-  #   def update_elemento(self):  DA FARE
+    def toSourceIndex(self, index):
+
+        return self.filter_proxy_model.mapToSource(index).row()
+
+

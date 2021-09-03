@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QPushButton
 from PyQt5 import QtGui
 
 from carrello.model.Carrello import Carrello
@@ -39,17 +39,9 @@ class VistaAggiungiQuantita(QWidget):
 
 
     def aggiungi_al_carrello(self):#DA FARE E RIVEDERE
-        if int(self.spin.text()) > int(self.prodotto.quantita_magazzino):
-            QMessageBox.critical(self, 'Errore', 'La domanda è maggiore della possibilità',
-                                 QMessageBox.Ok, QMessageBox.Ok)
-        else:
-            self.carrello.aggiungi_al_carrello(self.prodotto, int(self.spin.text()))
-            self.prodotto.quantita_magazzino = int(self.prodotto.quantita_magazzino) - int(self.spin.text())
-            self.carrello.save_data()
-            self.close()
-      #  if  self.prodotto.quantita_magazzino == 0: DA VEDERE
-
-
+        self.carrello.aggiungi_al_carrello(self.prodotto, int(self.spin.text()))
+        self.carrello.save_data()
+        self.close()
 
 
 
