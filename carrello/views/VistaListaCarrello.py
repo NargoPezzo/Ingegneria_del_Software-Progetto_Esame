@@ -71,6 +71,9 @@ class VistaListaCarrello(QWidget):
         for prodotto in self.controller.get_lista_carrello():
             self.table_widget.insertRow(row)
             self.table_widget.setItem(row, 0, QTableWidgetItem(prodotto.quantita_carrello))
+            self.table_widget.setItem(row, 1, QTableWidgetItem(prodotto.marca))
+            self.table_widget.setItem(row, 2, QTableWidgetItem(prodotto.nome))
+            self.table_widget.setItem(row, 3, QTableWidgetItem(prodotto.prezzo))
             row = row + 1
 
     def closeEvent(self, event):
