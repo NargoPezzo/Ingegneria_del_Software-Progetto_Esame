@@ -15,8 +15,9 @@ class Carrello():
                 self.carrello= pickle.load(f)
 
     def aggiungi_al_carrello(self,prodotto, quantita):
-        if self.verifica_presenza_prodotto_by_id(prodotto.id, quantita) is  False:
-            prodotto.set_quantita_carrello(quantita)
+       # if self.verifica_presenza_prodotto_by_id(prodotto.id, quantita) is False:
+            prodotto.quantita_carrello = quantita
+            print(prodotto.quantita_carrello)
             self.carrello.append(prodotto)
     '''    if prodotto.id in self.carrello:
             self.carrello.get_prodotto_by_index()
