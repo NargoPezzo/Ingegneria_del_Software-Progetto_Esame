@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem
 from PyQt5 import QtGui
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.model.Carrello import Carrello
@@ -15,17 +15,22 @@ class VistaListaCarrello(QWidget):
         self.controller = ControlloreCarrello()
         self.carrello = Carrello()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
-        self.prezzo_finale = 0
-        self.totale_prodotti = 0
 
-    #    v_layout = QVBoxLayout()
+        main_layout = QHBoxLayout()
 
-        h_layout = QHBoxLayout()
-        self.list_view = QListView()
+        self.table_widget = QTableWidget()
         self.update_ui()
-        h_layout.addWidget(self.list_view)
 
-    #    v_layout.addWidget(self.get_label_info("Totale", self.totale_prodotti))
+
+        main_layout.addWidget(self.table_widget)
+
+
+
+
+
+
+
+
 
         buttons_layout = QVBoxLayout()
         open_button = QPushButton("Apri")
@@ -36,11 +41,11 @@ class VistaListaCarrello(QWidget):
         new_button.clicked.connect(self.aggiungi_alle_statistiche)
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
-        h_layout.addLayout(buttons_layout)
-        h_layout.addWidget(new_button)
+        main_layout.addLayout(buttons_layout)
+        main_layout.addWidget(new_button)
 
-        self.setLayout(h_layout)
-        self.resize(600,300)
+        self.setLayout(main_layout)
+        self.resize(600, 300)
         self.setWindowTitle("Carrello")
 
     def show_selected_info(self):
@@ -55,19 +60,18 @@ class VistaListaCarrello(QWidget):
         self.close()
 
     def update_ui(self):
-        self.listview_model = QStandardItemModel(self.list_view)
-        for prodotto in self.controller.get_lista_dei_prodotti():
-            item = QStandardItem()
-            self.prezzo_finale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
-            item.setText(prodotto.marca + " " + prodotto.nome + " " + "{:>20}".format(str(self.prezzo_finale)) + " €")   #PER PREZZO <------
-            item.setEditable(False)                                                                                     # METTERE I PREZZI INCOLONNATI A DESTRA
-            font = item.font()
-            font.setPointSize(18)
-            item.setFont(font)
-            self.listview_model.appendRow(item)
-            self.totale_prodotti += self.prezzo_finale    # QUI IL TOTALE DELLA SOMMA DI TUTTI I PRODOTTI NEL CARRELLO DA MANDARE A SCHERMO
-         #   print(self.totale_prodotti)
-        self.list_view.setModel(self.listview_model)
+        self.table_widget.setColumnCount(4)
+        self.table_widget.setHorizontalHeaderItem(0, QTableWidgetItem("Quantità"))
+        self.table_widget.setHorizontalHeaderItem(1, QTableWidgetItem("Marca"))
+        self.table_widget.setHorizontalHeaderItem(2, QTableWidgetItem("Nome Prodotto"))
+        self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Prezzo"))
+        print(self.controller.get_lista_carrello())
+
+        row = 0
+        for prodotto in self.controller.get_lista_carrello():
+            self.table_widget.insertRow(row)
+            self.table_widget.setItem(row, 0, QTableWidgetItem(prodotto.quantita_carrello))
+            row = row + 1
 
     def closeEvent(self, event):
         self.controller.save_data()

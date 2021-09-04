@@ -34,7 +34,7 @@ class Carrello():
     def get_prodotto_by_index(self, index):
         return self.carrello[index]
 
-    def get_lista_prodotti(self):
+    def get_lista_carrello(self):
         return self.carrello
 
     def save_data(self):
