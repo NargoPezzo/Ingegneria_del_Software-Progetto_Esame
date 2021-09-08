@@ -1,6 +1,8 @@
 import os
 import pickle
 
+from PyQt5.QtWidgets import QMessageBox
+
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 
 
@@ -14,15 +16,10 @@ class Carrello():
             with open('carrello/data/carrello_salvato.pickle', 'rb') as f:
                 self.carrello= pickle.load(f)
 
-    def aggiungi_al_carrello(self, prodotto, quantita):
-       if self.verifica_presenza_prodotto_by_id(prodotto,  quantita) is False:
+    def aggiungi_al_carrello(self, prodotto):
+        if self.verifica_presenza_prodotto_by_id(prodotto) is False:
+            self.carrello.append(prodotto)
 
-            self.carrello.append(prodotto)
-    '''    if prodotto.id in self.carrello:
-            self.carrello.get_prodotto_by_index()
-        else:
-            self.carrello.append(prodotto)
-    '''
 
     def rimuovi_prodotto_by_id(self, id):
         def is_selected_prodotto(prodotto):
@@ -41,11 +38,20 @@ class Carrello():
         with open('carrello/data/carrello_salvato.pickle', 'wb') as handle:
             pickle.dump(self.carrello, handle, pickle.HIGHEST_PROTOCOL)
 
-    def verifica_presenza_prodotto_by_id(self, product, quantita):
-        product.quantita_carrello = quantita
-        product.quantita_magazzino = int(product.quantita_magazzino) - product.quantita_carrello
-        for(i,prodotto) in enumerate(self.carrello):
-            if prodotto.id == product.id:
-                self.carrello[i].quantita_carrello = quantita+self.carrello[i].quantita_carrello
+    def verifica_quantita_prodotto(self, prodotto, quantita):
+
+        if quantita <= int(prodotto.quantita_magazzino):
+            prodotto.quantita_carrello = quantita
+            prodotto.quantita_magazzino = int(prodotto.quantita_magazzino) - prodotto.quantita_carrello
+            return True
+        return False
+
+    def verifica_presenza_prodotto_by_id(self, prodottoscelto):
+
+        for(i, prodotto) in enumerate(self.carrello):
+            if prodotto.id == prodottoscelto.id:
+                self.carrello[i].quantita_carrello = prodottoscelto.quantita_carrello + self.carrello[i].quantita_carrello
                 return True
         return False
+
+

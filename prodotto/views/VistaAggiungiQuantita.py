@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QPushButton
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QPushButton, QMessageBox
 from PyQt5 import QtGui
 
 from carrello.model.Carrello import Carrello
@@ -10,6 +10,7 @@ class VistaAggiungiQuantita(QWidget):
     def __init__(self, prodotto, carrello, parent=None):
         super(VistaAggiungiQuantita, self).__init__(parent)
         self.prodotto = prodotto
+        self.msg = QMessageBox()
 
         self.carrello = carrello
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
@@ -39,9 +40,14 @@ class VistaAggiungiQuantita(QWidget):
 
 
     def aggiungi_al_carrello(self):#DA FARE E RIVEDERE
-        self.carrello.aggiungi_al_carrello(self.prodotto, int(self.spin.text()))
-        self.carrello.save_data()
-        self.close()
+        if self.carrello.verifica_quantita_prodotto(self.prodotto, int(self.spin.text())) is True:
+            self.carrello.aggiungi_al_carrello(self.prodotto)
+            self.carrello.save_data()
+            self.close()
+        else:
+            self.msg.setText("ERRORE: la quantità selezionata non è presente in magazzino")
+            self.msg.exec_()
+
 
 
 

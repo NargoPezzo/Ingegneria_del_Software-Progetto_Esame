@@ -25,13 +25,6 @@ class VistaListaCarrello(QWidget):
         main_layout.addWidget(self.table_widget)
 
 
-
-
-
-
-
-
-
         buttons_layout = QVBoxLayout()
         open_button = QPushButton("Apri")
         open_button.clicked.connect(self.show_selected_info)
