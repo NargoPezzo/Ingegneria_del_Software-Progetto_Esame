@@ -1,9 +1,6 @@
 import os
 import pickle
 
-from PyQt5.QtWidgets import QMessageBox
-
-from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 
 
 class Carrello():

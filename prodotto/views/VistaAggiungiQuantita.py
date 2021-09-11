@@ -1,9 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QPushButton, QMessageBox
 from PyQt5 import QtGui
 
-from carrello.model.Carrello import Carrello
-from listaprodotti.model.ListaProdotti import ListaProdotti
-from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 
 
 class VistaAggiungiQuantita(QWidget):
@@ -29,17 +26,15 @@ class VistaAggiungiQuantita(QWidget):
         self.spin.setSizeIncrement(1, 1)
         self.v_layout.addWidget(self.spin)
 
-      #  self.lista_carrello = Carrello()  #aggiunta
-      #  self.lista_prodotti = ListaProdotti() #aggiunta
 
         btn_conferma = QPushButton("Conferma")
         self.v_layout.addWidget(btn_conferma)
-        btn_conferma.clicked.connect(self.aggiungi_al_carrello) #aggiunta
+        btn_conferma.clicked.connect(self.aggiungi_al_carrello)
         self.setLayout(self.v_layout)
-        self.close() #aggiunta
+        self.close()
 
 
-    def aggiungi_al_carrello(self):#DA FARE E RIVEDERE
+    def aggiungi_al_carrello(self):
         if self.carrello.verifica_quantita_prodotto(self.prodotto, int(self.spin.text())) is True:
             self.carrello.aggiungi_al_carrello(self.prodotto)
             self.carrello.save_data()

@@ -4,7 +4,6 @@ from PyQt5 import QtGui
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.model.Carrello import Carrello
 from carrello.views.VistaProdottoCarrello import VistaProdottoCarrello
-from prodotto.views.VistaProdotto import VistaProdotto
 from statistiche.view.VistaStatistiche import VistaStatistiche
 
 
