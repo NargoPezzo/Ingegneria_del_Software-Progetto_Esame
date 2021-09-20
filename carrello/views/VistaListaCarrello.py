@@ -59,6 +59,7 @@ class VistaListaCarrello(QWidget):
         self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Prezzo"))
         print(self.controller.get_lista_carrello())
 
+        prezzofinalecarrello = 0
         row = 0
         for prodotto in self.controller.get_lista_carrello():
             self.table_widget.insertRow(row)
@@ -69,6 +70,12 @@ class VistaListaCarrello(QWidget):
             prodottototale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
             self.table_widget.setItem(row, 3, QTableWidgetItem(str(prodottototale) + " €"))
             row = row + 1
+            prezzofinalecarrello += int(prodottototale)
+
+        self.table_widget.insertRow(row)
+        self.table_widget.setItem(row, 2, QTableWidgetItem(str("TOTALE:")))
+        self.table_widget.setItem(row, 3, QTableWidgetItem(str(prezzofinalecarrello) + " €"))
+
 
     def closeEvent(self, event):
         self.controller.save_data()
