@@ -1,5 +1,6 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, \
+    QWidgetItem
 from PyQt5 import QtGui
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.model.Carrello import Carrello
@@ -11,17 +12,24 @@ class VistaListaCarrello(QWidget):
     def __init__(self,  parent=None):
         super(VistaListaCarrello, self).__init__(parent)
 
+        self.setFixedSize(605, 300)
+
         self.controller = ControlloreCarrello()
         self.carrello = Carrello()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
-        main_layout = QHBoxLayout()
+        self.main_layout = QHBoxLayout()
+        self.v_layout = QVBoxLayout()
 
         self.table_widget = QTableWidget()
+        self.table_total = QListView()
         self.update_ui()
 
+        self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
 
-        main_layout.addWidget(self.table_widget)
+        self.v_layout.addWidget(self.table_widget)
+        self.v_layout.addWidget(self.table_total)
+        self.main_layout.addLayout(self.v_layout)
 
 
         buttons_layout = QVBoxLayout()
@@ -33,10 +41,10 @@ class VistaListaCarrello(QWidget):
         new_button.clicked.connect(self.aggiungi_alle_statistiche)
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
-        main_layout.addLayout(buttons_layout)
-        main_layout.addWidget(new_button)
+        self.main_layout.addLayout(buttons_layout)
+        self.main_layout.addWidget(new_button)
 
-        self.setLayout(main_layout)
+        self.setLayout(self.main_layout)
         self.resize(600, 300)
         self.setWindowTitle("Carrello")
 
@@ -72,9 +80,17 @@ class VistaListaCarrello(QWidget):
             row = row + 1
             prezzofinalecarrello += int(prodottototale)
 
-        self.table_widget.insertRow(row)
-        self.table_widget.setItem(row, 2, QTableWidgetItem(str("TOTALE:")))
-        self.table_widget.setItem(row, 3, QTableWidgetItem(str(prezzofinalecarrello) + " €"))
+        self.table_total_model = QStandardItemModel(self.table_total)
+        item = QStandardItem()
+        item.setText("Totale: " + str(prezzofinalecarrello) + "€")
+        item.setEditable(False)
+        font = item.font()
+        font.setPointSize(14)
+        item.setFont(font)
+        self.table_total_model.appendRow(item)
+        self.table_total.setModel(self.table_total_model)
+
+
 
 
     def closeEvent(self, event):
