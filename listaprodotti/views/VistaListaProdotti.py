@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QSortFilterProxyModel, Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLineEdit, QSpacerItem
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLineEdit, QSpacerItem, \
+    QMessageBox
 
 from carrello.model.Carrello import Carrello
 from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
@@ -57,11 +58,14 @@ class VistaListaProdotti(QWidget):
         self.setWindowTitle("Lista Prodotti")
 
     def show_selected_info(self):
-        selected = self.list_view.selectedIndexes()[0]
-        sourceindex = self.toSourceIndex(selected)
-        prodotto_selezionato = self.controller.get_prodotto_by_index(sourceindex)
-        self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
-        self.vista_prodotto.show()
+        try:
+            selected = self.list_view.selectedIndexes()[0]
+            sourceindex = self.toSourceIndex(selected)
+            prodotto_selezionato = self.controller.get_prodotto_by_index(sourceindex)
+            self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
+            self.vista_prodotto.show()
+        except IndexError:
+            QMessageBox.critical(self, 'Errore', 'Per favore, seleziona un prodotto', QMessageBox.Ok, QMessageBox.Ok)
 
     def show_new_prodotto(self):
         self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)
