@@ -49,7 +49,7 @@ class VistaListaCarrello(QWidget):
         self.setWindowTitle("Carrello")
 
     def show_selected_info(self):
-        selected = self.list_view.selectedIndexes()[0].row()
+        selected = self.table_widget.selectedIndexes()[0].row()
         prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
         self.vista_prodotto = VistaProdottoCarrello(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
         self.vista_prodotto.show()
@@ -65,7 +65,6 @@ class VistaListaCarrello(QWidget):
         self.table_widget.setHorizontalHeaderItem(1, QTableWidgetItem("Marca"))
         self.table_widget.setHorizontalHeaderItem(2, QTableWidgetItem("Nome Prodotto"))
         self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Prezzo"))
-        print(self.controller.get_lista_carrello())
 
         prezzofinalecarrello = 0
         row = 0
