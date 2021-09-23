@@ -1,6 +1,6 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, \
-    QWidgetItem
+    QWidgetItem, QHeaderView
 from PyQt5 import QtGui
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.model.Carrello import Carrello
@@ -12,7 +12,7 @@ class VistaListaCarrello(QWidget):
     def __init__(self,  parent=None):
         super(VistaListaCarrello, self).__init__(parent)
 
-        self.setFixedSize(605, 300)
+        self.setFixedSize(700, 300)
 
         self.controller = ControlloreCarrello()
         self.carrello = Carrello()
@@ -26,6 +26,7 @@ class VistaListaCarrello(QWidget):
         self.update_ui()
 
         self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
+        self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
         self.v_layout.addWidget(self.table_widget)
         self.v_layout.addWidget(self.table_total)
