@@ -70,6 +70,7 @@ class VistaProdottoCarrello(QWidget):
         if reply == QMessageBox.Yes:
             self.elimina_prodotto(self.controller.get_id_prodotto())
             self.elimina_callback()
+            self.carrello.ritorna_quantita_al_carrello(self.prodotto, self.controller.get_quantita_carrello) #riga aggiunta
             self.close()
         else:
             return
@@ -89,3 +90,5 @@ class VistaProdottoCarrello(QWidget):
         self.label_prezzo.setText("Prezzo: {}".format(self.controller.get_prezzo_prodotto() + " €"))
         self.label_quantita.setText("Quantità: {}".format(self.controller.get_quantita_disp()))
 
+
+  #  def rimuovi_dal_carrello(self):

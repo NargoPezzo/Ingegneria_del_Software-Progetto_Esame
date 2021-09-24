@@ -51,4 +51,6 @@ class Carrello():
                 return True
         return False
 
-
+    def ritorna_quantita_al_carrello(self,prodotto,quantita): # METODO PER FAR TORNARE PRODOTTI DAL CARRELLO DI NUOVO AL MAGAZZINO
+        prodotto.quantita_carrello = quantita
+        prodotto.quantita_magazzino = int(prodotto.quantita_magazzino) + int(prodotto.quantita_carrello)  #ci sono quaasi
