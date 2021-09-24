@@ -1,6 +1,6 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, \
-    QWidgetItem, QHeaderView
+    QWidgetItem, QHeaderView, QMessageBox
 from PyQt5 import QtGui
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.model.Carrello import Carrello
@@ -50,10 +50,13 @@ class VistaListaCarrello(QWidget):
         self.setWindowTitle("Carrello")
 
     def show_selected_info(self):
-        selected = self.table_widget.selectedIndexes()[0].row()
-        prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-        self.vista_prodotto = VistaProdottoCarrello(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
-        self.vista_prodotto.show()
+        try:
+            selected = self.table_widget.selectedIndexes()[0].row()
+            prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
+            self.vista_prodotto = VistaProdottoCarrello(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
+            self.vista_prodotto.show()
+        except IndexError:
+            QMessageBox.critical(self, 'Errore', 'Per favore, seleziona un prodotto', QMessageBox.Ok, QMessageBox.Ok)
 
     def aggiungi_alle_statistiche(self):
         self.vista_statistiche = VistaStatistiche()
