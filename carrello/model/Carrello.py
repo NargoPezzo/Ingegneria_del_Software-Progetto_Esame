@@ -18,14 +18,14 @@ class Carrello():
             self.carrello.append(prodotto)
 
 
-    def rimuovi_prodotto_by_id(self, id):
-        def is_selected_prodotto(prodotto):
-            if prodotto.id == id:
+    def rimuovi_acquisto_by_id(self, id):
+        def is_selected_acquisto(acquisto):
+            if acquisto.id == id:
                 return True
             return False
-        self.carrello.remove(list(filter(is_selected_prodotto, self.carrello))[0])
+        self.carrello.remove(list(filter(is_selected_acquisto, self.carrello))[0])
 
-    def get_prodotto_by_index(self, index):
+    def get_acquisto_by_index(self, index):
         return self.carrello[index]
 
     def get_lista_carrello(self):
@@ -51,6 +51,4 @@ class Carrello():
                 return True
         return False
 
-    def ritorna_quantita_al_carrello(self,prodotto,quantita): # METODO PER FAR TORNARE PRODOTTI DAL CARRELLO DI NUOVO AL MAGAZZINO
-        prodotto.quantita_carrello = quantita
-        prodotto.quantita_magazzino = int(prodotto.quantita_magazzino) + int(prodotto.quantita_carrello)  #ci sono quaasi
+

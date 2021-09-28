@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 from PyQt5 import QtGui
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.model.Carrello import Carrello
-from carrello.views.VistaProdottoCarrello import VistaProdottoCarrello
+from carrello.views.VistaAcquistoCarrello import VistaProdottoCarrello
 from statistiche.view.VistaStatistiche import VistaStatistiche
 
 
@@ -52,8 +52,8 @@ class VistaListaCarrello(QWidget):
     def show_selected_info(self):
         try:
             selected = self.table_widget.selectedIndexes()[0].row()
-            prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-            self.vista_prodotto = VistaProdottoCarrello(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
+            acquisto_selezionato = self.controller.get_acquisto_by_index(selected)
+            self.vista_prodotto = VistaProdottoCarrello(acquisto_selezionato, self.controller.elimina_acquisto_by_id, self.update_ui, self.carrello)
             self.vista_prodotto.show()
         except IndexError:
             QMessageBox.critical(self, 'Errore', 'Per favore, seleziona un prodotto', QMessageBox.Ok, QMessageBox.Ok)
@@ -78,10 +78,10 @@ class VistaListaCarrello(QWidget):
             self.table_widget.setItem(row, 1, QTableWidgetItem(prodotto.marca))
             self.table_widget.setItem(row, 2, QTableWidgetItem(prodotto.nome))
 
-            prodottototale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
-            self.table_widget.setItem(row, 3, QTableWidgetItem(str(prodottototale) + " €"))
+            acquistototale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
+            self.table_widget.setItem(row, 3, QTableWidgetItem(str(acquistototale) + " €"))
             row = row + 1
-            prezzofinalecarrello += int(prodottototale)
+            prezzofinalecarrello += int(acquistototale)
 
         self.table_total_model = QStandardItemModel(self.table_total)
         item = QStandardItem()

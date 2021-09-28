@@ -15,7 +15,6 @@ class VistaProdottoCarrello(QWidget):
         self.elimina_callback = elimina_callback
         self.prodotto = prodotto
         self.carrello = carrello
-       # self.aggiungi_carrello = aggiungi_carrello
 
         v_layout = QVBoxLayout()
         h_layout = QHBoxLayout()
@@ -39,19 +38,10 @@ class VistaProdottoCarrello(QWidget):
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         btn_elimina = QPushButton(" RIMUOVI DAL CARRELLO ")
-        btn_elimina.clicked.connect(self.elimina_prodotto_click)
+        btn_elimina.clicked.connect(self.elimina_acquisto_click)
         btn_elimina.setStyleSheet("background-color: red")
         h_layout.addWidget(btn_elimina)
 
-        '''    btn_carrello = QPushButton("Aggiungi al Carrello")
-        btn_carrello.clicked.connect(self.aggiungi_al_carrello)
-        h_layout.addWidget(btn_carrello)
-
-
-        btn_modify = QPushButton("Modifica Quantità e Prezzo")
-        btn_modify.clicked.connect(self.show_modifica_prodotto)
-        h_layout.addWidget(btn_modify)
-  '''
         v_layout.addLayout(h_layout)
 
         self.setLayout(v_layout)
@@ -64,31 +54,23 @@ class VistaProdottoCarrello(QWidget):
         current_label.setFont(current_font)
         return current_label
 
-    def elimina_prodotto_click(self):
+    def elimina_acquisto_click(self):
         reply = QMessageBox.question(self, "Conferma", "Sei sicuro di voler eliminare il prodotto dal carrello?", QMessageBox.Yes, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
             self.elimina_prodotto(self.controller.get_id_prodotto())
             self.elimina_callback()
-            self.carrello.ritorna_quantita_al_carrello(self.prodotto, self.controller.get_quantita_carrello) #riga aggiunta
             self.close()
         else:
             return
 
-    def show_modifica_prodotto(self):
+    def show_modifica_acquisto(self):
         self.vista_modifica_prodotto = VistaModificaProdotto(self.prodotto, self.update_prodotto)
         self.vista_modifica_prodotto.show()
 
-
-    '''   def aggiungi_al_carrello(self):
-        self.vista_aggiungi_quantita = VistaAggiungiQuantita(self.prodotto, self.carrello)   NON DOVREBBE SERVIRE
-        self.vista_aggiungi_quantita.show()
-        self.close()
-  '''
 
     def update_prodotto(self):
         self.label_prezzo.setText("Prezzo: {}".format(self.controller.get_prezzo_prodotto() + " €"))
         self.label_quantita.setText("Quantità: {}".format(self.controller.get_quantita_disp()))
 
 
-  #  def rimuovi_dal_carrello(self):

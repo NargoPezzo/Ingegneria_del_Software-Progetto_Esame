@@ -34,3 +34,4 @@ class ListaProdotti():
             pickle.dump(self.lista_prodotti, handle, pickle.HIGHEST_PROTOCOL)
 
 
+
