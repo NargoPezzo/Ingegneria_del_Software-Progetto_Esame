@@ -3,8 +3,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
     QWidgetItem, QHeaderView, QMessageBox
 from PyQt5 import QtGui
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
-from carrello.model.Carrello import Carrello
-from carrello.views.VistaAcquistoCarrello import VistaProdottoCarrello
+from carrello.views.VistaAcquistoCarrello import VistaAcquistoCarrello
 from statistiche.view.VistaStatistiche import VistaStatistiche
 
 
@@ -15,7 +14,6 @@ class VistaListaCarrello(QWidget):
         self.setFixedSize(700, 300)
 
         self.controller = ControlloreCarrello()
-        self.carrello = Carrello()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
         self.main_layout = QHBoxLayout()
@@ -53,7 +51,7 @@ class VistaListaCarrello(QWidget):
         try:
             selected = self.table_widget.selectedIndexes()[0].row()
             acquisto_selezionato = self.controller.get_acquisto_by_index(selected)
-            self.vista_prodotto = VistaProdottoCarrello(acquisto_selezionato, self.controller.elimina_acquisto_by_id, self.update_ui, self.carrello)
+            self.vista_prodotto = VistaAcquistoCarrello(acquisto_selezionato, self.controller.elimina_acquisto_by_id, self.update_ui)
             self.vista_prodotto.show()
         except IndexError:
             QMessageBox.critical(self, 'Errore', 'Per favore, seleziona un prodotto', QMessageBox.Ok, QMessageBox.Ok)

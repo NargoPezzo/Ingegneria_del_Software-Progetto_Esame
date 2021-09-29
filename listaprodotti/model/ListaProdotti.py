@@ -33,5 +33,19 @@ class ListaProdotti():
         with open('listaprodotti/data/lista_prodotti_salvata2.pickle', 'wb') as handle:
             pickle.dump(self.lista_prodotti, handle, pickle.HIGHEST_PROTOCOL)
 
+    def ritorna_quantita(self, id, quantita):
+
+        for prodotto in self.lista_prodotti:
+            if prodotto.id == id:
+                print(prodotto.quantita_magazzino)
+                print(quantita)
+
+                prodotto.quantita_magazzino += quantita
+                prodotto.quantita_carrello = 0
+
+        self.save_data()
+
+
+
 
 

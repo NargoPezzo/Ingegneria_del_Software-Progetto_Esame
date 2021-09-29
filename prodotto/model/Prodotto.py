@@ -13,7 +13,6 @@ class Prodotto:
         self.quantita_carrello = quantita_carrello
         self.data_acquisto = data_acquisto
 
-    '''def set_quantita_carrello(self, quantita_carrello):
-        self.quantita_carrello = quantita_carrello'''
+
 
 

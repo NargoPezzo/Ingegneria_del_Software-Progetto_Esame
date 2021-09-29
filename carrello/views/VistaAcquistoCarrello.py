@@ -2,19 +2,19 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePoli
     QHBoxLayout, QMessageBox
 
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
-from carrello.controller.ControlloreCarrello import ControlloreCarrello
-from prodotto.views.VistaAggiungiQuantita import VistaAggiungiQuantita
+from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
 from prodotto.views.VistaModificaProdotto import VistaModificaProdotto
 from PyQt5 import QtGui
 
-class VistaProdottoCarrello(QWidget):
-    def __init__(self, prodotto, elimina_prodotto, elimina_callback, carrello, parent=None):
-        super(VistaProdottoCarrello, self).__init__(parent)
+class VistaAcquistoCarrello(QWidget):
+    def __init__(self, prodotto, elimina_prodotto, elimina_callback, parent=None):
+        super(VistaAcquistoCarrello, self).__init__(parent)
         self.controller = ControlloreProdotto(prodotto)
         self.elimina_prodotto = elimina_prodotto
         self.elimina_callback = elimina_callback
         self.prodotto = prodotto
-        self.carrello = carrello
+        self.controlloremagazzino = ControlloreListaProdotti()
+
 
         v_layout = QVBoxLayout()
         h_layout = QHBoxLayout()
@@ -59,6 +59,7 @@ class VistaProdottoCarrello(QWidget):
 
         if reply == QMessageBox.Yes:
             self.elimina_prodotto(self.controller.get_id_prodotto())
+            self.controlloremagazzino.ritorna_quantita(self.prodotto.id, self.prodotto.quantita_carrello)
             self.elimina_callback()
             self.close()
         else:
@@ -72,5 +73,7 @@ class VistaProdottoCarrello(QWidget):
     def update_prodotto(self):
         self.label_prezzo.setText("Prezzo: {}".format(self.controller.get_prezzo_prodotto() + " €"))
         self.label_quantita.setText("Quantità: {}".format(self.controller.get_quantita_disp()))
+
+
 
 

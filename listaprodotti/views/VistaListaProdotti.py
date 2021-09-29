@@ -3,7 +3,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QLineEdit, QSpacerItem, \
     QMessageBox
 
-from carrello.model.Carrello import Carrello
+from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from listaprodotti.controller.ControlloreListaProdotti import ControlloreListaProdotti
 from listaprodotti.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
@@ -14,7 +14,7 @@ class VistaListaProdotti(QWidget):
     def __init__(self, parent=None):
         super(VistaListaProdotti, self).__init__(parent)
 
-        self.carrello = Carrello()
+        self.carrello = ControlloreCarrello()
         self.controller = ControlloreListaProdotti()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         main_layout = QHBoxLayout()
