@@ -37,9 +37,6 @@ class ListaProdotti():
 
         for prodotto in self.lista_prodotti:
             if prodotto.id == id:
-                print(prodotto.quantita_magazzino)
-                print(quantita)
-
                 prodotto.quantita_magazzino += quantita
                 prodotto.quantita_carrello = 0
 

@@ -62,6 +62,7 @@ class VistaListaCarrello(QWidget):
         self.close()
 
     def update_ui(self):
+        self.table_widget.setRowCount(0)
         self.table_widget.setColumnCount(4)
         self.table_widget.setHorizontalHeaderItem(0, QTableWidgetItem("Quantità"))
         self.table_widget.setHorizontalHeaderItem(1, QTableWidgetItem("Marca"))
