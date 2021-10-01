@@ -29,3 +29,6 @@ class ControlloreCarrello():
 
     def verifica_presenza_prodotto_by_id(self, prodottoscelto):
         return self.model.verifica_presenza_prodotto_by_id(prodottoscelto)
+
+    def clearall(self):
+        self.model.clearall()

@@ -7,7 +7,7 @@ from listaprodotti.views.VistaListaProdotti import VistaListaProdotti
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
 
-from statistiche.view.VistaStatistiche import VistaStatistiche
+from statistiche.views.VistaStats import VistaStats
 
 
 class VistaHome(QWidget):
@@ -63,7 +63,7 @@ class VistaHome(QWidget):
         self.vistacarrello.show()
 
     def go_statistiche(self):
-        self.vista_statistiche = VistaStatistiche()
+        self.vista_statistiche = VistaStats()
         self.vista_statistiche.show()
 
 

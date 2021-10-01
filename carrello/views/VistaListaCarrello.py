@@ -4,7 +4,9 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 from PyQt5 import QtGui
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.views.VistaAcquistoCarrello import VistaAcquistoCarrello
-from statistiche.view.VistaStatistiche import VistaStatistiche
+import datetime
+
+from statistiche.controller.ControlloreStats import ControlloreStats
 
 
 class VistaListaCarrello(QWidget):
@@ -14,6 +16,7 @@ class VistaListaCarrello(QWidget):
         self.setFixedSize(700, 300)
 
         self.controller = ControlloreCarrello()
+        self.controllerstats = ControlloreStats()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
         self.main_layout = QHBoxLayout()
@@ -57,9 +60,27 @@ class VistaListaCarrello(QWidget):
             QMessageBox.critical(self, 'Errore', 'Per favore, seleziona un prodotto', QMessageBox.Ok, QMessageBox.Ok)
 
     def aggiungi_alle_statistiche(self):
-        self.vista_statistiche = VistaStatistiche()
-        self.vista_statistiche.show()
-        self.close()
+        msg = QMessageBox()
+
+        if self.controller.get_lista_carrello():
+
+            reply = QMessageBox.question(self, "Conferma", "Vuoi confermare l'acquisto?",
+                                     QMessageBox.Yes, QMessageBox.No)
+
+            if reply == QMessageBox.Yes:
+                for prodotto in self.controller.get_lista_carrello():
+                    prodotto.data_acquisto = datetime.date.today()
+                    self.controllerstats.aggiungi_stat(prodotto)
+                self.controller.clearall()
+                self.controller.save_data()
+                self.controllerstats.save_data()
+                msg.setText('Acquisto confermato  :D')
+                msg.exec_()
+                self.close()
+            else:
+                return
+        else:
+            QMessageBox.critical(self, 'Errore', 'Il carrello non contiene alcun prodotto', QMessageBox.Ok, QMessageBox.Ok)
 
     def update_ui(self):
         self.table_widget.setRowCount(0)

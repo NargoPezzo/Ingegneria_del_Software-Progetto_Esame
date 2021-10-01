@@ -2,7 +2,7 @@ import datetime
 
 
 class Prodotto:
-    def __init__(self, id, marca, nome, categoria, prezzo, quantita_magazzino, quantita_carrello, data_acquisto= datetime.date.today()):
+    def __init__(self, id, marca, nome, categoria, prezzo, quantita_magazzino, quantita_carrello, data_acquisto= None):
         super(Prodotto, self).__init__()
         self.id = id
         self.marca = marca

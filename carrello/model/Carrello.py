@@ -25,6 +25,9 @@ class Carrello():
             return False
         self.carrello.remove(list(filter(is_selected_acquisto, self.carrello))[0])
 
+    def clearall(self):
+        self.carrello.clear()
+
     def get_acquisto_by_index(self, index):
         return self.carrello[index]
 
