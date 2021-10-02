@@ -11,3 +11,6 @@ class ControlloreStats():
 
     def aggiungi_stat(self, acquisto):
         self.model.aggiungi_stat(acquisto)
+
+    def get_lista_dei_prodotti(self):
+        return self.model.get_lista_prodotti()

@@ -16,3 +16,6 @@ class Stats():
 
     def aggiungi_stat(self, acquisto):
         self.stats.append(acquisto)
+
+    def get_lista_prodotti(self):
+        return self.stats
