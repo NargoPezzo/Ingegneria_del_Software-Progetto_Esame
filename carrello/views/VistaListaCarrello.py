@@ -84,11 +84,12 @@ class VistaListaCarrello(QWidget):
 
     def update_ui(self):
         self.table_widget.setRowCount(0)
-        self.table_widget.setColumnCount(4)
+        self.table_widget.setColumnCount(5)
         self.table_widget.setHorizontalHeaderItem(0, QTableWidgetItem("Quantità"))
         self.table_widget.setHorizontalHeaderItem(1, QTableWidgetItem("Marca"))
         self.table_widget.setHorizontalHeaderItem(2, QTableWidgetItem("Nome Prodotto"))
-        self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Prezzo"))
+        self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Categoria"))
+        self.table_widget.setHorizontalHeaderItem(4, QTableWidgetItem("Prezzo"))
 
         prezzofinalecarrello = 0
         row = 0
@@ -97,9 +98,10 @@ class VistaListaCarrello(QWidget):
             self.table_widget.setItem(row, 0, QTableWidgetItem(str(prodotto.quantita_carrello)))
             self.table_widget.setItem(row, 1, QTableWidgetItem(prodotto.marca))
             self.table_widget.setItem(row, 2, QTableWidgetItem(prodotto.nome))
+            self.table_widget.setItem(row, 3, QTableWidgetItem(prodotto.categoria))
 
             acquistototale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
-            self.table_widget.setItem(row, 3, QTableWidgetItem(str(acquistototale) + " €"))
+            self.table_widget.setItem(row, 4, QTableWidgetItem(str(acquistototale) + " €"))
             row = row + 1
             prezzofinalecarrello += int(acquistototale)
 
