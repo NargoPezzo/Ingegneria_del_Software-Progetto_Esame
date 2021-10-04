@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QTableWidget, QHe
 from PyQt5 import QtGui
 
 from statistiche.controller.ControlloreStats import ControlloreStats
+from matplotlib import pyplot as plt
+import numpy as np
 
 
 class VistaStats(QWidget):
@@ -16,32 +18,35 @@ class VistaStats(QWidget):
 
         self.main_layout = QHBoxLayout()
         self.v_layout = QVBoxLayout()
-        self.list_view = QListView()
-        self.table_total = QListView()
 
-        self.table_widget = QTableWidget()
+
+
         self.update_ui()
 
-        self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
-        self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
-        self.v_layout.addWidget(self.table_widget)
-        self.v_layout.addWidget(self.table_total)
+
+
         self.main_layout.addLayout(self.v_layout)
 
         self.setLayout(self.main_layout)
         self.resize(600, 300)
-        self.setWindowTitle("Carrello")
+        self.setWindowTitle("Statistiche sulle vendite")
 
 
     def update_ui(self):
-        self.listview_model = QStandardItemModel(self.list_view)
+
+
+        nomi_prodotto = []
+        data = []
         for prodotto in self.controllerstats.get_lista_delle_stats():
-            item = QStandardItem()
-            item.setText(prodotto.marca + " " + prodotto.nome)
-            item.setEditable(False)
-            font = item.font()
-            font.setPointSize(18)
-            item.setFont(font)
-            self.listview_model.appendRow(item)
-        self.list_view.setModel(self.listview_model)
+
+            for i in nomi_prodotto[i]:
+                for j in data[j]:
+                    if prodotto.id in nomi_prodotto[i]:
+                        data[j] += prodotto.quantita_carrello
+
+            nomi_prodotto.append(prodotto.id)
+            data.append(prodotto.quantita_carrello)
+
+        print(nomi_prodotto)
+        print(data)
