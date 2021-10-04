@@ -40,13 +40,16 @@ class VistaStats(QWidget):
         data = []
         for prodotto in self.controllerstats.get_lista_delle_stats():
 
-            for i in nomi_prodotto[i]:
-                for j in data[j]:
-                    if prodotto.id in nomi_prodotto[i]:
-                        data[j] += prodotto.quantita_carrello
+            j = 0
+            for i in range(len(nomi_prodotto)):
+                if nomi_prodotto[i] == prodotto.id:
+                    data[i] += prodotto.quantita_carrello
+                    j = 1
 
-            nomi_prodotto.append(prodotto.id)
-            data.append(prodotto.quantita_carrello)
+            if j == 0:
+                nomi_prodotto.append(prodotto.id)
+                data.append(prodotto.quantita_carrello)
+
 
         print(nomi_prodotto)
         print(data)
