@@ -50,6 +50,7 @@ class VistaInserisciDipendente(QWidget):
         if nome == "" or cognome == "" or cf == "" or indirizzo == "" or email == "" or telefono == "" or eta == "" or password == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         else:
-            self.controller.aggiungi_dipendente(Dipendente((nome+cognome).lower(), nome, cognome, cf, indirizzo, email, telefono, eta,password))
+            prova = (nome+cognome).lower()
+            self.controller.aggiungi_dipendente(Dipendente(prova.replace(" ", ""), nome, cognome, cf, indirizzo, email, telefono, eta,password))
             self.callback()
             self.close()
