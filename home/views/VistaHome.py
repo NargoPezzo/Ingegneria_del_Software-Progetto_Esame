@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel, QMainWindow
 
 from carrello.views.VistaListaCarrello import VistaListaCarrello
 from listaclienti.views.VistaListaClienti import VistaListaClienti
@@ -10,7 +10,7 @@ from PyQt5.QtCore import Qt
 from statistiche.views.VistaStats import VistaStats
 
 
-class VistaHome(QWidget):
+class VistaHome(QMainWindow):
 
     def __init__(self, parent=None):
         super(VistaHome, self).__init__(parent)
