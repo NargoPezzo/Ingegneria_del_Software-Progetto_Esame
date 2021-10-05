@@ -50,6 +50,7 @@ class VistaInserisciCliente(QWidget):
         if nome == "" or cognome == "" or cf == "" or indirizzo == "" or email == "" or telefono == "" or eta == "":
             QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
         else:
-            self.controller.aggiungi_cliente(Cliente((nome+cognome).lower(), nome, cognome, cf, indirizzo, email, telefono, eta))
+            prova = (nome+cognome).lower()
+            self.controller.aggiungi_cliente(Cliente(prova.replace(" ", ""), nome, cognome, cf, indirizzo, email, telefono, eta))
             self.callback()
             self.close()

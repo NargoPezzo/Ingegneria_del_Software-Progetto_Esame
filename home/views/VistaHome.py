@@ -10,7 +10,7 @@ from PyQt5.QtCore import Qt
 from statistiche.views.VistaStats import VistaStats
 
 
-class VistaHome(QMainWindow):
+class VistaHome(QWidget):
 
     def __init__(self, parent=None):
         super(VistaHome, self).__init__(parent)
