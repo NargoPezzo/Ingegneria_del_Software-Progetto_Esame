@@ -1,6 +1,8 @@
 from PyQt5.QtChart import QChartView, QPieSeries, QChart
 from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from PyQt5 import QtGui
+from PyQt5.QtGui import QPainter, QPen
+from PyQt5.QtCore import Qt
 from statistiche.controller.ControlloreStats import ControlloreStats
 
 
@@ -11,7 +13,6 @@ class VistaStats(QWidget):
         self.nomi_prodotto = []
         self.data = []
 
-        self.setFixedSize(700, 300)
         self.chartview = QChartView
 
         self.controllerstats = ControlloreStats()
@@ -28,6 +29,19 @@ class VistaStats(QWidget):
         self.setLayout(self.v_layout)
         self.resize(600, 300)
         self.setWindowTitle("Statistiche sulle vendite")
+
+    def build_arrays(self,datascelta):
+        for prodotto in self.controllerstats.get_lista_delle_stats():
+            if prodotto.data.acquisto >= datascelta:
+                j = 0
+                for i in range(len(self.nomi_prodotto)):
+                    if self.nomi_prodotto[i] == prodotto.id:
+                        self.data[i] += prodotto.quantita_carrello
+                        j = 1
+                if j == 0:
+                    self.nomi_prodotto.append(prodotto.id)
+                    self.data.append(prodotto.quantita_carrello)
+
 
 
     def update_ui(self):
