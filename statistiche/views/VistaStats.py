@@ -114,9 +114,13 @@ class VistaStats(QWidget):
         self.table_widget.setRowCount(0)
         self.table_widget.setColumnCount(4)
         self.table_widget.setHorizontalHeaderItem(0, QTableWidgetItem("Quantità"))
+        self.table_widget.setColumnWidth(0, 130)
         self.table_widget.setHorizontalHeaderItem(1, QTableWidgetItem("Marca"))
+        self.table_widget.setColumnWidth(1, 130)
         self.table_widget.setHorizontalHeaderItem(2, QTableWidgetItem("Nome Prodotto"))
+        self.table_widget.setColumnWidth(2, 130)
         self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Categoria"))
+        self.table_widget.setColumnWidth(3, 130)
 
         prezzofinalecarrello = 0
         row = 0
@@ -127,6 +131,7 @@ class VistaStats(QWidget):
             self.table_widget.setItem(row, 1, QTableWidgetItem(prodotto.marca))
             self.table_widget.setItem(row, 2, QTableWidgetItem(prodotto.nome))
             self.table_widget.setItem(row, 3, QTableWidgetItem(prodotto.categoria))
+
 
             acquistototale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
             row = row + 1
