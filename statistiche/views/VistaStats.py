@@ -12,8 +12,10 @@ class VistaStats(QWidget):
     def __init__(self, datascelta):
         super(VistaStats, self).__init__()
         self.datascelta = datascelta
-        self.nomi_prodotto = []
-        self.data = []
+
+        self.categoria = []
+        self.quantita_categoria = []
+        self.prodotti = []
 
         self.chartview = QChartView()
         self.chartview.setRenderHint(QPainter.Antialiasing)
@@ -41,27 +43,42 @@ class VistaStats(QWidget):
         self.resize(600, 900)
         self.setWindowTitle(self.setTitle(datascelta))
 
-    def build_arrays(self, datascelta):
+    def build_pie(self, datascelta):
         for prodotto in self.controllerstats.get_lista_delle_stats():
             if prodotto.data_acquisto >= datascelta:
                 j = 0
-                for i in range(len(self.nomi_prodotto)):
-                    if self.nomi_prodotto[i] == prodotto.categoria:
-                        self.data[i] += prodotto.quantita_carrello
+                for i in range(len(self.categoria)):
+                    if self.categoria[i] == prodotto.categoria:
+                        self.quantita_categoria[i] += prodotto.quantita_carrello
                         j = 1
                 if j == 0:
-                    self.nomi_prodotto.append(prodotto.categoria)
-                    self.data.append(prodotto.quantita_carrello)
+                    self.categoria.append(prodotto.categoria)
+                    self.quantita_categoria.append(prodotto.quantita_carrello)
+
+
+    def build_table(self, datascelta):
+
+        for prodotto in self.controllerstats.get_lista_delle_stats():
+            if prodotto.data_acquisto >= datascelta:
+                j = 0
+                for product in self.prodotti:
+                    if product.id == prodotto.id:
+                        product.quantita_carrello += prodotto.quantita_carrello
+                        j = 1
+                if j == 0:
+                    self.prodotti.append(prodotto)
+
+
 
 
 
     def create_pie(self, data):
         series = QPieSeries()
 
-        self.build_arrays(data)
+        self.build_pie(data)
 
-        for i in range(len(self.nomi_prodotto)):
-            series.append(self.nomi_prodotto[i], self.data[i])
+        for i in range(len(self.categoria)):
+            series.append(self.categoria[i], self.quantita_categoria[i])
 
         chart = QChart()
         chart.addSeries(series)
@@ -82,6 +99,8 @@ class VistaStats(QWidget):
 
     def create_table(self, datascelta):
 
+        self.build_table(datascelta)
+
         self.table_widget.setRowCount(0)
         self.table_widget.setColumnCount(4)
         self.table_widget.setHorizontalHeaderItem(0, QTableWidgetItem("Quantità"))
@@ -91,7 +110,8 @@ class VistaStats(QWidget):
 
         prezzofinalecarrello = 0
         row = 0
-        for prodotto in self.controllerstats.get_lista_delle_stats():
+        for prodotto in self.prodotti:
+
             self.table_widget.insertRow(row)
             self.table_widget.setItem(row, 0, QTableWidgetItem(str(prodotto.quantita_carrello)))
             self.table_widget.setItem(row, 1, QTableWidgetItem(prodotto.marca))
