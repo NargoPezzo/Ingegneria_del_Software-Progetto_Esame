@@ -21,7 +21,7 @@ class VistaSceltaStats(QWidget):
         grid_layout.addWidget(self.get_generic_button("Vendite Mensili", self.go_monthly_stats), 1, 2)
 
         self.setLayout(grid_layout)
-        self.setFixedSize(400, 200)
+        self.setFixedSize(400, 100)
         self.setWindowTitle("Statistiche")
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 

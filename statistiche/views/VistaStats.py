@@ -120,7 +120,7 @@ class VistaStats(QWidget):
         self.table_widget.setHorizontalHeaderItem(2, QTableWidgetItem("Nome Prodotto"))
         self.table_widget.setColumnWidth(2, 130)
         self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Categoria"))
-        self.table_widget.setColumnWidth(3, 130)
+        self.table_widget.setColumnWidth(3, 140)
 
         prezzofinalecarrello = 0
         row = 0
