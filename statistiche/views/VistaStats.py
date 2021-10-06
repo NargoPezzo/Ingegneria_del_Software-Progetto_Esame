@@ -82,6 +82,7 @@ class VistaStats(QWidget):
 
     def create_table(self, datascelta):
 
+        self.table_widget.setMaximumHeight(300) #REGOLA ALTEZZA TABELLA DEI PRODOTTI IN STATISTICA
         self.table_widget.setRowCount(0)
         self.table_widget.setColumnCount(4)
         self.table_widget.setHorizontalHeaderItem(0, QTableWidgetItem("Quantità"))
