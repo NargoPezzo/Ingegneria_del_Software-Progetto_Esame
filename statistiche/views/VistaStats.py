@@ -29,7 +29,7 @@ class VistaStats(QWidget):
         self.table_total = QListView()
 
         self.create_pie(datascelta)
-        self.create_table(datascelta)
+        self.populate_table(datascelta)
         self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
         self.table_widget.setMaximumHeight(200)
 
@@ -40,7 +40,7 @@ class VistaStats(QWidget):
 
 
         self.setLayout(self.v_layout)
-        self.setFixedSize(600, 700)
+        self.setFixedSize(625, 700)
         self.setWindowTitle(self.setTitle(datascelta))
         self.chartview.setRenderHint(QtGui.QPainter.Antialiasing)
 
@@ -107,20 +107,16 @@ class VistaStats(QWidget):
 
         return "Vendite Mensili"
 
-    def create_table(self, datascelta):
+    def populate_table(self, datascelta):
 
         self.build_table(datascelta)
 
         self.table_widget.setRowCount(0)
         self.table_widget.setColumnCount(4)
-        self.table_widget.setHorizontalHeaderItem(0, QTableWidgetItem("Quantità"))
-        self.table_widget.setColumnWidth(0, 130)
-        self.table_widget.setHorizontalHeaderItem(1, QTableWidgetItem("Marca"))
-        self.table_widget.setColumnWidth(1, 130)
-        self.table_widget.setHorizontalHeaderItem(2, QTableWidgetItem("Nome Prodotto"))
-        self.table_widget.setColumnWidth(2, 130)
-        self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Categoria"))
-        self.table_widget.setColumnWidth(3, 140)
+        self.create_table(0, "Quantità")
+        self.create_table(1, "Marca")
+        self.create_table(2, "Nome Prodotto")
+        self.create_table(3, "Categoria")
 
         prezzofinalecarrello = 0
         row = 0
@@ -148,5 +144,13 @@ class VistaStats(QWidget):
         self.table_total.setModel(self.table_total_model)
 
 
+    def create_table(self, index, label):
 
+        item = QTableWidgetItem()
+        font = QFont()
+        font.setBold(True)
+        item.setFont(font)
+        item.setText(label)
+        self.table_widget.setHorizontalHeaderItem(index, item)
+        self.table_widget.setColumnWidth(index, 140)
 
