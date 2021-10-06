@@ -16,6 +16,7 @@ class VistaStats(QWidget):
         self.data = []
 
         self.chartview = QChartView()
+        self.chartview.setRenderHint(QPainter.Antialiasing)
 
         self.controllerstats = ControlloreStats()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
@@ -30,7 +31,7 @@ class VistaStats(QWidget):
 
 
         self.setLayout(self.v_layout)
-        self.resize(600, 300)
+        self.resize(600, 600)
         self.setWindowTitle(self.setTitle(datascelta))
 
     def build_arrays(self, datascelta):
@@ -38,11 +39,11 @@ class VistaStats(QWidget):
             if prodotto.data_acquisto >= datascelta:
                 j = 0
                 for i in range(len(self.nomi_prodotto)):
-                    if self.nomi_prodotto[i] == prodotto.id:
+                    if self.nomi_prodotto[i] == prodotto.categoria:
                         self.data[i] += prodotto.quantita_carrello
                         j = 1
                 if j == 0:
-                    self.nomi_prodotto.append(prodotto.id)
+                    self.nomi_prodotto.append(prodotto.categoria)
                     self.data.append(prodotto.quantita_carrello)
 
 
@@ -57,13 +58,19 @@ class VistaStats(QWidget):
 
         chart = QChart()
         chart.addSeries(series)
-        chart.setTitle("Vendite totali")
+        chart.setTitle(self.setTitle(data))
 
         self.chartview = QChartView(chart)
 
     def setTitle(self, datascelta):
 
-        if datascelta =
+        if datascelta == datetime.date.today():
+            return "Vendite Giornaliere"
+
+        if datascelta == datetime.date.today() - datetime.timedelta(weeks = 1):
+            return "Vendite Settimanali"
+
+        return "Vendite Mensili"
 
 
 
