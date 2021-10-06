@@ -3,7 +3,7 @@ import datetime
 from PyQt5.QtChart import QChartView, QPieSeries, QChart
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableWidgetItem, QTableWidget, QListView, QHeaderView
 from PyQt5 import QtGui
-from PyQt5.QtGui import QPainter, QPen, QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QPainter, QPen, QStandardItemModel, QStandardItem, QFont
 
 from statistiche.controller.ControlloreStats import ControlloreStats
 
@@ -31,7 +31,8 @@ class VistaStats(QWidget):
         self.create_pie(datascelta)
         self.create_table(datascelta)
         self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
-        self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        #self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.Ma)
+        self.table_widget.setMaximumHeight(200)
 
         self.v_layout.addWidget(self.chartview)
         self.v_layout.addWidget(self.table_widget)
@@ -40,8 +41,9 @@ class VistaStats(QWidget):
 
 
         self.setLayout(self.v_layout)
-        self.resize(600, 900)
+        self.setFixedSize(600, 700)
         self.setWindowTitle(self.setTitle(datascelta))
+
 
     def build_pie(self, datascelta):
         for prodotto in self.controllerstats.get_lista_delle_stats():
@@ -55,7 +57,6 @@ class VistaStats(QWidget):
                     self.categoria.append(prodotto.categoria)
                     self.quantita_categoria.append(prodotto.quantita_carrello)
 
-
     def build_table(self, datascelta):
 
         for prodotto in self.controllerstats.get_lista_delle_stats():
@@ -68,12 +69,9 @@ class VistaStats(QWidget):
                 if j == 0:
                     self.prodotti.append(prodotto)
 
-
-
-
-
     def create_pie(self, data):
         series = QPieSeries()
+
 
         self.build_pie(data)
 
@@ -81,11 +79,13 @@ class VistaStats(QWidget):
             series.append(self.categoria[i], self.quantita_categoria[i])
 
         chart = QChart()
+        font = QFont()
+        font.setPointSize(18)
         chart.addSeries(series)
+        chart.setTitleFont(font)
         chart.setTitle(self.setTitle(data))
 
         self.chartview = QChartView(chart)
-
 
     def setTitle(self, datascelta):
 
