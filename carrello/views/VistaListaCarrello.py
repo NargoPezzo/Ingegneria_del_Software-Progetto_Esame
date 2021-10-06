@@ -1,4 +1,4 @@
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, \
     QWidgetItem, QHeaderView, QMessageBox
 from PyQt5 import QtGui
@@ -13,7 +13,7 @@ class VistaListaCarrello(QWidget):
     def __init__(self,  parent=None):
         super(VistaListaCarrello, self).__init__(parent)
 
-        self.setFixedSize(700, 300)
+        self.setFixedSize(702, 300)
 
         self.controller = ControlloreCarrello()
         self.controllerstats = ControlloreStats()
@@ -27,7 +27,7 @@ class VistaListaCarrello(QWidget):
         self.update_ui()
 
         self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
-        self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        #self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
         self.v_layout.addWidget(self.table_widget)
         self.v_layout.addWidget(self.table_total)
@@ -47,7 +47,6 @@ class VistaListaCarrello(QWidget):
         self.main_layout.addWidget(new_button)
 
         self.setLayout(self.main_layout)
-        self.resize(600, 300)
         self.setWindowTitle("Carrello")
 
     def show_selected_info(self):
@@ -85,11 +84,11 @@ class VistaListaCarrello(QWidget):
     def update_ui(self):
         self.table_widget.setRowCount(0)
         self.table_widget.setColumnCount(5)
-        self.table_widget.setHorizontalHeaderItem(0, QTableWidgetItem("Quantità"))
-        self.table_widget.setHorizontalHeaderItem(1, QTableWidgetItem("Marca"))
-        self.table_widget.setHorizontalHeaderItem(2, QTableWidgetItem("Nome Prodotto"))
-        self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Categoria"))
-        self.table_widget.setHorizontalHeaderItem(4, QTableWidgetItem("Prezzo"))
+        self.create_table(0, "Quantità")
+        self.create_table(1, "Marca")
+        self.create_table(2, "Nome Prodotto")
+        self.create_table(3, "Categoria")
+        self.create_table(4, "Prezzo")
 
         prezzofinalecarrello = 0
         row = 0
@@ -116,7 +115,15 @@ class VistaListaCarrello(QWidget):
         self.table_total.setModel(self.table_total_model)
 
 
+    def create_table(self, index, label):
 
+        item = QTableWidgetItem()
+        font = QFont()
+        font.setBold(True)
+        item.setFont(font)
+        item.setText(label)
+        self.table_widget.setHorizontalHeaderItem(index, item)
+        self.table_widget.setColumnWidth(index, 100)
 
     def closeEvent(self, event):
         self.controller.save_data()
