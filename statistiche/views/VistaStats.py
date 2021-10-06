@@ -1,3 +1,5 @@
+import datetime
+
 from PyQt5.QtChart import QChartView, QPieSeries, QChart
 from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from PyQt5 import QtGui
@@ -19,7 +21,9 @@ class VistaStats(QWidget):
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
         self.v_layout = QVBoxLayout()
-        self.update_ui()
+        today = datetime.date.today()
+        yesterday = today - datetime.timedelta(days = 1)
+        self.update_ui(yesterday)
 
 
         self.v_layout.addWidget(self.chartview)
@@ -32,7 +36,7 @@ class VistaStats(QWidget):
 
     def build_arrays(self,datascelta):
         for prodotto in self.controllerstats.get_lista_delle_stats():
-            if prodotto.data.acquisto >= datascelta:
+            if prodotto.data_acquisto >= datascelta:
                 j = 0
                 for i in range(len(self.nomi_prodotto)):
                     if self.nomi_prodotto[i] == prodotto.id:
@@ -44,10 +48,13 @@ class VistaStats(QWidget):
 
 
 
-    def update_ui(self):
+    def update_ui(self, data):
         series = QPieSeries()
-        for prodotto in self.controllerstats.get_lista_delle_stats():
-            series.append(prodotto.id, prodotto.quantita_carrello)
+
+        self.build_arrays(data)
+
+        for i in range(len(self.nomi_prodotto)):
+            series.append(self.nomi_prodotto[i], self.data[i])
 
         chart = QChart()
         chart.addSeries(series)
