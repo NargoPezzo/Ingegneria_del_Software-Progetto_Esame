@@ -1,9 +1,9 @@
 import datetime
 
 from PyQt5.QtChart import QChartView, QPieSeries, QChart
-from PyQt5.QtWidgets import QWidget, QVBoxLayout
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableWidgetItem, QTableWidget, QListView, QHeaderView
 from PyQt5 import QtGui
-from PyQt5.QtGui import QPainter, QPen
+from PyQt5.QtGui import QPainter, QPen, QStandardItemModel, QStandardItem
 
 from statistiche.controller.ControlloreStats import ControlloreStats
 
@@ -23,15 +23,22 @@ class VistaStats(QWidget):
 
         self.v_layout = QVBoxLayout()
 
-        self.update_ui(datascelta)
+        self.table_widget = QTableWidget()
+        self.table_total = QListView()
 
+        self.create_pie(datascelta)
+        self.create_table(datascelta)
+        self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
+        self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
         self.v_layout.addWidget(self.chartview)
+        self.v_layout.addWidget(self.table_widget)
+        self.v_layout.addWidget(self.table_total)
 
 
 
         self.setLayout(self.v_layout)
-        self.resize(600, 600)
+        self.resize(600, 900)
         self.setWindowTitle(self.setTitle(datascelta))
 
     def build_arrays(self, datascelta):
@@ -48,7 +55,7 @@ class VistaStats(QWidget):
 
 
 
-    def update_ui(self, data):
+    def create_pie(self, data):
         series = QPieSeries()
 
         self.build_arrays(data)
@@ -62,6 +69,7 @@ class VistaStats(QWidget):
 
         self.chartview = QChartView(chart)
 
+
     def setTitle(self, datascelta):
 
         if datascelta == datetime.date.today():
@@ -71,6 +79,38 @@ class VistaStats(QWidget):
             return "Vendite Settimanali"
 
         return "Vendite Mensili"
+
+    def create_table(self, datascelta):
+
+        self.table_widget.setRowCount(0)
+        self.table_widget.setColumnCount(4)
+        self.table_widget.setHorizontalHeaderItem(0, QTableWidgetItem("Quantità"))
+        self.table_widget.setHorizontalHeaderItem(1, QTableWidgetItem("Marca"))
+        self.table_widget.setHorizontalHeaderItem(2, QTableWidgetItem("Nome Prodotto"))
+        self.table_widget.setHorizontalHeaderItem(3, QTableWidgetItem("Categoria"))
+
+        prezzofinalecarrello = 0
+        row = 0
+        for prodotto in self.controllerstats.get_lista_delle_stats():
+            self.table_widget.insertRow(row)
+            self.table_widget.setItem(row, 0, QTableWidgetItem(str(prodotto.quantita_carrello)))
+            self.table_widget.setItem(row, 1, QTableWidgetItem(prodotto.marca))
+            self.table_widget.setItem(row, 2, QTableWidgetItem(prodotto.nome))
+            self.table_widget.setItem(row, 3, QTableWidgetItem(prodotto.categoria))
+
+            acquistototale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
+            row = row + 1
+            prezzofinalecarrello += int(acquistototale)
+
+        self.table_total_model = QStandardItemModel(self.table_total)
+        item = QStandardItem()
+        item.setText("Totale: " + str(prezzofinalecarrello) + "€")
+        item.setEditable(False)
+        font = item.font()
+        font.setPointSize(14)
+        item.setFont(font)
+        self.table_total_model.appendRow(item)
+        self.table_total.setModel(self.table_total_model)
 
 
 
