@@ -18,7 +18,7 @@ class VistaStats(QWidget):
         self.prodotti = []
 
         self.chartview = QChartView()
-        self.chartview.setRenderHint(QtGui.QPainter.Antialiasing)
+
 
         self.controllerstats = ControlloreStats()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
@@ -42,6 +42,7 @@ class VistaStats(QWidget):
         self.setLayout(self.v_layout)
         self.setFixedSize(600, 700)
         self.setWindowTitle(self.setTitle(datascelta))
+        self.chartview.setRenderHint(QtGui.QPainter.Antialiasing)
 
 
     def build_pie(self, datascelta):
@@ -74,8 +75,18 @@ class VistaStats(QWidget):
 
         self.build_pie(data)
 
-        for i in range(len(self.categoria)):
-            series.append(self.categoria[i], self.quantita_categoria[i])
+
+        slice = series.append(self.categoria[0], self.quantita_categoria[0])
+        slice.setBrush(QtGui.QColor("#FF5631"))
+        slice = series.append(self.categoria[1], self.quantita_categoria[1])
+        slice.setBrush(QtGui.QColor("#31B1FF"))
+        slice = series.append(self.categoria[2], self.quantita_categoria[2])
+        slice.setBrush(QtGui.QColor("#31FF4D"))
+        slice = series.append(self.categoria[3], self.quantita_categoria[3])
+        slice.setBrush(QtGui.QColor("#DA31FF"))
+        slice = series.append(self.categoria[4], self.quantita_categoria[4])
+        slice.setBrush(QtGui.QColor("#FFEC31"))
+
 
         chart = QChart()
         font = QFont()
