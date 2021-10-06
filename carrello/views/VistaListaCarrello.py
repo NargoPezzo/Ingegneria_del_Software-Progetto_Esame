@@ -110,6 +110,7 @@ class VistaListaCarrello(QWidget):
         item.setEditable(False)
         font = item.font()
         font.setPointSize(14)
+        font.setBold(True)
         item.setFont(font)
         self.table_total_model.appendRow(item)
         self.table_total.setModel(self.table_total_model)
