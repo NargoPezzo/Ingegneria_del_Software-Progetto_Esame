@@ -18,7 +18,7 @@ class VistaStats(QWidget):
         self.prodotti = []
 
         self.chartview = QChartView()
-        self.chartview.setRenderHint(QPainter.Antialiasing)
+        self.chartview.setRenderHint(QtGui.QPainter.Antialiasing)
 
         self.controllerstats = ControlloreStats()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
@@ -31,7 +31,6 @@ class VistaStats(QWidget):
         self.create_pie(datascelta)
         self.create_table(datascelta)
         self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
-        #self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.Ma)
         self.table_widget.setMaximumHeight(200)
 
         self.v_layout.addWidget(self.chartview)
