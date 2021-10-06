@@ -15,7 +15,7 @@ class VistaStats(QWidget):
         self.nomi_prodotto = []
         self.data = []
 
-        self.chartview = QChartView
+        self.chartview = QChartView()
 
         self.controllerstats = ControlloreStats()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
