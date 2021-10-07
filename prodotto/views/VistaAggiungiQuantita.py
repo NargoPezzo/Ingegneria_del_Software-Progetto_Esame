@@ -12,8 +12,8 @@ class VistaAggiungiQuantita(QWidget):
         self.carrello = carrello
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
-        self.setWindowTitle("Aggiungi Prodotto al Carrello")
-        self.resize(250, 100)
+        self.setWindowTitle("Aggiungi al Carrello")
+        self.resize(300, 100)
 
         self.v_layout = QVBoxLayout()
 

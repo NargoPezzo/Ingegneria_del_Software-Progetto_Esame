@@ -61,6 +61,8 @@ class VistaLogin(QWidget):
 
     def check_password(self):
         msg = QMessageBox()
+        msg.setWindowTitle('Login')
+        msg.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         lista = ListaDipendenti()
 
         if lista.verifica_id_dipendente(self.lineEdit_username.text(), self.lineEdit_password.text()):

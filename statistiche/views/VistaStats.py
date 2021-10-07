@@ -1,7 +1,7 @@
 import datetime
 
 from PyQt5.QtChart import QChartView, QPieSeries, QChart
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableWidgetItem, QTableWidget, QListView, QHeaderView
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableWidgetItem, QTableWidget, QListView, QMessageBox
 from PyQt5 import QtGui
 from PyQt5.QtGui import QPainter, QPen, QStandardItemModel, QStandardItem, QFont
 
@@ -75,17 +75,19 @@ class VistaStats(QWidget):
 
         self.build_pie(data)
 
-
-        slice = series.append(self.categoria[0], self.quantita_categoria[0])
-        slice.setBrush(QtGui.QColor("#FF5631"))
-        slice = series.append(self.categoria[1], self.quantita_categoria[1])
-        slice.setBrush(QtGui.QColor("#31B1FF"))
-        slice = series.append(self.categoria[2], self.quantita_categoria[2])
-        slice.setBrush(QtGui.QColor("#31FF4D"))
-        slice = series.append(self.categoria[3], self.quantita_categoria[3])
-        slice.setBrush(QtGui.QColor("#DA31FF"))
-        slice = series.append(self.categoria[4], self.quantita_categoria[4])
-        slice.setBrush(QtGui.QColor("#FFEC31"))
+        try:
+            slice = series.append(self.categoria[0], self.quantita_categoria[0])
+            slice.setBrush(QtGui.QColor("#FF5631"))
+            slice = series.append(self.categoria[1], self.quantita_categoria[1])
+            slice.setBrush(QtGui.QColor("#31B1FF"))
+            slice = series.append(self.categoria[2], self.quantita_categoria[2])
+            slice.setBrush(QtGui.QColor("#31FF4D"))
+            slice = series.append(self.categoria[3], self.quantita_categoria[3])
+            slice.setBrush(QtGui.QColor("#DA31FF"))
+            slice = series.append(self.categoria[4], self.quantita_categoria[4])
+            slice.setBrush(QtGui.QColor("#FFEC31"))
+        except IndexError:
+            QMessageBox.critical(self, 'Errore', 'Nessuna statistica da visualizzare', QMessageBox.Ok, QMessageBox.Ok)
 
 
         chart = QChart()

@@ -9,7 +9,10 @@ class VistaModificaProdotto(QWidget):
         self.info = {}
         self.update = update
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
+        self.setWindowTitle('Modifica Prodotto')
         self.v_layout = QVBoxLayout()
+        self.resize(300, 200)
+
 
 
         self.get_form_entry("Nuovo Prezzo")

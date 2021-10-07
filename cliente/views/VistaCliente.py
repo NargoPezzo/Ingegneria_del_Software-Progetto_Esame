@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
-
+from PyQt5 import QtGui
 
 from cliente.controller.ControlloreCliente import ControlloreCliente
 
@@ -10,6 +10,7 @@ class VistaCliente(QWidget):
         self.controller = ControlloreCliente(cliente)
         self.elimina_cliente = elimina_cliente
         self.elimina_callback = elimina_callback
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
         v_layout = QVBoxLayout()
 
