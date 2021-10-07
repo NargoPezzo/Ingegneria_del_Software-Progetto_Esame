@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
-from PyQt5 import QtGui
+from PyQt5 import QtGui, QtCore
 
 
 class VistaModificaProdotto(QWidget):
@@ -28,6 +28,7 @@ class VistaModificaProdotto(QWidget):
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
+        current_text_edit.setValidator(QtGui.QDoubleValidator(0, 100, 2))
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 

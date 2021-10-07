@@ -101,9 +101,9 @@ class VistaListaCarrello(QWidget):
             self.inserisci_elemento_in_tabella(prodotto.nome, row, 2)
             self.inserisci_elemento_in_tabella(prodotto.categoria, row, 3)
 
-            acquistototale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
-            prezzofinalecarrello += int(acquistototale)
-            acquistototale = str(int(prodotto.quantita_carrello) * int(prodotto.prezzo)) + "€"
+            acquistototale = float(prodotto.quantita_carrello) * float(prodotto.prezzo)
+            prezzofinalecarrello += float(acquistototale)
+            acquistototale = str(acquistototale) + "€"
             self.inserisci_elemento_in_tabella(acquistototale, row, 4)
             row = row + 1
 
