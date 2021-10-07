@@ -11,6 +11,7 @@ class VistaInserisciDipendente(QWidget):
         self.callback = callback
         self.info = {}
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
+        self.resize(300, 200)
 
         self.v_layout = QVBoxLayout()
 

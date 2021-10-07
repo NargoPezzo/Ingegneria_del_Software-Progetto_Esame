@@ -1,7 +1,7 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, \
     QWidgetItem, QHeaderView, QMessageBox
-from PyQt5 import QtGui
+from PyQt5 import QtGui, QtCore
 from carrello.controller.ControlloreCarrello import ControlloreCarrello
 from carrello.views.VistaAcquistoCarrello import VistaAcquistoCarrello
 import datetime
@@ -25,6 +25,7 @@ class VistaListaCarrello(QWidget):
         self.table_widget = QTableWidget()
         self.table_total = QListView()
         self.update_ui()
+
 
         self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
         #self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
@@ -95,15 +96,17 @@ class VistaListaCarrello(QWidget):
         row = 0
         for prodotto in self.controller.get_lista_carrello():
             self.table_widget.insertRow(row)
-            self.table_widget.setItem(row, 0, QTableWidgetItem(str(prodotto.quantita_carrello)))
-            self.table_widget.setItem(row, 1, QTableWidgetItem(prodotto.marca))
-            self.table_widget.setItem(row, 2, QTableWidgetItem(prodotto.nome))
-            self.table_widget.setItem(row, 3, QTableWidgetItem(prodotto.categoria))
+            self.inserisci_elemento_in_tabella(prodotto.quantita_carrello, row, 0)
+            self.inserisci_elemento_in_tabella(prodotto.marca, row, 1)
+            self.inserisci_elemento_in_tabella(prodotto.nome, row, 2)
+            self.inserisci_elemento_in_tabella(prodotto.categoria, row, 3)
 
             acquistototale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
-            self.table_widget.setItem(row, 4, QTableWidgetItem(str(acquistototale) + " €"))
-            row = row + 1
             prezzofinalecarrello += int(acquistototale)
+            acquistototale = str(int(prodotto.quantita_carrello) * int(prodotto.prezzo)) + "€"
+            self.inserisci_elemento_in_tabella(acquistototale, row, 4)
+            row = row + 1
+
 
         self.table_total_model = QStandardItemModel(self.table_total)
         item = QStandardItem()
@@ -129,6 +132,12 @@ class VistaListaCarrello(QWidget):
 
     def closeEvent(self, event):
         self.controller.save_data()
+
+    def inserisci_elemento_in_tabella(self, elemento, row, index):
+        item = QTableWidgetItem()
+        item.setText(str(elemento))
+        item.setFlags(QtCore.Qt.ItemIsEnabled)
+        self.table_widget.setItem(row, index, item)
 
 
 

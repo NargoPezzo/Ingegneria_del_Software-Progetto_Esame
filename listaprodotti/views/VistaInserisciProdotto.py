@@ -14,6 +14,7 @@ class VistaInserisciProdotto(QWidget):
         self.callback = callback
         self.info = {}
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
+        self.resize(300, 200)
 
         self.v_layout = QVBoxLayout()
         self.v_layout.addWidget(QLabel("Categoria"))

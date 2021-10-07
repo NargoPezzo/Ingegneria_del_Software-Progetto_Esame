@@ -12,6 +12,7 @@ class VistaInserisciCliente(QWidget):
         self.info = {}
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         self.v_layout = QVBoxLayout()
+        self.resize(300, 200)
 
         self.get_form_entry("Nome")
         self.get_form_entry("Cognome")

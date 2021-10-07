@@ -31,7 +31,6 @@ class VistaHome(QWidget):
         self.setWindowTitle("Negozio di Elettronica")
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
 
-
     '''
     Questa funzione restituisce un bottone generico dato il titolo
     '''

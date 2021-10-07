@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
-
+from PyQt5 import QtGui
 from dipendente.controller.ControlloreDipendente import ControlloreDipendente
 
 class VistaDipendente(QWidget):
@@ -8,7 +8,7 @@ class VistaDipendente(QWidget):
         self.controller = ControlloreDipendente(dipendente)
         self.elimina_dipendente = elimina_dipendente
         self.elimina_callback = elimina_callback
-
+        self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         v_layout = QVBoxLayout()
 
         label_nome = QLabel(self.controller.get_nome_dipendente() + " " + self.controller.get_cognome_dipendente())
