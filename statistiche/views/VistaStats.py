@@ -2,7 +2,7 @@ import datetime
 
 from PyQt5.QtChart import QChartView, QPieSeries, QChart
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableWidgetItem, QTableWidget, QListView, QMessageBox
-from PyQt5 import QtGui
+from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QPainter, QPen, QStandardItemModel, QStandardItem, QFont
 
 from statistiche.controller.ControlloreStats import ControlloreStats
@@ -125,11 +125,10 @@ class VistaStats(QWidget):
         for prodotto in self.prodotti:
 
             self.table_widget.insertRow(row)
-            self.table_widget.setItem(row, 0, QTableWidgetItem(str(prodotto.quantita_carrello)))
-            self.table_widget.setItem(row, 1, QTableWidgetItem(prodotto.marca))
-            self.table_widget.setItem(row, 2, QTableWidgetItem(prodotto.nome))
-            self.table_widget.setItem(row, 3, QTableWidgetItem(prodotto.categoria))
-
+            self.inserisci_elemento_in_tabella(prodotto.quantita_carrello, row, 0)
+            self.inserisci_elemento_in_tabella(prodotto.marca, row, 1)
+            self.inserisci_elemento_in_tabella(prodotto.nome, row, 2)
+            self.inserisci_elemento_in_tabella(prodotto.categoria, row, 3)
 
             acquistototale = int(prodotto.quantita_carrello) * int(prodotto.prezzo)
             row = row + 1
@@ -156,4 +155,10 @@ class VistaStats(QWidget):
         item.setText(label)
         self.table_widget.setHorizontalHeaderItem(index, item)
         self.table_widget.setColumnWidth(index, 140)
+
+    def inserisci_elemento_in_tabella(self, elemento, row, index):
+        item = QTableWidgetItem()
+        item.setText(str(elemento))
+        item.setFlags(QtCore.Qt.ItemIsEnabled)
+        self.table_widget.setItem(row, index, item)
 
