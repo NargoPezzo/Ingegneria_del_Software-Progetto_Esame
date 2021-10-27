@@ -41,7 +41,6 @@ class VistaAcquistoCarrello(QWidget):
 
         btn_elimina = QPushButton(" RIMUOVI DAL CARRELLO ")
         btn_elimina.clicked.connect(self.elimina_acquisto_click)
-        btn_elimina.setStyleSheet("background-color: red")
         h_layout.addWidget(btn_elimina)
 
         v_layout.addLayout(h_layout)

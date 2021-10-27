@@ -26,7 +26,6 @@ class VistaListaDipendenti(QWidget):
 
         new_button = QPushButton("Nuovo")
         new_button.clicked.connect(self.show_new_dipendente)
-        new_button.setStyleSheet("background-color: lightgreen")
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
         h_layout.addLayout(buttons_layout)

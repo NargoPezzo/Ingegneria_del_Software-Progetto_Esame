@@ -38,7 +38,6 @@ class VistaProdotto(QWidget):
 
         btn_elimina = QPushButton(" RIMUOVI DAL MAGAZZINO ")
         btn_elimina.clicked.connect(self.elimina_prodotto_click)
-        btn_elimina.setStyleSheet("background-color: red")
         h_layout.addWidget(btn_elimina)
 
         btn_carrello = QPushButton("Aggiungi al Carrello")

@@ -41,7 +41,6 @@ class VistaListaClienti(QWidget):
         buttons_layout.addWidget(open_button)
 
         new_button = QPushButton("Nuovo")
-        new_button.setStyleSheet("background-color: lightgreen")
         new_button.clicked.connect(self.show_new_cliente)
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()

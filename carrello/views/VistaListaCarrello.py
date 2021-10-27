@@ -40,7 +40,6 @@ class VistaListaCarrello(QWidget):
         buttons_layout.addWidget(open_button)
 
         new_button = QPushButton("Checkout")
-        new_button.setStyleSheet("background-color: lightgreen")
         new_button.clicked.connect(self.aggiungi_alle_statistiche)
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
