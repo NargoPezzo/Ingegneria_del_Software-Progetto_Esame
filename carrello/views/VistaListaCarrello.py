@@ -7,6 +7,7 @@ from carrello.views.VistaAcquistoCarrello import VistaAcquistoCarrello
 import datetime
 
 from statistiche.controller.ControlloreStats import ControlloreStats
+from decimal import *
 
 
 class VistaListaCarrello(QWidget):
@@ -99,9 +100,9 @@ class VistaListaCarrello(QWidget):
             self.inserisci_elemento_in_tabella(prodotto.nome, row, 2)
             self.inserisci_elemento_in_tabella(prodotto.categoria, row, 3)
 
-            acquistototale = float(prodotto.quantita_carrello) * float(prodotto.prezzo)
-            prezzofinalecarrello += float(acquistototale)
-            acquistototale = str(acquistototale) + "€"
+            acquistototale = prodotto.quantita_carrello * float(prodotto.prezzo)
+            prezzofinalecarrello += acquistototale
+            acquistototale = str(acquistototale) + " €"
             self.inserisci_elemento_in_tabella(acquistototale, row, 4)
             row = row + 1
 
