@@ -28,7 +28,6 @@ class VistaListaCarrello(QWidget):
 
 
         self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
-        #self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
         self.v_layout.addWidget(self.table_widget)
         self.v_layout.addWidget(self.table_total)
@@ -136,7 +135,7 @@ class VistaListaCarrello(QWidget):
     def inserisci_elemento_in_tabella(self, elemento, row, index):
         item = QTableWidgetItem()
         item.setText(str(elemento))
-        item.setFlags(QtCore.Qt.ItemIsEnabled)
+        item.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled)
         self.table_widget.setItem(row, index, item)
 
 
