@@ -48,6 +48,8 @@ class VistaInserisciProdotto(QWidget):
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
+        if tipo == "Prezzo" or tipo == "Quantità":
+            current_text_edit.setValidator(QtGui.QDoubleValidator(0, 100, 2))
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
@@ -62,8 +64,9 @@ class VistaInserisciProdotto(QWidget):
         marca = self.info["Marca"].text()
         nome = self.info["Nome"].text()
         categoria = self.combo_categoria.currentText()
-
         prezzo = self.info["Prezzo"].text()
+        prezzo.replace(",", ".")
+        print(prezzo)
         quantita = self.info["Quantità"].text()
 
         if marca == "" or nome == "" or categoria == "" or prezzo == "" or quantita == "":
