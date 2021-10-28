@@ -65,8 +65,6 @@ class VistaInserisciProdotto(QWidget):
         nome = self.info["Nome"].text()
         categoria = self.combo_categoria.currentText()
         prezzo = self.info["Prezzo"].text()
-        prezzo.replace(",", ".")
-        print(prezzo)
         quantita = self.info["Quantità"].text()
 
         if marca == "" or nome == "" or categoria == "" or prezzo == "" or quantita == "":
