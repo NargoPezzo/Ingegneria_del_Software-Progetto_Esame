@@ -28,21 +28,29 @@ class VistaModificaProdotto(QWidget):
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
-        current_text_edit.setValidator(QtGui.QDoubleValidator(0, 100, 2))
+        if tipo == "Nuovo Prezzo":
+            current_text_edit.setValidator(QtGui.QDoubleValidator(0, 100, 2))
+        if tipo == "Nuova Quantità":
+            current_text_edit.setValidator(QtGui.QIntValidator(0,100))
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
 
     def modifica_prodotto(self):
 
-        nuovoprezzo = self.info["Nuovo Prezzo"].text()
-        nuovaquantita = self.info["Nuova Quantità"].text()
-
-        if nuovoprezzo == "" or nuovaquantita == "":
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
-
+        msg = QMessageBox()
+        if "," in self.info["Nuovo Prezzo"].text():
+            msg.setText('ERRORE: Formato prezzo non corretto. Utilizzare "." al posto di ","')
+            msg.exec_()
         else:
-            self.prodotto.prezzo = nuovoprezzo
-            self.prodotto.quantita_magazzino = nuovaquantita
-            self.update()
-            self.close()
+            nuovoprezzo = self.info["Nuovo Prezzo"].text()
+            nuovaquantita = self.info["Nuova Quantità"].text()
+
+            if nuovoprezzo == "" or nuovaquantita == "":
+                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+
+            else:
+                self.prodotto.prezzo = nuovoprezzo
+                self.prodotto.quantita_magazzino = nuovaquantita
+                self.update()
+                self.close()

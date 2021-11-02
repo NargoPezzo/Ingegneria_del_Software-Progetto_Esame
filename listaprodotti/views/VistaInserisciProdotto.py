@@ -2,7 +2,6 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, \
     QComboBox
 
-from decimal import *
 
 from prodotto.model.Prodotto import Prodotto
 from PyQt5 import QtGui
@@ -48,8 +47,10 @@ class VistaInserisciProdotto(QWidget):
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
-        if tipo == "Prezzo" or tipo == "Quantità":
+        if tipo == "Prezzo":
             current_text_edit.setValidator(QtGui.QDoubleValidator(0, 100, 2))
+        if tipo == "Quantità":
+            current_text_edit.setValidator(QtGui.QIntValidator(0, 100))
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
@@ -60,18 +61,22 @@ class VistaInserisciProdotto(QWidget):
         self.combo_categoria_model.appendRow(item)
 
     def add_prodotto(self):
-
-        marca = self.info["Marca"].text()
-        nome = self.info["Nome"].text()
-        categoria = self.combo_categoria.currentText()
-        prezzo = self.info["Prezzo"].text()
-        quantita = self.info["Quantità"].text()
-
-        if marca == "" or nome == "" or categoria == "" or prezzo == "" or quantita == "":
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
-
-
+        msg = QMessageBox()
+        if "," in self.info["Prezzo"].text():
+            msg.setText('ERRORE: Formato prezzo non corretto. Utilizzare "." al posto di ","')
+            msg.exec_()
         else:
-            self.controller.aggiungi_prodotto(Prodotto((marca+nome).lower(), marca, nome, categoria, prezzo, quantita, 0))
-            self.callback()
-            self.close()
+            marca = self.info["Marca"].text()
+            nome = self.info["Nome"].text()
+            categoria = self.combo_categoria.currentText()
+            prezzo = self.info["Prezzo"].text()
+            quantita = self.info["Quantità"].text()
+
+            if marca == "" or nome == "" or categoria == "" or prezzo == "" or quantita == "":
+                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+
+
+            else:
+                self.controller.aggiungi_prodotto(Prodotto((marca+nome).lower(), marca, nome, categoria, prezzo, quantita, 0))
+                self.callback()
+                self.close()
