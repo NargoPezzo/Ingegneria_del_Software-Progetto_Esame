@@ -39,7 +39,6 @@ class Carrello():
             pickle.dump(self.carrello, handle, pickle.HIGHEST_PROTOCOL)
 
     def verifica_quantita_prodotto(self, prodotto, quantita):
-
         if quantita <= int(prodotto.quantita_magazzino):
             prodotto.quantita_carrello = quantita
             prodotto.quantita_magazzino = int(prodotto.quantita_magazzino) - prodotto.quantita_carrello
