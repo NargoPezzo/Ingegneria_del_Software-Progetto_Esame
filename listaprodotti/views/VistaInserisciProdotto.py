@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem
 
 from prodotto.model.Prodotto import Prodotto
 from PyQt5 import QtGui
-
+from listaprodotti.views import VistaListaProdotti
 
 class VistaInserisciProdotto(QWidget):
     def __init__(self, controller, callback):
@@ -78,5 +78,6 @@ class VistaInserisciProdotto(QWidget):
 
             else:
                 self.controller.aggiungi_prodotto(Prodotto((marca+nome).lower(), marca, nome, categoria, prezzo, quantita, 0))
+                self.controller.save_data()
                 self.callback()
                 self.close()
