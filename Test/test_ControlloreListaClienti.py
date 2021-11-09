@@ -7,6 +7,7 @@ from listaclienti.controller.ControlloreListaClienti import ControlloreListaClie
 
 
 class TestControlloreListaClienti(TestCase):
+
     def test_aggiungi_cliente(self):
         self.controller = ControlloreListaClienti()
         self.cliente = Cliente("mariorossi", "Mario", "Rossi", "RSSMRA66A02A271R", "via Roma 14", "mariorossi@outlook.it", "3458256745", "45")
@@ -16,12 +17,8 @@ class TestControlloreListaClienti(TestCase):
         self.test_aggiungi_cliente()
         self.assertNotEqual(self.controller.get_lista_dei_clienti(), [])
 
-    def test_elimina_cliente_by_id(self):
+    def test_get_cliente_by_index(self):
         self.test_aggiungi_cliente()
-        if os.path.isfile('listaclienti/data/lista_clienti_salvata.pickle'):
-            with open('listaclienti/data/lista_clienti_salvata.pickle', 'rb') as f:
-                self.lista_clienti = pickle.load(f)
-                a = self.lista_clienti.id(self.cliente)
-                b = "marcoverdi"
-                self.assertFalse(self.controller.elimina_cliente_by_id(b))
-                self.assertTrue(self.controller.elimina_cliente_by_id(a))
+        self.assertTrue(self.controller.get_cliente_by_index(0))
+        self.assertFalse(self.controller.get_cliente_by_index(1))
+
