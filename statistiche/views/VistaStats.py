@@ -14,6 +14,8 @@ class VistaStats(QWidget):
         super(VistaStats, self).__init__()
         self.datascelta = datascelta
 
+
+
         self.categoria = []
         self.quantita_categoria = []
         self.prodotti = []
@@ -42,7 +44,7 @@ class VistaStats(QWidget):
 
         self.setLayout(self.v_layout)
         self.setFixedSize(625, 700)
-        self.setWindowTitle(self.setTitle(datascelta))
+        self.setWindowTitle(self.set_title(datascelta))
         self.chartview.setRenderHint(QtGui.QPainter.Antialiasing)
 
 
@@ -98,16 +100,18 @@ class VistaStats(QWidget):
 
 
 
+
+
         chart = QChart()
         font = QFont()
         font.setPointSize(18)
         chart.addSeries(series)
         chart.setTitleFont(font)
-        chart.setTitle(self.setTitle(data))
+        chart.setTitle(self.set_title(data))
 
         self.chartview = QChartView(chart)
 
-    def setTitle(self, datascelta):
+    def set_title(self, datascelta):
 
         if datascelta == datetime.date.today():
             return "Vendite Giornaliere"
