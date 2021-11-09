@@ -64,6 +64,8 @@ class VistaInserisciProdotto(QWidget):
         msg = QMessageBox()
         if "," in self.info["Prezzo"].text():
             msg.setText('ERRORE: Formato prezzo non corretto. Utilizzare "." al posto di ","')
+            msg.setWindowTitle("Errore Formattazione")
+            msg.setWindowIcon(QtGui.QIcon('logos/logo.png'))
             msg.exec_()
         else:
             marca = self.info["Marca"].text()
@@ -81,3 +83,4 @@ class VistaInserisciProdotto(QWidget):
                 self.controller.save_data()
                 self.callback()
                 self.close()
+

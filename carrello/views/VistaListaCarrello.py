@@ -41,7 +41,7 @@ class VistaListaCarrello(QWidget):
         buttons_layout.addWidget(open_button)
 
         new_button = QPushButton("Checkout")
-        new_button.clicked.connect(self.aggiungi_alle_statistiche)
+        new_button.clicked.connect(self.checkout)
         buttons_layout.addWidget(new_button)
         buttons_layout.addStretch()
         self.main_layout.addLayout(buttons_layout)
@@ -59,7 +59,7 @@ class VistaListaCarrello(QWidget):
         except IndexError:
             QMessageBox.critical(self, 'Errore', 'Per favore, seleziona un prodotto', QMessageBox.Ok, QMessageBox.Ok)
 
-    def aggiungi_alle_statistiche(self):
+    def checkout(self):
         msg = QMessageBox()
 
         if self.controller.get_lista_carrello():

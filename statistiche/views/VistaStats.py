@@ -75,7 +75,6 @@ class VistaStats(QWidget):
 
 
         self.build_pie(data)
-        print(self.quantita_categoria)
 
         if self.quantita_categoria == []:
             QMessageBox.critical(self, 'Errore', 'Nessuna statistica da visualizzare', QMessageBox.Ok, QMessageBox.Ok)

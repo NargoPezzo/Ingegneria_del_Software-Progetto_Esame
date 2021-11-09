@@ -13,7 +13,6 @@ from PyQt5 import QtGui
 class VistaListaProdotti(QWidget):
     def __init__(self, parent=None):
         super(VistaListaProdotti, self).__init__(parent)
-
         self.carrello = ControlloreCarrello()
         self.controller = ControlloreListaProdotti()
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
@@ -29,13 +28,15 @@ class VistaListaProdotti(QWidget):
         self.filter_proxy_model.setFilterCaseSensitivity(Qt.CaseInsensitive)
         self.filter_proxy_model.setFilterKeyColumn(0)
 
+        self.list_view.setModel(self.filter_proxy_model)
+
         search_field = QLineEdit()
         search_field.setStyleSheet('font-size: 15px; height: 30px;')
         search_field.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
+
+
+
         v_layout.addWidget(search_field)
-
-        self.list_view.setModel(self.filter_proxy_model)
-
         v_layout.addWidget(self.list_view)
         main_layout.addLayout(v_layout)
 
@@ -60,8 +61,8 @@ class VistaListaProdotti(QWidget):
     def show_selected_info(self):
         try:
             selected = self.list_view.selectedIndexes()[0]
-            print(selected)
             sourceindex = self.toSourceIndex(selected)
+            print(sourceindex)
             prodotto_selezionato = self.controller.get_prodotto_by_index(sourceindex)
             self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
             self.vista_prodotto.show()
