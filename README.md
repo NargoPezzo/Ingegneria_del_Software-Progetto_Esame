@@ -1,4 +1,4 @@
-# Progetto di Ingengneria del Software
+# Progetto di Ingegneria del Software
 Gestione di un Negozio di Elettronica
 
 Per il corretto utilizzo del software installare manualmente le librerie:
