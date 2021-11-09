@@ -5,6 +5,7 @@ from prodotto.model.Prodotto import Prodotto
 
 
 class TestControlloreListaProdotti(TestCase):
+
     def test_aggiungi_prodotto(self):
         self.controller = ControlloreListaProdotti()
         self.prodotto = Prodotto("appleiphone", "Apple", "iPhone", "Telefonia", "699.99", "100", "01/01/2021")

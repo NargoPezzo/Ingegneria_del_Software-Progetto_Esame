@@ -1,5 +1,3 @@
-import os
-import pickle
 from unittest import TestCase
 
 from cliente.model.Cliente import Cliente

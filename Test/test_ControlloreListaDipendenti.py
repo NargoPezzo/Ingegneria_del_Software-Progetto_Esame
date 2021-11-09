@@ -1,5 +1,3 @@
-import os
-import pickle
 from unittest import TestCase
 
 from dipendente.model.Dipendente import Dipendente
@@ -7,6 +5,7 @@ from listadipendenti.controller.ControlloreListaDipendenti import ControlloreLis
 
 
 class TestControlloreListaDipendenti(TestCase):
+
     def test_aggiungi_dipendente(self):
         self.controller = ControlloreListaDipendenti()
         self.dipendente = Dipendente("paolobianchi", "Paolo", "Bianchi", "BNCPLO66A02A271R", "via Roma 14",
