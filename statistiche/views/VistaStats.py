@@ -6,6 +6,7 @@ from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
 
 from statistiche.controller.ControlloreStats import ControlloreStats
+from math import ceil
 
 
 class VistaStats(QWidget):
@@ -140,10 +141,11 @@ class VistaStats(QWidget):
 
             acquistototale = float(prodotto.quantita_carrello) * float(prodotto.prezzo)
             row = row + 1
-            prezzofinalecarrello += int(acquistototale)
+            prezzofinalecarrello += float(acquistototale)
 
         self.table_total_model = QStandardItemModel(self.table_total)
         item = QStandardItem()
+        prezzofinalecarrello = ceil(prezzofinalecarrello * 100) / 100.0
         item.setText("Totale: " + str(prezzofinalecarrello) + "€")
         item.setEditable(False)
         font = item.font()
