@@ -60,9 +60,8 @@ class VistaListaProdotti(QWidget):
 
     def show_selected_info(self):
         try:
-            selected = self.list_view.selectedIndexes()[0]
-            sourceindex = self.toSourceIndex(selected)
-            print(sourceindex)
+
+            sourceindex = self.list_view.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(sourceindex)
             self.vista_prodotto = VistaProdotto(prodotto_selezionato, self.controller.elimina_prodotto_by_id, self.update_ui, self.carrello)
             self.vista_prodotto.show()
@@ -78,6 +77,7 @@ class VistaListaProdotti(QWidget):
 
         self.listview_model = QStandardItemModel(self.list_view)
         for prodotto in self.controller.get_lista_dei_prodotti():
+            print(prodotto)
             item = QStandardItem()
             item.setText(prodotto.marca + " " + prodotto.nome)
             item.setEditable(False)

@@ -36,8 +36,8 @@ class VistaListaDipendenti(QWidget):
 
     def show_selected_info(self):
         try:
-            selected = self.list_view.selectedIndexes()[0].row()
-            dipendente_selezionato = self.controller.get_dipendente_by_index(selected)
+            sourceindex = self.list_view.selectedIndexes()[0].row()
+            dipendente_selezionato = self.controller.get_dipendente_by_index(sourceindex)
             self.vista_dipendente = VistaDipendente(dipendente_selezionato, self.controller.elimina_dipendente_by_id, self.update_ui)
             self.vista_dipendente.show()
         except IndexError:

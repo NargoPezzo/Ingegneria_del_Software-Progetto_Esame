@@ -52,9 +52,9 @@ class VistaListaClienti(QWidget):
 
     def show_selected_info(self):
         try:
-            selected = self.list_view.selectedIndexes()[0]
-            SourceIndex = self.toSourceIndex(selected)
-            cliente_selezionato = self.controller.get_cliente_by_index(SourceIndex)
+            sourceindex = self.list_view.selectedIndexes()[0].row()
+           # SourceIndex = self.toSourceIndex(selected)
+            cliente_selezionato = self.controller.get_cliente_by_index(sourceindex)
             self.vista_cliente = VistaCliente(cliente_selezionato, self.controller.rimuovi_cliente_by_id, self.update_ui)
             self.vista_cliente.show()
         except IndexError:
