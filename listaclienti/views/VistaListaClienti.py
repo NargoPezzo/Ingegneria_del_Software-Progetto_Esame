@@ -55,7 +55,7 @@ class VistaListaClienti(QWidget):
             selected = self.list_view.selectedIndexes()[0]
             SourceIndex = self.toSourceIndex(selected)
             cliente_selezionato = self.controller.get_cliente_by_index(SourceIndex)
-            self.vista_cliente = VistaCliente(cliente_selezionato, self.controller.elimina_cliente_by_id, self.update_ui)
+            self.vista_cliente = VistaCliente(cliente_selezionato, self.controller.rimuovi_cliente_by_id, self.update_ui)
             self.vista_cliente.show()
         except IndexError:
             QMessageBox.critical(self, 'Errore', 'Per favore, seleziona un cliente', QMessageBox.Ok, QMessageBox.Ok)

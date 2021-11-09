@@ -18,11 +18,6 @@ class TestControlloreListaDipendenti(TestCase):
         self.test_aggiungi_dipendente()
         self.assertNotEqual(self.controller.get_lista_dei_dipendenti(), [])
 
-    def test_elimina_dipendente_by_id(self):
+    def test_get_dipendente_by_index(self):
         self.test_aggiungi_dipendente()
-        if os.path.isfile('listadipendenti/data/lista_dipendenti_salvata.pickle'):
-            with open('listadipendenti/data/lista_dipendenti_salvata.pickle', 'r') as f:
-                self.lista_dipendenti = pickle.load(f)
-                a = self.lista_dipendenti.id(self.dipendente)
-                self.assertFalse(self.controller.elimina_dipendente_by_id(10000))
-                self.assertTrue(self.controller.elimina_dipendente_by_id(a))
+        self.assertTrue(self.controller.get_dipendente_by_index(0))

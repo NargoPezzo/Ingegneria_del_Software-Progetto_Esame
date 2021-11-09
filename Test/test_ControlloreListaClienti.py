@@ -20,5 +20,3 @@ class TestControlloreListaClienti(TestCase):
     def test_get_cliente_by_index(self):
         self.test_aggiungi_cliente()
         self.assertTrue(self.controller.get_cliente_by_index(0))
-        self.assertFalse(self.controller.get_cliente_by_index(1))
-
