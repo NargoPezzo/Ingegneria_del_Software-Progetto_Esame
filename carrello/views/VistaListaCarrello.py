@@ -75,6 +75,8 @@ class VistaListaCarrello(QWidget):
                 self.controller.save_data()
                 self.controllerstats.save_data()
                 msg.setText('Acquisto confermato  :D')
+                msg.setWindowTitle("Grazie per l'acquisto")
+                msg.setWindowIcon(QtGui.QIcon('logos/logo.png'))
                 msg.exec_()
                 self.close()
             else:
