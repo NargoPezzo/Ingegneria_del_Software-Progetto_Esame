@@ -21,6 +21,7 @@ class VistaAcquistoCarrello(QWidget):
         v_layout = QVBoxLayout()
         h_layout = QHBoxLayout()
 
+        #Vengono recuperate le informazioni da mostrare a schermo
         label_nome = QLabel(self.controller.get_marca_prodotto() + " " + self.controller.get_nome_prodotto())
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         font_nome = label_nome.font()
@@ -29,16 +30,17 @@ class VistaAcquistoCarrello(QWidget):
         v_layout.addWidget(label_nome, )
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
-        v_layout.addWidget(self.get_label_info("Categoria", self.controller.get_categoria_prodotto()))
 
+        #Aggiunge tramite metodo get_label_info il titolo di una informazione e l'informazione stessa tramite controller
+        v_layout.addWidget(self.get_label_info("Categoria", self.controller.get_categoria_prodotto()))
         self.label_prezzo = self.get_label_info("Prezzo", self.controller.get_prezzo_prodotto() + " €")
         self.label_quantita = self.get_label_info("Quantità", self.controller.get_quantita_carrello())
-
         v_layout.addWidget(self.label_prezzo)
         v_layout.addWidget(self.label_quantita)
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
+        #Genera un bottone per rimuovere il prodotto dal carrello
         btn_elimina = QPushButton(" RIMUOVI DAL CARRELLO ")
         btn_elimina.clicked.connect(self.elimina_acquisto_click)
         h_layout.addWidget(btn_elimina)
@@ -48,6 +50,7 @@ class VistaAcquistoCarrello(QWidget):
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_marca_prodotto() + " " + self.controller.get_nome_prodotto())
 
+    #Metodo che assegna come parametri un' informazione e il valore assegnato come sopra tramite il controller
     def get_label_info(self, testo, valore):
         current_label = QLabel("{}: {}".format(testo, valore))
         current_font = current_label.font()
@@ -55,6 +58,7 @@ class VistaAcquistoCarrello(QWidget):
         current_label.setFont(current_font)
         return current_label
 
+    #Metodo richiamato dal bottone che elimina l' acquisto dal carrello
     def elimina_acquisto_click(self):
         reply = QMessageBox.question(self, "Conferma", "Sei sicuro di voler eliminare il prodotto dal carrello?", QMessageBox.Yes, QMessageBox.No)
 
@@ -66,15 +70,6 @@ class VistaAcquistoCarrello(QWidget):
             self.close()
         else:
             return
-
-    def show_modifica_acquisto(self):
-        self.vista_modifica_prodotto = VistaModificaProdotto(self.prodotto, self.update_prodotto)
-        self.vista_modifica_prodotto.show()
-
-
-    def update_prodotto(self):
-        self.label_prezzo.setText("Prezzo: {}".format(self.controller.get_prezzo_prodotto() + " €"))
-        self.label_quantita.setText("Quantità: {}".format(self.controller.get_quantita_disp()))
 
 
 
