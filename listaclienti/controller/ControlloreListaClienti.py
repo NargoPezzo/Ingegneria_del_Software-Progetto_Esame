@@ -1,5 +1,8 @@
 from listaclienti.model.ListaClienti import ListaClienti
 
+"""
+Gestisce e attua i comandi relativi alla lista dei clienti
+"""
 
 class ControlloreListaClienti():
     def __init__(self):
