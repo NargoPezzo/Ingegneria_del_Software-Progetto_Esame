@@ -1,3 +1,6 @@
+"""
+Gestisce e attua i comandi relativi al dipendente
+"""
 class ControlloreDipendente:
     def __init__(self, dipendente):
         self.model = dipendente

@@ -1,3 +1,6 @@
+"""
+Gestisce i dati e le operazioni relative al dipendente
+"""
 class Dipendente:
     def __init__(self, id, nome, cognome, cf, indirizzo, email, telefono, eta,password):
         super(Dipendente, self).__init__()

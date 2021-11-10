@@ -1,7 +1,9 @@
 import os
 import pickle
 
-
+"""
+Gestisce i dati e le operazioni relative al carrello
+"""
 
 class Carrello():
     def __init__(self):

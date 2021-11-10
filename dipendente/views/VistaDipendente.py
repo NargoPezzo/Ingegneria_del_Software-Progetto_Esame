@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
 from PyQt5 import QtGui
 from dipendente.controller.ControlloreDipendente import ControlloreDipendente
-
+"""
+La classe VistaDipendente si occupa di mostrare a schermo le informazioni relative al dipendente.
+"""
 class VistaDipendente(QWidget):
     def __init__(self, dipendente, elimina_dipendente, elimina_callback, parent=None):
         super(VistaDipendente, self).__init__(parent)
@@ -11,6 +13,7 @@ class VistaDipendente(QWidget):
         self.setWindowIcon(QtGui.QIcon('logos/logo.png'))
         v_layout = QVBoxLayout()
 
+        #Impostazioni generali per titolo finestra
         label_nome = QLabel(self.controller.get_nome_dipendente() + " " + self.controller.get_cognome_dipendente())
         font_nome = label_nome.font()
         font_nome.setPointSize(30)
@@ -19,7 +22,7 @@ class VistaDipendente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-
+        # Aggiunge tramite metodo get_label_info il titolo di una informazione e l'informazione stessa tramite controller
         v_layout.addWidget(self.get_label_info("Codice Fiscale", self.controller.get_cf_dipendente()))
         v_layout.addWidget(self.get_label_info("Indirizzo", self.controller.get_indirizzo_dipendente()))
         v_layout.addWidget(self.get_label_info("Email", self.controller.get_email_dipendente()))

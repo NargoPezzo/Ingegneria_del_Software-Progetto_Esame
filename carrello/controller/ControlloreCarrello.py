@@ -1,6 +1,8 @@
 from carrello.model.Carrello import Carrello
 
-
+"""
+Classe che si occupa di interagire tra il model e le viste del carrello
+"""
 class ControlloreCarrello():
     def __init__(self):
         super(ControlloreCarrello, self).__init__()

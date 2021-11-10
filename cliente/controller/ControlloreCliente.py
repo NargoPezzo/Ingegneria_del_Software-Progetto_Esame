@@ -1,3 +1,6 @@
+"""
+Gestisce e attua i comandi relativi al cliente
+"""
 class ControlloreCliente:
     def __init__(self, cliente):
         self.model = cliente
