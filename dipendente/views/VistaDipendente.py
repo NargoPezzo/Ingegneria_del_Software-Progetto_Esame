@@ -34,6 +34,7 @@ class VistaDipendente(QWidget):
 
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
+        # Bottone per eliminare un dipendente
         btn_elimina = QPushButton("Elimina")
         btn_elimina.clicked.connect(self.elimina_dipendente_click)
         v_layout.addWidget(btn_elimina)
@@ -41,6 +42,7 @@ class VistaDipendente(QWidget):
         self.setLayout(v_layout)
         self.setWindowTitle(self.controller.get_nome_dipendente() + " " + self.controller.get_cognome_dipendente())
 
+    # Metodo che prende come parametri il testo di una informazione e il valore assegnato come sopra tramite il controller
     def get_label_info(self, testo, valore):
         current_label = QLabel("{}: {}".format(testo, valore))
         current_font = current_label.font()
@@ -48,6 +50,7 @@ class VistaDipendente(QWidget):
         current_label.setFont(current_font)
         return current_label
 
+    # Metodo che si occupa di eliminare il dipendente
     def elimina_dipendente_click(self):
         self.elimina_dipendente(self.controller.get_id_dipendente())
         self.elimina_callback()
