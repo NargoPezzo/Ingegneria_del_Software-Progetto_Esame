@@ -15,7 +15,7 @@ class VistaStats(QWidget):
         self.datascelta = datascelta
 
 
-
+        #genera array vuoti da popolare con le informazioni del file pickle
         self.categoria = []
         self.quantita_categoria = []
         self.prodotti = []
@@ -31,15 +31,16 @@ class VistaStats(QWidget):
         self.table_widget = QTableWidget()
         self.table_total = QListView()
 
+
         self.create_pie(datascelta)
         self.populate_table(datascelta)
         self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
         self.table_widget.setMaximumHeight(200)
 
+
         self.v_layout.addWidget(self.chartview)
         self.v_layout.addWidget(self.table_widget)
         self.v_layout.addWidget(self.table_total)
-
 
 
         self.setLayout(self.v_layout)
@@ -47,7 +48,7 @@ class VistaStats(QWidget):
         self.setWindowTitle(self.set_title(datascelta))
         self.chartview.setRenderHint(QtGui.QPainter.Antialiasing)
 
-
+    #popola array con le informazioni dal file pickle e raggruppa i prodotti per categoria
     def build_pie(self, datascelta):
         for prodotto in self.controllerstats.get_lista_delle_stats():
             if prodotto.data_acquisto >= datascelta:
@@ -60,8 +61,8 @@ class VistaStats(QWidget):
                     self.categoria.append(prodotto.categoria)
                     self.quantita_categoria.append(prodotto.quantita_carrello)
 
+    #popola array con le informazioni dal file pickle
     def build_table(self, datascelta):
-
         for prodotto in self.controllerstats.get_lista_delle_stats():
             if prodotto.data_acquisto >= datascelta:
                 j = 0
@@ -72,9 +73,9 @@ class VistaStats(QWidget):
                 if j == 0:
                     self.prodotti.append(prodotto)
 
+    #genera il grafico a torta e lo popola utilizzando i dati dell' array
     def create_pie(self, data):
         series = QPieSeries()
-
 
         self.build_pie(data)
 
@@ -111,6 +112,7 @@ class VistaStats(QWidget):
 
         self.chartview = QChartView(chart)
 
+    #genera il titolo della pagina in base alla data passata dalla view precedente
     def set_title(self, datascelta):
 
         if datascelta == datetime.date.today():
@@ -121,6 +123,7 @@ class VistaStats(QWidget):
 
         return "Vendite Mensili"
 
+    #crea tabella contenente tutti i prodotti venduti registrati e la popola con i dati contenuti nell' array
     def populate_table(self, datascelta):
 
         self.build_table(datascelta)
@@ -158,7 +161,7 @@ class VistaStats(QWidget):
         self.table_total_model.appendRow(item)
         self.table_total.setModel(self.table_total_model)
 
-
+    #genera gli header della tabella contenenti i prodotti
     def create_table(self, index, label):
 
         item = QTableWidgetItem()
@@ -169,6 +172,7 @@ class VistaStats(QWidget):
         self.table_widget.setHorizontalHeaderItem(index, item)
         self.table_widget.setColumnWidth(index, 140)
 
+    #inserisce un singolo elemento in una cella predefinita della tabella dato un indice
     def inserisci_elemento_in_tabella(self, elemento, row, index):
         item = QTableWidgetItem()
         item.setText(str(elemento))

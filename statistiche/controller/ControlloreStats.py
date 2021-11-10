@@ -1,6 +1,8 @@
 from statistiche.model.Stats import Stats
 
-
+"""
+gestisce e attua il model della classe statistiche
+"""
 class ControlloreStats():
     def __init__(self):
         super(ControlloreStats, self).__init__()

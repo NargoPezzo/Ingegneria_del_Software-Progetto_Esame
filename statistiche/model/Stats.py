@@ -1,6 +1,9 @@
 import os
 import pickle
 
+"""
+gestisce i dati e le operazioni relative alle statistiche
+"""
 
 class Stats():
     def __init__(self):
