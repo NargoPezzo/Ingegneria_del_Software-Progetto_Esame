@@ -1,10 +1,11 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QGridLayout, \
     QHBoxLayout, QMessageBox
-
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 from prodotto.views.VistaAggiungiQuantita import VistaAggiungiQuantita
 from prodotto.views.VistaModificaProdotto import VistaModificaProdotto
 from PyQt5 import QtGui
+
+
 
 class VistaProdotto(QWidget):
     def __init__(self, prodotto, elimina_prodotto, elimina_callback, carrello, parent=None):

@@ -1,3 +1,6 @@
+"""
+Gestisce e attua i comandi relativi al prodotto
+"""
 class ControlloreProdotto:
     def __init__(self, prodotto):
         self.model = prodotto

@@ -1,4 +1,6 @@
-import datetime
+"""
+Gestisce i dati e le operazioni relative al prodotto
+"""
 
 
 class Prodotto:
