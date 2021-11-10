@@ -36,10 +36,13 @@ class VistaListaCarrello(QWidget):
 
 
         buttons_layout = QVBoxLayout()
+
+        #genera un bottone per aprire le informazioni sull' acquisto
         open_button = QPushButton("Apri")
         open_button.clicked.connect(self.show_selected_info)
         buttons_layout.addWidget(open_button)
 
+        #genera un bottone per effettuare il checkout degli acquisti nel carrello
         new_button = QPushButton("Checkout")
         new_button.clicked.connect(self.checkout)
         buttons_layout.addWidget(new_button)
@@ -50,6 +53,7 @@ class VistaListaCarrello(QWidget):
         self.setLayout(self.main_layout)
         self.setWindowTitle("Carrello")
 
+    #metodo richiamato dal bottone che mostra le informazioni del prodotto scelto
     def show_selected_info(self):
         try:
             selected = self.table_widget.selectedIndexes()[0].row()
@@ -59,6 +63,7 @@ class VistaListaCarrello(QWidget):
         except IndexError:
             QMessageBox.critical(self, 'Errore', 'Per favore, seleziona un prodotto', QMessageBox.Ok, QMessageBox.Ok)
 
+    #metodo che esegue il checkout dei prodotti nel carrello
     def checkout(self):
         msg = QMessageBox()
 
@@ -84,6 +89,7 @@ class VistaListaCarrello(QWidget):
         else:
             QMessageBox.critical(self, 'Errore', 'Il carrello non contiene alcun prodotto', QMessageBox.Ok, QMessageBox.Ok)
 
+    #crea/aggiorna l' intera view
     def update_ui(self):
         self.table_widget.setRowCount(0)
         self.table_widget.setColumnCount(5)
@@ -121,7 +127,7 @@ class VistaListaCarrello(QWidget):
         self.table_total_model.appendRow(item)
         self.table_total.setModel(self.table_total_model)
 
-
+    #genera l' header della tabella dei prodotti
     def create_table(self, index, label):
 
         item = QTableWidgetItem()
@@ -132,9 +138,11 @@ class VistaListaCarrello(QWidget):
         self.table_widget.setHorizontalHeaderItem(index, item)
         self.table_widget.setColumnWidth(index, 100)
 
+    #sulla chiusura della view salva i dati del carrello
     def closeEvent(self, event):
         self.controller.save_data()
 
+    #inserisce singoli elementi in singole celle della tabella dato un indice
     def inserisci_elemento_in_tabella(self, elemento, row, index):
         item = QTableWidgetItem()
         item.setText(str(elemento))
