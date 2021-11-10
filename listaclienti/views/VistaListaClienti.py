@@ -21,7 +21,7 @@ class VistaListaClienti(QWidget):
         self.list_view = QListView()
         self.update_ui()
 
-        #crea un elenco fittizio sopra l'elenco reale per poter usare la barra di ricerca
+        #Crea un elenco fittizio sopra l'elenco reale per poter usare la barra di ricerca
         self.filter_proxy_model = QSortFilterProxyModel()
         self.filter_proxy_model.setSourceModel(self.listview_model)
         self.filter_proxy_model.setFilterCaseSensitivity(Qt.CaseInsensitive)
@@ -69,7 +69,7 @@ class VistaListaClienti(QWidget):
         self.vista_inserisci_cliente = VistaInserisciCliente(self.controller, self.update_ui)
         self.vista_inserisci_cliente.show()
 
-    #Metodo che serve per aggiornare la vista
+    #Metodo che serve per generare e/o aggiornare la vista
     def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)
         for cliente in self.controller.get_lista_dei_clienti():

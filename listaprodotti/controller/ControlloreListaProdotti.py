@@ -1,5 +1,8 @@
 from listaprodotti.model.ListaProdotti import ListaProdotti
 
+"""
+Gestisce e attua i comandi relativi alla lista dei prodotti
+"""
 
 class ControlloreListaProdotti():
     def __init__(self):
@@ -20,9 +23,6 @@ class ControlloreListaProdotti():
 
     def save_data(self):
         self.model.save_data()
-
-    def save_data_carrello(self):
-        self.model.save_data_carrello()
 
     def ritorna_quantita(self, id, quantita):
         self.model.ritorna_quantita(id, quantita)

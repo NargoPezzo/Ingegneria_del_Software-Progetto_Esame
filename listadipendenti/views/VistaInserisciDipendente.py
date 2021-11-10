@@ -1,8 +1,10 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
-
 from dipendente.model.Dipendente import Dipendente
 from PyQt5 import QtGui
 
+"""
+La classe VistaInserisciDipendente si occupa di mostrare all'utente il form per registrare i dati del dipendente
+"""
 
 class VistaInserisciDipendente(QWidget):
     def __init__(self, controller, callback):
@@ -33,12 +35,14 @@ class VistaInserisciDipendente(QWidget):
         self.setLayout(self.v_layout)
         self.setWindowTitle("Nuovo Dipendente")
 
+    #Metodo per titolare i parametri da inserire
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
+    #Metodo che genera un nuovo dipendente sfruttando le informazioni inserite dall'utente
     def add_dipendente(self):
         nome = self.info["Nome"].text()
         cognome = self.info["Cognome"].text()
