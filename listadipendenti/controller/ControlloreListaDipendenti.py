@@ -1,5 +1,10 @@
 from listadipendenti.model.ListaDipendenti import ListaDipendenti
 
+"""
+Gestisce e attua i comandi relativi alla lista dei dipendenti
+"""
+
+
 
 class ControlloreListaDipendenti():
     def __init__(self):

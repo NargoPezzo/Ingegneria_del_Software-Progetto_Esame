@@ -1,11 +1,13 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, \
     QComboBox
-
-
 from prodotto.model.Prodotto import Prodotto
 from PyQt5 import QtGui
-from listaprodotti.views import VistaListaProdotti
+
+"""
+La classe VistaInserisciProdotto si occupa di mostrare all'utente il form per registrare i dati del nuovo prodotto
+"""
+
 
 class VistaInserisciProdotto(QWidget):
     def __init__(self, controller, callback):
@@ -44,6 +46,7 @@ class VistaInserisciProdotto(QWidget):
         self.setLayout(self.v_layout)
         self.setWindowTitle("Nuovo Prodotto")
 
+    #Metodo per titolare i parametri da inserire
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
@@ -54,12 +57,14 @@ class VistaInserisciProdotto(QWidget):
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
+    #Metodo che crea un menù a tendina dove selezionare la tipologia del prodotto da inserire
     def add_combobox_item(self, tipo):
         item = QStandardItem()
         item.setText(tipo)
         item.setEditable(False)
         self.combo_categoria_model.appendRow(item)
 
+    #Metodo che genera un nuovo prodotto sfruttando le informazioni inserite dall'utente
     def add_prodotto(self):
         msg = QMessageBox()
         if "," in self.info["Prezzo"].text():

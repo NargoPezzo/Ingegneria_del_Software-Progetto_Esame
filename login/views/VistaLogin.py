@@ -5,11 +5,14 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QVBoxLayout
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import Qt
-
 from home.views.VistaHome import VistaHome
 from home.views.VistaHomeDirettore import VistaHomeDirettore
 from listadipendenti.model.ListaDipendenti import ListaDipendenti
 
+"""
+La classe VistaLogin si occupa di mostrare a schermo la finestra iniziale dove l'utente deve fare
+l'accesso per poter entrare all'interno del programma
+"""
 
 class VistaLogin(QWidget):
     def __init__(self):
@@ -48,7 +51,9 @@ class VistaLogin(QWidget):
         v_layout.addLayout(layout)
         self.setLayout(v_layout)
 
-
+        #Controlla che il file pickle sia presente all'interno della cartella data e si posiziona
+        #in fase di lettura
+        """
         if os.path.isfile('listadipendenti/data/lista_prodotti_salvata.pickle'):
             pickle_file = open('listadipendenti/data/lista_dipendenti_salvata.pickle', 'rb')
             self.objects = []
@@ -58,7 +63,9 @@ class VistaLogin(QWidget):
                 except EOFError:
                     break
                 pickle_file.close()
-
+                """
+    #Metodo che controlla se l'username e la password inserite siano corrette.
+    #In seguito apre all'utente la relativa vista.
     def check_password(self):
         msg = QMessageBox()
         msg.setWindowTitle('Login')
@@ -83,6 +90,7 @@ class VistaLogin(QWidget):
             msg.setText('ERRORE: Ricontrollare le credenziali')
             msg.exec_()
 
+    #Metodo che rende possibile l'accesso sia tramite bottone che con "Invio" da tastiera
     def keyPressEvent(self, qKeyEvent):
 
         if qKeyEvent.key() == QtCore.Qt.Key_Return:
