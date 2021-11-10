@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpinBox, QPushButton, QMessageBox
 from PyQt5 import QtGui
 
-
+"""
+La classe VistaInserisciProdotto si occupa di mostrare all'utente il form per registrare i dati del nuovo prodotto
+"""
 
 class VistaAggiungiQuantita(QWidget):
     def __init__(self, prodotto, carrello, parent=None):
@@ -26,14 +28,17 @@ class VistaAggiungiQuantita(QWidget):
         self.spin.setSizeIncrement(1, 1)
         self.v_layout.addWidget(self.spin)
 
-
+        #Bottone per per confermare il passaggio del prodotto dal magazzino al carrello
         btn_conferma = QPushButton("Conferma")
         self.v_layout.addWidget(btn_conferma)
         btn_conferma.clicked.connect(self.aggiungi_al_carrello)
         self.setLayout(self.v_layout)
         self.close()
-
-
+    """
+    Metodo che aggiunge il prodotto al carrello.
+    Al metodo verifica_quantita_prodotto viene passato il prodotto e la quantità, e se risulta True aggiunge
+    il prodotto al carrelo.
+    """
     def aggiungi_al_carrello(self):
         if self.carrello.verifica_quantita_prodotto(self.prodotto, int(self.spin.text())) is True:
             self.carrello.aggiungi_al_carrello(self.prodotto)

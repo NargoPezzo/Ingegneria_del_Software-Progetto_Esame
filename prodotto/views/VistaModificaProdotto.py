@@ -1,6 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
 from PyQt5 import QtGui, QtCore
 
+"""
+La classe VistaModificaProdotto apre una finestra a schermo dove l'utente può cambiare i valori di prezzo è quantità
+"""
 
 class VistaModificaProdotto(QWidget):
     def __init__(self, prodotto, update, parent=None):
@@ -20,11 +23,13 @@ class VistaModificaProdotto(QWidget):
 
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
+        #Bottone per confermare i cambiamenti
         btn_conferma = QPushButton("Conferma")
         self.v_layout.addWidget(btn_conferma)
         btn_conferma.clicked.connect(self.modifica_prodotto)
         self.setLayout(self.v_layout)
 
+    #Metodo per titolare i parametri da inserire
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
@@ -35,7 +40,7 @@ class VistaModificaProdotto(QWidget):
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
-
+    #Metodo per modificare i parametri di prezzo e quantità del prodotto
     def modifica_prodotto(self):
 
         msg = QMessageBox()

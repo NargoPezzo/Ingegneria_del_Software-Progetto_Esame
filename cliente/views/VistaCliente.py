@@ -18,7 +18,7 @@ class VistaCliente(QWidget):
 
         v_layout = QVBoxLayout()
 
-        #vengono recuperate le informazioni da mostrare a schermo
+        #Vengono recuperate le informazioni da mostrare a schermo
         label_nome = QLabel(self.controller.get_nome_cliente() + " " + self.controller.get_cognome_cliente())
 
         #impostazioni per il font
