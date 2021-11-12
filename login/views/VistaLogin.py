@@ -8,6 +8,7 @@ from PyQt5.QtCore import Qt
 from home.views.VistaHome import VistaHome
 from home.views.VistaHomeDirettore import VistaHomeDirettore
 from listadipendenti.model.ListaDipendenti import ListaDipendenti
+import credenziali
 
 """
 La classe VistaLogin si occupa di mostrare a schermo la finestra iniziale dove l'utente deve fare
@@ -30,9 +31,9 @@ class VistaLogin(QWidget):
         label_logo.setAlignment(Qt.AlignCenter)
         v_layout.addWidget(label_logo)
 
-        label_name = QLabel('<font size="4"> Nome Utente </font>')
+        label_name = QLabel('<font size="4"> Username </font>')
         self.lineEdit_username = QLineEdit()
-        self.lineEdit_username.setPlaceholderText('Inserire Nome Utente')
+        self.lineEdit_username.setPlaceholderText('Inserire Username')
         layout.addWidget(label_name, 0, 0)
         layout.addWidget(self.lineEdit_username, 0, 1)
 
@@ -51,19 +52,6 @@ class VistaLogin(QWidget):
         v_layout.addLayout(layout)
         self.setLayout(v_layout)
 
-        #Controlla che il file pickle sia presente all'interno della cartella data e si posiziona
-        #in fase di lettura
-        """
-        if os.path.isfile('listadipendenti/data/lista_prodotti_salvata.pickle'):
-            pickle_file = open('listadipendenti/data/lista_dipendenti_salvata.pickle', 'rb')
-            self.objects = []
-            while True:
-                try:
-                    self.objects.append(pickle.load(pickle_file))
-                except EOFError:
-                    break
-                pickle_file.close()
-                """
     #Metodo che controlla se l'username e la password inserite siano corrette.
     #In seguito apre all'utente la relativa vista.
     def check_password(self):
@@ -79,7 +67,7 @@ class VistaLogin(QWidget):
             self.dialog.show()
             self.close()
 
-        elif self.lineEdit_username.text() == '' and self.lineEdit_password.text() == '':
+        elif self.lineEdit_username.text() == credenziali.username and self.lineEdit_password.text() == credenziali.password:
             self.dialog = VistaHomeDirettore()
             msg.setText('Accesso alla pagina del direttore')
             msg.exec_()

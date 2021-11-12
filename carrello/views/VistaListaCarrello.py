@@ -27,13 +27,11 @@ class VistaListaCarrello(QWidget):
         self.table_total = QListView()
         self.update_ui()
 
-
         self.table_total.setMaximumHeight(self.table_total.sizeHintForRow(0))
 
         self.v_layout.addWidget(self.table_widget)
         self.v_layout.addWidget(self.table_total)
         self.main_layout.addLayout(self.v_layout)
-
 
         buttons_layout = QVBoxLayout()
 
