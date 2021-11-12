@@ -83,7 +83,6 @@ class VistaListaProdotti(QWidget):
     def update_ui(self):
         self.listview_model = QStandardItemModel(self.list_view)
         for prodotto in self.controller.get_lista_dei_prodotti():
-            print(prodotto)
             item = QStandardItem()
             item.setText(prodotto.marca + " " + prodotto.nome)
             item.setEditable(False)

@@ -37,6 +37,8 @@ class VistaInserisciCliente(QWidget):
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
+        if tipo == "Telefono" or tipo == "Età":
+            current_text_edit.setValidator(QtGui.QIntValidator(0, 1000000000))
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 

@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QVBoxLayout, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, \
+    QDoubleSpinBox, QSpinBox
 from PyQt5 import QtGui, QtCore
 
 """
@@ -31,31 +32,30 @@ class VistaModificaProdotto(QWidget):
 
     #Metodo per titolare i parametri da inserire
     def get_form_entry(self, tipo):
+        global current_text_edit
         self.v_layout.addWidget(QLabel(tipo))
-        current_text_edit = QLineEdit(self)
         if tipo == "Nuovo Prezzo":
-            current_text_edit.setValidator(QtGui.QDoubleValidator(0, 100, 2))
+            current_text_edit = QDoubleSpinBox()
+            current_text_edit.setRange(0, 1000000)
         if tipo == "Nuova Quantità":
-            current_text_edit.setValidator(QtGui.QIntValidator(0,100))
+            current_text_edit = QSpinBox()
+            current_text_edit.setRange(0, 100)
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
     #Metodo per modificare i parametri di prezzo e quantità del prodotto
     def modifica_prodotto(self):
 
-        msg = QMessageBox()
-        if "," in self.info["Nuovo Prezzo"].text():
-            msg.setText('ERRORE: Formato prezzo non corretto. Utilizzare "." al posto di ","')
-            msg.exec_()
+
+        nuovoprezzo = self.info["Nuovo Prezzo"].text()
+        nuovoprezzo = nuovoprezzo.replace(",", ".")
+        nuovaquantita = self.info["Nuova Quantità"].text()
+
+        if nuovoprezzo == "" or nuovaquantita == "":
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+
         else:
-            nuovoprezzo = self.info["Nuovo Prezzo"].text()
-            nuovaquantita = self.info["Nuova Quantità"].text()
-
-            if nuovoprezzo == "" or nuovaquantita == "":
-                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
-
-            else:
-                self.prodotto.prezzo = nuovoprezzo
-                self.prodotto.quantita_magazzino = nuovaquantita
-                self.update()
-                self.close()
+            self.prodotto.prezzo = nuovoprezzo
+            self.prodotto.quantita_magazzino = nuovaquantita
+            self.update()
+            self.close()

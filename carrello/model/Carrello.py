@@ -13,7 +13,7 @@ class Carrello():
 
         if os.path.isfile('carrello/data/carrello_salvato.pickle'):
             with open('carrello/data/carrello_salvato.pickle', 'rb') as f:
-                self.carrello= pickle.load(f)
+                self.carrello = pickle.load(f)
 
     def aggiungi_al_carrello(self, prodotto):
         if self.verifica_presenza_prodotto_by_id(prodotto) is False:

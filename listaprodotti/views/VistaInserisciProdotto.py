@@ -1,6 +1,6 @@
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QRegExpValidator
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, \
-    QComboBox
+    QComboBox, QDoubleSpinBox, QSpinBox
 from prodotto.model.Prodotto import Prodotto
 from PyQt5 import QtGui
 
@@ -34,8 +34,8 @@ class VistaInserisciProdotto(QWidget):
 
         self.get_form_entry("Marca")
         self.get_form_entry("Nome")
-        self.get_form_entry("Prezzo")
-        self.get_form_entry("Quantità")
+        self.get_spin_box("Prezzo")
+        self.get_spin_box("Quantità")
 
         self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
@@ -50,10 +50,18 @@ class VistaInserisciProdotto(QWidget):
     def get_form_entry(self, tipo):
         self.v_layout.addWidget(QLabel(tipo))
         current_text_edit = QLineEdit(self)
+        self.v_layout.addWidget(current_text_edit)
+        self.info[tipo] = current_text_edit
+
+    def get_spin_box(self, tipo):
+        global current_text_edit
+        self.v_layout.addWidget(QLabel(tipo))
         if tipo == "Prezzo":
-            current_text_edit.setValidator(QtGui.QDoubleValidator(0, 100, 2))
+            current_text_edit = QDoubleSpinBox()
+            current_text_edit.setRange(0, 10000000)
         if tipo == "Quantità":
-            current_text_edit.setValidator(QtGui.QIntValidator(0, 100))
+            current_text_edit = QSpinBox()
+            current_text_edit.setRange(0, 100)
         self.v_layout.addWidget(current_text_edit)
         self.info[tipo] = current_text_edit
 
@@ -66,26 +74,21 @@ class VistaInserisciProdotto(QWidget):
 
     #Metodo che genera un nuovo prodotto sfruttando le informazioni inserite dall'utente
     def add_prodotto(self):
-        msg = QMessageBox()
-        if "," in self.info["Prezzo"].text():
-            msg.setText('ERRORE: Formato prezzo non corretto. Utilizzare "." al posto di ","')
-            msg.setWindowTitle("Errore Formattazione")
-            msg.setWindowIcon(QtGui.QIcon('logos/logo.png'))
-            msg.exec_()
+
+        marca = self.info["Marca"].text()
+        nome = self.info["Nome"].text()
+        categoria = self.combo_categoria.currentText()
+        prezzo = self.info["Prezzo"].text()
+        prezzo = prezzo.replace(",", ".")
+        quantita = self.info["Quantità"].text()
+
+        if marca == "" or nome == "" or categoria == "" or prezzo == "" or quantita == "":
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
+
+
         else:
-            marca = self.info["Marca"].text()
-            nome = self.info["Nome"].text()
-            categoria = self.combo_categoria.currentText()
-            prezzo = self.info["Prezzo"].text()
-            quantita = self.info["Quantità"].text()
-
-            if marca == "" or nome == "" or categoria == "" or prezzo == "" or quantita == "":
-                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste', QMessageBox.Ok, QMessageBox.Ok)
-
-
-            else:
-                self.controller.aggiungi_prodotto(Prodotto((marca+nome).lower(), marca, nome, categoria, prezzo, quantita, 0))
-                self.controller.save_data()
-                self.callback()
-                self.close()
+            self.controller.aggiungi_prodotto(Prodotto((marca+nome).lower(), marca, nome, categoria, prezzo, quantita, 0))
+            self.controller.save_data()
+            self.callback()
+            self.close()
 
