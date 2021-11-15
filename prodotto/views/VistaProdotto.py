@@ -28,7 +28,7 @@ class VistaProdotto(QWidget):
         font_nome = label_nome.font()
         font_nome.setPointSize(30)
         label_nome.setFont(font_nome)
-        v_layout.addWidget(label_nome, )
+        v_layout.addWidget(label_nome)
 
         #Aggiunge tramite metodo get_label_info il titolo di una informazione e l'informazione stessa tramite controller
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
