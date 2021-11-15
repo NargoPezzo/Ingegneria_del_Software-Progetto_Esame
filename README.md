@@ -21,4 +21,4 @@ Guida per installare le librerie:
 - 
 Esempio:
 - username: francescostucchi
-- password: "password creata dal direttore"
+- password: easteregg
